@@ -3784,4 +3784,13 @@ found in the list of installed apps.</string>
 
     <string name="performance_settings">Performance</string>
 
+  <!-- added by Kejar31 kang from XoomDev settgings for nav bar -->
+
+    <string name="navigation_bar_prefs_title">Softkeys settings</string>
+    <string name="show_menu_button_title">Show menu button in nav bar</string>
+    <string name="show_search_button_title">Show search button in nav bar</string>
+    <string name="navigation_bar_prefs">SoftKeys</string>
+
+	
+
 </resources>

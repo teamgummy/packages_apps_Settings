@@ -95,6 +95,13 @@
         android:title="@string/applications_settings"
         android:id="@+id/application_settings" />
 
+    <!-- Nav Bar settings added by Kejar31 for GummyNex and Liberty kanged from XoomDev -->
+
+    <header
+        android:fragment="com.android.settings.NavigationBarSettings"
+        android:icon="@drawable/ic_settings_softkeys"
+        android:title="@string/navigation_bar_prefs" />
+
     <!-- Manufacturer hook -->
     <header
         android:fragment="com.android.settings.WirelessSettings"

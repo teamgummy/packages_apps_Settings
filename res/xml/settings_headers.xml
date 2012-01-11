@@ -95,13 +95,6 @@
         android:title="@string/applications_settings"
         android:id="@+id/application_settings" />
 
-    <!-- Nav Bar settings added by Kejar31 for GummyNex and Liberty kanged from XoomDev -->
-
-    <header
-        android:fragment="com.android.settings.NavigationBarSettings"
-        android:icon="@drawable/ic_settings_softkeys"
-        android:title="@string/navigation_bar_prefs" />
-
     <!-- Manufacturer hook -->
     <header
         android:fragment="com.android.settings.WirelessSettings"
@@ -154,13 +147,12 @@
     <!-- SYSTEM -->
     <header android:title="@string/header_category_system" />
 
-    <!-- Perfomance add by Kejar31 for GummyNex and Liberty-->
+    <!-- Liberty Settings -->
     <header
-        android:id="@+id/performance_settings"
-        android:icon="@drawable/ic_settings_performance"
-        android:title="@string/performance_settings">
-        <intent android:action="android.intent.action.MAIN" android:targetPackage="com.liberty.settings" android:targetClass="com.liberty.settings.Performance" />
-    </header>
+        android:id="@+id/liberty_settings"
+        android:icon="@drawable/ic_settings_liberty"
+        android:title="@string/liberty_settings_title"
+        android:fragment="com.android.settings.LibertySettings" />
 
     <!-- Dock -->
     <header

@@ -3791,6 +3791,11 @@ found in the list of installed apps.</string>
     <string name="show_search_button_title">Show search button in nav bar</string>
     <string name="navigation_bar_prefs">SoftKeys</string>
 
-	
+   <!-- Strings for SystemUI Tweaks Menu -->
+    <string name="liberty_settings_title">Liberty Settings</string>
+    <string name="systemui_tweaks">SystemUI Tweaks</string>
+    <string name="clock_style_title">Clock style</string>
+    <string name="am_pm_style_title">AM PM style</string>
+    <string name="hide_alarm">Hide Alarm</string>	
 
 </resources>

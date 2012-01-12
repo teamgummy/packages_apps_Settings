@@ -1316,10 +1316,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="LibertySettings"
+        <activity android:name="GummySettings"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/liberty_settings_title">
+            android:label="@string/gummy_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />

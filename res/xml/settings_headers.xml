@@ -147,12 +147,12 @@
     <!-- SYSTEM -->
     <header android:title="@string/header_category_system" />
 
-    <!-- Liberty Settings -->
+    <!-- Gummy Settings -->
     <header
-        android:id="@+id/liberty_settings"
-        android:icon="@drawable/ic_settings_liberty"
-        android:title="@string/liberty_settings_title"
-        android:fragment="com.android.settings.LibertySettings" />
+        android:id="@+id/gummy_settings"
+        android:icon="@drawable/ic_settings_performance"
+        android:title="@string/gummy_settings_title"
+        android:fragment="com.android.settings.GummySettings" />
 
     <!-- Dock -->
     <header

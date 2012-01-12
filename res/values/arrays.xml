@@ -711,7 +711,7 @@
         <item>2</item>
     </string-array>
     <string-array name="am_pm_entries">
-        <item>Show AM_PM</item>
+        <item>Show AM/PM</item>
         <item>Small AM/PM</item>
         <item>Hide AM/PM</item>
     </string-array>
@@ -723,8 +723,8 @@
 	</string-array>
 	<string-array name="clock_entries">
 		<item>Hide clock</item>
-		<item>Show - right</item>
-		<item>Show - center</item>
+		<item>Show clock to the right</item>
+		<item>Show clock in the center</item>
 	</string-array>
 
     <string-array name="battery_values">
@@ -733,8 +733,8 @@
 		<item>2</item>
 	</string-array>
 	<string-array name="battery_entries">
-		<item>Normal</item>
-		<item>Percent Battery</item>
+		<item>Stock AOSP</item>
+		<item>Gummy Battery</item>
 		<item>Circle Battery</item>
 	</string-array>
 </resources>

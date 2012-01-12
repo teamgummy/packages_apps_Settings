@@ -726,4 +726,15 @@
 		<item>Show - right</item>
 		<item>Show - center</item>
 	</string-array>
+
+    <string-array name="battery_values">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
+	<string-array name="battery_entries">
+		<item>Normal</item>
+		<item>Percent Battery</item>
+		<item>Circle Battery</item>
+	</string-array>
 </resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/liberty_settings_title"
+    android:key="liberty_settings"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <PreferenceScreen
+            android:key="systemui_tweaks"
+            android:title="@string/systemui_tweaks"
+            android:fragment="com.android.settings.SystemUITweaks" />
+
+    <PreferenceScreen
+            android:key="performance_settings"
+            android:title="@string/performance_settings">
+            <intent android:action="android.intent.action.MAIN"
+                 android:targetPackage="com.liberty.settings"
+                 android:targetClass="com.liberty.settings.Performance" />
+    </PreferenceScreen>
+</PreferenceScreen>

@@ -730,11 +730,13 @@
     <string-array name="battery_values">
 		<item>0</item>
 		<item>1</item>
+		<item>3</item>
 		<item>2</item>
 	</string-array>
 	<string-array name="battery_entries">
-		<item>Stock AOSP</item>
-		<item>Gummy Battery</item>
+		<item>Stock AOSP (no %)</item>
+		<item>Gummy Fat Battery</item>
+		<item>Gummy Bar Battery</item>
 		<item>Circle Battery</item>
 	</string-array>
 </resources>

@@ -11,6 +11,11 @@
             android:fragment="com.android.settings.SystemUITweaks" />
 
     <PreferenceScreen
+            android:key="lockscreen_settings"
+            android:title="@string/lockscreen_settings"
+            android:fragment="com.android.settings.LockscreenSettings" />
+
+    <PreferenceScreen
             android:key="performance_settings"
             android:title="@string/performance_settings">
             <intent android:action="android.intent.action.MAIN"

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/lockscreen_settings"
+    android:key="lockscreen_settings">
+
+    <PreferenceCategory
+            android:key="general_category"
+            android:title="General Settings">
+
+        <CheckBoxPreference
+            android:key="lockscreen_battery"
+            android:title="@string/lockscreen_battery" >
+        </CheckBoxPreference>
+
+    </PreferenceCategory>
+</PreferenceScreen>

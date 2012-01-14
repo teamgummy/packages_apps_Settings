@@ -18,6 +18,10 @@
             android:entries="@array/battery_entries"
             android:entryValues="@array/battery_values"
             android:title="@string/battery_types" />
+
+        <Preference
+            android:key="carrier_text"
+            android:title="@string/carrier_text" />
     </PreferenceCategory>
 
     <PreferenceCategory

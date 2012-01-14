@@ -3800,5 +3800,6 @@ found in the list of installed apps.</string>
     <string name="battery_types">Battery Types</string>
     <string name="lockscreen_settings">Lockscreen Settings</string>
     <string name="lockscreen_battery">Lockscreen Battery %</string>
+    <string name="carrier_text">Custom Carrier Text</string>
 
 </resources>

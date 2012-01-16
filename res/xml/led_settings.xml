@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/led_settings"
+        android:key="led_settings"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+	<ListPreference
+		android:entries="@array/led_entries"
+		android:entryValues="@array/led_values"
+		android:key="led_on"
+		android:title="@string/title_led_on"
+		android:summary="@string/summary_led_on" />
+
+	<ListPreference
+		android:entries="@array/led_entries"
+		android:entryValues="@array/led_values"
+		android:key="led_off"
+		android:title="@string/title_led_off"
+		android:summary="@string/summary_led_off" />
+
+	<com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="led_color" 
+		android:title="@string/led_color_title" 
+		android:defaultValue="#3f52bf" />
+
+</PreferenceScreen>

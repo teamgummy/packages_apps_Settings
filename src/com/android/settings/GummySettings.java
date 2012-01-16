@@ -11,10 +11,12 @@ public class GummySettings extends SettingsPreferenceFragment {
 
     private static final String SYSTEMUI_TWEAKS = "systemui_tweaks";
     private static final String LOCKSCREEN_SETTINGS = "lockscreen_settings";
+    private static final String LED_SETTINGS = "led_settings";
     private static final String PERFORMANCE_SETTINGS = "performance_settings";
 
     PreferenceScreen mSystemUITweaks;
     PreferenceScreen mLockscreenSettings;
+    PreferenceScreen mLEDSettings;
     PreferenceScreen mPerformanceSettings;
     
     @Override
@@ -24,6 +26,7 @@ public class GummySettings extends SettingsPreferenceFragment {
 
         mSystemUITweaks = (PreferenceScreen) findPreference(SYSTEMUI_TWEAKS);
         mLockscreenSettings = (PreferenceScreen) findPreference(LOCKSCREEN_SETTINGS);
+        mLEDSettings = (PreferenceScreen) findPreference(LED_SETTINGS);
         mPerformanceSettings = (PreferenceScreen) findPreference(PERFORMANCE_SETTINGS);
     }
 }

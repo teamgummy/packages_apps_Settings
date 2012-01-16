@@ -3783,6 +3783,7 @@ found in the list of installed apps.</string>
    <!-- added by Kejar31 for Perfomance settings to GummyNex and Liberty -->
 
     <string name="performance_settings">Performance</string>
+    <string name="voltage_control">Voltage Control</string>
 
   <!-- added by Kejar31 kang from XoomDev settgings for nav bar -->
 
@@ -3790,6 +3791,76 @@ found in the list of installed apps.</string>
     <string name="show_menu_button_title">Show menu button in nav bar</string>
     <string name="show_search_button_title">Show search button in nav bar</string>
     <string name="navigation_bar_prefs">SoftKeys</string>
+
+    <!--  LED -->
+    <string name="title_led_on">LED pulse ON duration</string>
+    <string name="summary_led_on">@null</string>
+    <string name="title_led_off">LED pulse OFF duration</string>
+    <string name="summary_led_off">@null</string>
+    <string name="led_color_title">LED color</string>
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on Color to apply</string>   
+    <string name="arrow_right">→</string> 
+    <string name="arrow_down">↓</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#FF000000</string>
+    <string name="set">Set</string>
+    <string name="ics_color">!!!</string>
+
+    <!-- Performance Tool Strings -->
+    <string name="prefcat_cpu">Set CPU</string>
+    <string name="prefcat_free_memory">Free Memory</string>
+    <string name="pc_tweaks">Tweaks</string>
+    <string name="pc_init_d">Enable/Disable Tweaks</string>
+    <string name="pc_init_d_tweaks">Customize Tweaks</string>
+    <string name="pt_init_d">Start-up Tweaks</string>
+    <string name="pt_enable_init_d">Enable start-up tweaks</string>
+    <string name="pt_zipalign">Zipalign apks</string>
+    <string name="pt_enable_sd_boost">Enable SD boost</string>
+    <string name="pt_sd_boost">Read ahead value</string>
+    <string name="pt_fix_permissions">Fix permissions</string>
+    <string name="pt_clear_cache">Clear cache</string>
+    <string name="pt_enable_sysctl">Enable sysctl</string>
+    <string name="pt_enable_cron">Enable scheduled tasks</string>
+    <string name="pt_set_cpu_activity">Set cpu</string>
+    <string name="pt_free_memory">Free memory</string>
+    <string name="pt_free_memory_boot">Set at boot</string>
+    <string name="pt_set_max">Max cpu</string>
+    <string name="pt_set_min">Min cpu</string>
+    <string name="pt_set_gov">Scaling governor</string>
+    <string name="pt_cpu_boot">Set at boot</string>
+    <string name="ps_init_d">Configure tweaks that are run at boot
+                (init.d)
+    </string>
+    <string name="ps_enable_init_d">Enable/disabe start-up tweaks</string>
+    <string name="ps_zipalign">zipalign any unaligned apps on each boot</string>
+    <string name="ps_enable_sd_boost">Enable/disable SD card speed boost</string>
+    <string name="ps_sd_boost">Set value of read ahead in kb</string>
+    <string name="ps_fix_permissions">Fix permissions for apps on each boot</string>
+    <string name="ps_clear_cache">Clear data cache on each boot</string>
+    <string name="ps_enable_sysctl">Enable sysctl tweaks on boot</string>
+    <string name="ps_enable_cron">Enable scheduled cron jobs</string>
+    <string name="ps_set_max">Set max cpu scaling frequency\nCurrent: %s</string>
+    <string name="ps_set_min">Set min cpu scaling frequency\nCurrent: %s</string>
+    <string name="ps_set_gov">Set current scaling governor\nCurrent: %s</string>
+    <string name="ps_cpu_boot">Apply cpu at boot</string>
+    <string name="ps_set_cpu_activity">Set min/max frequencies and scaling governor
+    </string>
+    <string name="ps_free_memory">Amount of ram the minfree taskkiller will keep |
+                Current: %s</string>
+    <string name="ps_free_memory_boot">Apply the amount above at boot</string>
+    <string name="toast_min_max_error01">Max cpu cannot be lower than min cpu</string>
+    <string name="toast_min_max_error02">Min cpu cannot be higher than max cpu</string>
+    <string name="freq">Frequency</string>
+    <string name="current">mV current</string>
+    <string name="saved">mV saved</string>
+    <string name="error_values">Error getting values</string>
+    <string name="set_boot">Set On Boot</string>
+    <string name="apply_values">Apply Values</string>
+    <string name="dt_free_memory">Minfree Taskkiller</string>
+    
 
    <!-- Strings for SystemUI Tweaks Menu -->
     <string name="gummy_settings_title">Gummy Settings</string>
@@ -3801,5 +3872,6 @@ found in the list of installed apps.</string>
     <string name="lockscreen_settings">Lockscreen Settings</string>
     <string name="lockscreen_battery">Lockscreen Battery %</string>
     <string name="carrier_text">Custom Carrier Text</string>
+    <string name="led_settings">LED Settings</string>
 
 </resources>

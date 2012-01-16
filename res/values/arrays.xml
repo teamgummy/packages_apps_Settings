@@ -706,14 +706,14 @@
     </string-array>
 
     <string-array name="am_pm_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
+                <item>0</item>
+                <item>1</item>
+                <item>2</item>
     </string-array>
     <string-array name="am_pm_entries">
-        <item>Show AM/PM</item>
-        <item>Small AM/PM</item>
-        <item>Hide AM/PM</item>
+                <item>Show AM/PM</item>
+                <item>Small AM/PM</item>
+                <item>Hide AM/PM</item>
     </string-array>
 
     <string-array name="clock_values">
@@ -739,4 +739,60 @@
 		<item>Gummy Bar Battery</item>
 		<item>Circle Battery</item>
 	</string-array>
+
+        <!-- LED Settings -->
+	<string-array name="led_entries">
+		<item>.5 seconds</item>
+		<item>1 second</item>
+		<item>1.5 seconds</item>
+		<item>2 seconds</item>
+		<item>2.5 seconds</item>
+		<item>3 seconds</item>
+		<item>3.5 seconds</item>
+		<item>4 seconds</item>
+		<item>4.5 seconds</item>
+		<item>5 seconds</item>
+		<item>5.5 seconds</item>
+		<item>6 seconds</item>
+		<item>7 seconds</item>
+		<item>8 seconds</item>
+		<item>9 seconds</item>
+		<item>10 seconds</item>
+	</string-array>
+
+	<!-- values must be in milliseconds!~@@#E!@ -->
+	<string-array name="led_values">
+		<item>500</item>
+		<item>1000</item>
+		<item>1500</item>
+		<item>2000</item>
+		<item>2500</item>
+		<item>3000</item>
+		<item>3500</item>
+		<item>4000</item>
+		<item>4500</item>
+		<item>5000</item>
+		<item>5500</item>
+		<item>6000</item>
+		<item>7000</item>
+		<item>8000</item>
+		<item>9000</item>
+		<item>10000</item>
+	</string-array>
+
+	<!-- Performance arrays -->
+        <string-array name="minfree">
+                <item>25mb</item>
+                <item>50mb</item>
+                <item>75mb</item>
+                <item>80mb</item>
+                <item>100mb</item>
+        </string-array>
+        <string-array name="minfree_values">
+                <item>1536,2048,4096,5120,5632,6144</item>
+                <item>2560,3840,6400,7680,10240,12800</item>
+                <item>2560,3840,6400,10240,12800,19200</item>
+                <item>2048,3072,6144,15360,17920,20480</item>
+                <item>2560,3840,6400,12800,12800,25600</item>
+        </string-array>
 </resources>

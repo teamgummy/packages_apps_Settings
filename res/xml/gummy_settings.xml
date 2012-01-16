@@ -16,10 +16,20 @@
             android:fragment="com.android.settings.LockscreenSettings" />
 
     <PreferenceScreen
+            android:key="led_settings"
+            android:title="@string/led_settings">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.android.settings.LEDSettings"
+                android:targetPackage="com.android.settings" />
+    </PreferenceScreen>
+
+    <PreferenceScreen
             android:key="performance_settings"
             android:title="@string/performance_settings">
-            <intent android:action="android.intent.action.MAIN"
-                 android:targetPackage="com.liberty.settings"
-                 android:targetClass="com.liberty.settings.Performance" />
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.android.settings.Performance"
+                android:targetPackage="com.android.settings" />
     </PreferenceScreen>
 </PreferenceScreen>

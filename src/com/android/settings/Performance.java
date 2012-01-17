@@ -15,7 +15,8 @@ import android.util.Log;
 import com.android.settings.util.CMDProcessor;
 import com.android.settings.util.Helpers;
 
-public class Performance extends PreferenceActivity implements OnSharedPreferenceChangeListener {
+public class Performance extends SettingsPreferenceFragment implements
+        OnSharedPreferenceChangeListener {
 
 	public static final String TAG = "Performance";
 	public static final String KEY_MAX_CPU = "max_cpu";
@@ -41,7 +42,7 @@ public class Performance extends PreferenceActivity implements OnSharedPreferenc
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		
 		super.onCreate(savedInstanceState);		
 		preferences.registerOnSharedPreferenceChangeListener(this);		
@@ -111,7 +112,7 @@ public class Performance extends PreferenceActivity implements OnSharedPreferenc
 				final String value = preferences.getString(key, null);
 				final String maxInMhz = (Integer.toString((Integer.parseInt(value) / 1000))+" MHz");
 				if (!sendCpu(key, value, MAX_FREQ))
-					Helpers.sendMsg(getApplicationContext(),
+					Helpers.sendMsg(getActivity(),
 							getString(R.string.toast_min_max_error01));
 				else
 					mMaxCpu.setSummary(getString(R.string.ps_set_max, maxInMhz));
@@ -119,7 +120,7 @@ public class Performance extends PreferenceActivity implements OnSharedPreferenc
 				final String value = preferences.getString(key, null);
 				final String minInMhz = (Integer.toString((Integer.parseInt(value) / 1000))+" MHz");
 				if (!sendCpu(key, value, MIN_FREQ))
-					Helpers.sendMsg(getApplicationContext(),
+					Helpers.sendMsg(getActivity(),
 							getString(R.string.toast_min_max_error02));
 				else				
 					mMinCpu.setSummary(getString(R.string.ps_set_min, minInMhz));

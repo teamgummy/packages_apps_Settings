@@ -6,27 +6,15 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Log;
 
 import com.android.settings.R;
 
-public class LEDSettings extends Activity {
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        getFragmentManager().beginTransaction().replace(android.R.id.content,
-                new LEDPreferences()).commit();
-    }
-
-    public class LEDPreferences extends PreferenceFragment implements OnPreferenceChangeListener {
+public class LEDSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
         public static final String TAG = "LEDPreferences";
-
         private static final String PREF_LED_OFF = "led_off";
         private static final String PREF_LED_ON = "led_on";
         private static final String PREF_COLOR_PICKER = "led_color";
@@ -113,4 +101,4 @@ public class LEDSettings extends Activity {
 
     }
 
-}
+

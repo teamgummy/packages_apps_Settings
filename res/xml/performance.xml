@@ -14,10 +14,13 @@
 		<CheckBoxPreference android:key="cpu_boot"
 			android:defaultValue="false" android:summary="@string/ps_cpu_boot"
 			android:title="@string/pt_cpu_boot" />
-		<PreferenceScreen 
-                        android:key="volt_control"
-                        android:title="Voltage Control"
-                        android:fragment="com.android.settings.VoltageControlActivity" />                        
+		<PreferenceScreen android:key="volt_control"
+                        android:title="Voltage Control">
+                <intent
+                        android:action="android.intent.action.MAIN"
+                         android:targetClass="com.android.settings.VoltageControlActivity"
+                        android:targetPackage="com.android.settings" />
+	</PreferenceScreen>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/pt_init_d"
 		android:key="sysctl_conf_category">

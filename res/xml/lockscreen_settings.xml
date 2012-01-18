@@ -9,9 +9,29 @@
             android:title="General Settings">
 
         <CheckBoxPreference
+            android:key="lockscreen_extra"
+            android:title="@string/lockscreen_extra" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
             android:key="lockscreen_battery"
             android:title="@string/lockscreen_battery" >
         </CheckBoxPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="custom_app"
+            android:title="Custom Apps">
+
+        <Preference
+            android:key="lockscreen_custom_1"
+            android:title="@string/custom_app_1"
+            android:summary="@string/custom_app_1_summary" />
+
+        <Preference
+            android:key="lockscreen_custom_2"
+            android:title="@string/custom_app_2"
+            android:summary="@string/custom_app_2_summary" />
 
     </PreferenceCategory>
 </PreferenceScreen>

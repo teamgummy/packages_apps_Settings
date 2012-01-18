@@ -3860,9 +3860,8 @@ found in the list of installed apps.</string>
     <string name="set_boot">Set On Boot</string>
     <string name="apply_values">Apply Values</string>
     <string name="dt_free_memory">Minfree Taskkiller</string>
-    
 
-   <!-- Strings for SystemUI Tweaks Menu -->
+    <!-- Strings for SystemUI Tweaks Menu -->
     <string name="gummy_settings_title">Gummy Settings</string>
     <string name="systemui_tweaks">SystemUI Tweaks</string>
     <string name="clock_style_title">Clock style</string>
@@ -3873,5 +3872,13 @@ found in the list of installed apps.</string>
     <string name="lockscreen_battery">Lockscreen Battery %</string>
     <string name="carrier_text">Custom Carrier Text</string>
     <string name="led_settings">LED Settings</string>
+    <string name="powersaver_settings">Power Saver Options</string>
+    <string name="lockscreen_extra">Enable Custom App Icons</string>
+    <string name="group_applications">Applications</string>
+    <string name="select_custom_app_title">Select custom application</string>
+    <string name="custom_app_1">Custom App 1</string>
+    <string name="custom_app_2">Custom App 2</string>
+    <string name="custom_app_1_summary">Choose a custom app to launch</string>
+    <string name="custom_app_2_summary">Choose a custom app to launch</string>
 
 </resources>

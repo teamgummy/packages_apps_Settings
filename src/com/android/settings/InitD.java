@@ -18,7 +18,7 @@ import com.android.settings.util.Helpers;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-public class InitD extends PreferenceActivity implements OnSharedPreferenceChangeListener {
+public class InitD extends SettingsPreferenceFragment implements OnSharedPreferenceChangeListener {
 
 	private static final String TAG = "InitD";
 	
@@ -47,7 +47,7 @@ public class InitD extends PreferenceActivity implements OnSharedPreferenceChang
 
 		super.onCreate(savedInstanceState);
 		
-		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+		PreferenceManager.getDefaultSharedPreferences(getActivity()).registerOnSharedPreferenceChangeListener(this);
 		addPreferencesFromResource(R.xml.init_d);
 
 		cfg = new File("/system/etc/liberty.cfg");

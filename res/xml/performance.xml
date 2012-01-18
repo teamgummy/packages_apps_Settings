@@ -14,25 +14,17 @@
 		<CheckBoxPreference android:key="cpu_boot"
 			android:defaultValue="false" android:summary="@string/ps_cpu_boot"
 			android:title="@string/pt_cpu_boot" />
-		<PreferenceScreen android:key="volt_control"
-                        android:title="Voltage Control">
-                <intent
-                        android:action="android.intent.action.MAIN"
-                         android:targetClass="com.android.settings.VoltageControlActivity"
-                        android:targetPackage="com.android.settings" />
-    </PreferenceScreen>
-                         
+		<PreferenceScreen 
+                        android:key="volt_control"
+                        android:title="Voltage Control"
+                        android:fragment="com.android.settings.VoltageControlActivity" />                        
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/pt_init_d"
 		android:key="sysctl_conf_category">
 		<PreferenceScreen android:key="init_d"
                         android:title="@string/pt_init_d"
-			android:summary="@string/ps_init_d">
-                <intent
-                        android:action="android.intent.action.MAIN"
-                        android:targetClass="com.android.settings.InitD"
-                        android:targetPackage="com.android.settings" />
-    </PreferenceScreen>
+			android:summary="@string/ps_init_d"
+                        android:fragment="com.android.settings.InitD" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/prefcat_free_memory"
 		android:key="performance">

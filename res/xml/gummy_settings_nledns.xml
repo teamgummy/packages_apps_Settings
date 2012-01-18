@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/gummy_settings_title"
+    android:key="gummy_settings"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <PreferenceScreen
+            android:key="systemui_tweaks"
+            android:title="@string/systemui_tweaks"
+            android:fragment="com.android.settings.SystemUITweaksNS" />
+
+    <PreferenceScreen
+            android:key="lockscreen_settings"
+            android:title="@string/lockscreen_settings">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.android.settings.LockscreenSettings"
+                android:targetPackage="com.android.settings" />
+    </PreferenceScreen>
+
+   <!-- <PreferenceScreen
+            android:key="led_settings"
+            android:title="@string/led_settings"
+            android:fragment="com.android.settings.LEDSettings" /> -->
+
+    <PreferenceScreen
+            android:key="performance_settings"
+            android:title="@string/performance_settings"
+            android:fragment="com.android.settings.Performance" />
+
+</PreferenceScreen>

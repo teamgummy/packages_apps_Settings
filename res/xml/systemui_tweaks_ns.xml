@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/systemui_tweaks"
+    android:key="systemui_tweaks">
+
+    <PreferenceCategory
+            android:key="general_category"
+            android:title="General Settings">
+
+        <CheckBoxPreference
+            android:key="hide_alarm"
+            android:title="@string/hide_alarm" >
+        </CheckBoxPreference>
+
+        <ListPreference
+            android:key="battery_style"
+            android:entries="@array/battery_entries"
+            android:entryValues="@array/battery_values"
+            android:title="@string/battery_types" />
+
+        <Preference
+            android:key="carrier_text"
+            android:title="@string/carrier_text" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="clock_category"
+            android:title="Clock Settings">
+        <ListPreference
+            android:key="clock_style"
+            android:entries="@array/clock_entries"
+            android:entryValues="@array/clock_values"
+            android:title="@string/clock_style_title" />
+
+        <ListPreference
+            android:key="clock_am_pm"
+            android:entries="@array/am_pm_entries"
+            android:entryValues="@array/am_pm_values"
+            android:title="@string/am_pm_style_title" />
+    </PreferenceCategory>
+
+    <!--<PreferenceCategory
+            android:key="softkeys_category"
+            android:title="Soft Key Settings">
+
+            <CheckBoxPreference
+            android:key="show_menu_button"
+            android:title="@string/show_menu_button_title" >
+            </CheckBoxPreference>
+
+            <CheckBoxPreference
+            android:key="show_search_button"
+            android:title="@string/show_search_button_title" >
+            </CheckBoxPreference>
+    </PreferenceCategory>-->
+</PreferenceScreen>

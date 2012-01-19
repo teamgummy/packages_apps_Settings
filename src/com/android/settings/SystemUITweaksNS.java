@@ -1,5 +1,4 @@
 package com.android.settings;
-import com.android.settings.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,39 +14,57 @@ import android.provider.Settings;
 import android.text.Spannable;
 import android.widget.EditText;
 
+import com.android.settings.R;
+import com.android.settings.util.colorpicker.ColorPickerPreference;
+
 public class SystemUITweaksNS extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String HIDE_ALARM = "hide_alarm";
     private static final String PREF_CLOCK_DISPLAY_STYLE = "clock_am_pm";
     private static final String PREF_CLOCK_STYLE = "clock_style";
-    private static final String PREF_BATTERY_STYLE = "battery_style";
+    private static final String HIDE_BATTERY = "hide_battery";
+    private static final String BATTERY_STYLE = "battery_style";
+    private static final String BATTERY_BAR = "battery_bar";
+    private static final String BATTERY_BAR_COLOR = "battery_bar_color";
     private static final String PREF_CARRIER_TEXT = "carrier_text";
 
     private CheckBoxPreference mHideAlarm;
+    private CheckBoxPreference mHideBatt;
+    private CheckBoxPreference mBattBar;
     private ListPreference mAmPmStyle;
     private ListPreference mClockStyle;
     private ListPreference mBatteryStyle;
     private Preference mCarrier;
+    private ColorPickerPreference mBattBarColor;
 
     String mCarrierText = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.systemui_tweaks_ns);
+        addPreferencesFromResource(R.xml.systemui_tweaks);
         PreferenceScreen prefSet = getPreferenceScreen();
 
         mHideAlarm = (CheckBoxPreference) prefSet.findPreference(HIDE_ALARM);
         mHideAlarm.setChecked(Settings.System.getInt(getContentResolver(),
             Settings.System.HIDE_ALARM, 0) == 1);
 
+        mHideBatt = (CheckBoxPreference) prefSet.findPreference(HIDE_BATTERY);
+        mHideBatt.setChecked(Settings.System.getInt(getContentResolver(),
+            Settings.System.HIDE_BATTERY, 0) == 1);
+        mBattBar = (CheckBoxPreference) prefSet.findPreference(BATTERY_BAR);
+        mBattBar.setChecked(Settings.System.getInt(getContentResolver(),
+            Settings.System.STATUSBAR_BATTERY_BAR, 0) == 1);
+
+        mBattBarColor = (ColorPickerPreference) prefSet.findPreference(BATTERY_BAR_COLOR);
+        mBattBarColor.setOnPreferenceChangeListener(this);
+
         mCarrier = (Preference) prefSet.findPreference(PREF_CARRIER_TEXT);
         updateCarrierText();
 
         mClockStyle = (ListPreference) prefSet.findPreference(PREF_CLOCK_STYLE);
         mAmPmStyle = (ListPreference) prefSet.findPreference(PREF_CLOCK_DISPLAY_STYLE);
-        mBatteryStyle = (ListPreference) prefSet.findPreference(PREF_BATTERY_STYLE);
-
+        mBatteryStyle = (ListPreference) prefSet.findPreference(BATTERY_STYLE);
 
         int styleValue = Settings.System.getInt(getContentResolver(),
                 Settings.System.STATUS_BAR_AM_PM, 2);
@@ -80,6 +97,16 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements OnPr
             value = mHideAlarm.isChecked();
             Settings.System.putInt(getContentResolver(),
                 Settings.System.HIDE_ALARM, value ? 1 : 0);
+            return true;
+        } else if (preference == mHideBatt) {
+            value = mHideBatt.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.HIDE_BATTERY, value ? 1 : 0);
+            return true;
+        } else if (preference == mBattBar) {
+            value = mBattBar.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.STATUSBAR_BATTERY_BAR, value ? 1 : 0);
             return true;
         } else if (preference == mCarrier) {
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
@@ -119,6 +146,13 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements OnPr
             int val = Integer.valueOf((String) newValue);
             Settings.System.putInt(getContentResolver(),
                 Settings.System.BATTERY_PERCENTAGES, val);
+            return true;
+        } else if (preference == mBattBarColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.STATUSBAR_BATTERY_BAR_COLOR, color);
             return true;
         }
         return false;

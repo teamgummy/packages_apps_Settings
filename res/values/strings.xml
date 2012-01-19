@@ -3861,18 +3861,24 @@ found in the list of installed apps.</string>
     <string name="apply_values">Apply Values</string>
     <string name="dt_free_memory">Minfree Taskkiller</string>
 
-    <!-- Strings for SystemUI Tweaks Menu -->
+    <!-- Strings for Gummy Settings-->
     <string name="gummy_settings_title">Gummy Settings</string>
+    <string name="led_settings">LED Settings</string>
     <string name="systemui_tweaks">SystemUI Tweaks</string>
+    <string name="lockscreen_settings">Lockscreen Settings</string>
+
+    <!-- Strings for SystemUI Tweaks Menu -->
     <string name="clock_style_title">Clock style</string>
     <string name="am_pm_style_title">AM PM style</string>
     <string name="hide_alarm">Hide Alarm</string>
     <string name="battery_types">Battery Types</string>
-    <string name="lockscreen_settings">Lockscreen Settings</string>
-    <string name="lockscreen_battery">Lockscreen Battery %</string>
     <string name="carrier_text">Custom Carrier Text</string>
-    <string name="led_settings">LED Settings</string>
-    <string name="powersaver_settings">Power Saver Options</string>
+    <string name="hide_battery">Hide Battery Icon</string>
+    <string name="battery_bar">Battery Bar</string>
+    <string name="battery_bar_color">Battery Bar Color</string>
+
+    <!-- Strings for Lockscreen Settings Menu -->
+    <string name="lockscreen_battery">Lockscreen Battery %</string>
     <string name="lockscreen_extra">Enable Custom App Icons</string>
     <string name="group_applications">Applications</string>
     <string name="select_custom_app_title">Select custom application</string>

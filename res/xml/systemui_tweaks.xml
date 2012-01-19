@@ -13,12 +13,6 @@
             android:title="@string/hide_alarm" >
         </CheckBoxPreference>
 
-        <ListPreference
-            android:key="battery_style"
-            android:entries="@array/battery_entries"
-            android:entryValues="@array/battery_values"
-            android:title="@string/battery_types" />
-
         <Preference
             android:key="carrier_text"
             android:title="@string/carrier_text" />
@@ -38,6 +32,33 @@
             android:entries="@array/am_pm_entries"
             android:entryValues="@array/am_pm_values"
             android:title="@string/am_pm_style_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="battery_category"
+            android:title="Battery Settings">
+
+        <CheckBoxPreference
+            android:key="hide_battery"
+            android:title="@string/hide_battery" >
+        </CheckBoxPreference>
+
+        <ListPreference
+            android:key="battery_style"
+            android:entries="@array/battery_entries"
+            android:entryValues="@array/battery_values"
+            android:title="@string/battery_types" />
+
+        <CheckBoxPreference
+            android:key="battery_bar"
+            android:title="@string/battery_bar" >
+        </CheckBoxPreference>
+
+	<com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="battery_bar_color" 
+		android:title="@string/battery_bar_color" 
+		android:defaultValue="#ffffff" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

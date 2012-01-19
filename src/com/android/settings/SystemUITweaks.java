@@ -1,5 +1,4 @@
 package com.android.settings;
-import com.android.settings.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,6 +14,9 @@ import android.provider.Settings;
 import android.text.Spannable;
 import android.widget.EditText;
 
+import com.android.settings.R;
+import com.android.settings.util.colorpicker.ColorPickerPreference;
+
 public class SystemUITweaks extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String HIDE_ALARM = "hide_alarm";
@@ -22,16 +24,22 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
     private static final String PREF_CLOCK_STYLE = "clock_style";
     private static final String SHOW_MENU_BUTTON = "show_menu_button";
     private static final String SHOW_SEARCH_BUTTON = "show_search_button";
-    private static final String PREF_BATTERY_STYLE = "battery_style";
+    private static final String HIDE_BATTERY = "hide_battery";
+    private static final String BATTERY_STYLE = "battery_style";
+    private static final String BATTERY_BAR = "battery_bar";
+    private static final String BATTERY_BAR_COLOR = "battery_bar_color";
     private static final String PREF_CARRIER_TEXT = "carrier_text";
 
     private CheckBoxPreference mHideAlarm;
     private CheckBoxPreference mShowMenuButton;
     private CheckBoxPreference mShowSearchButton;
+    private CheckBoxPreference mHideBatt;
+    private CheckBoxPreference mBattBar;
     private ListPreference mAmPmStyle;
     private ListPreference mClockStyle;
     private ListPreference mBatteryStyle;
     private Preference mCarrier;
+    private ColorPickerPreference mBattBarColor;
 
     String mCarrierText = null;
 
@@ -45,12 +53,22 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
         mHideAlarm.setChecked(Settings.System.getInt(getContentResolver(),
             Settings.System.HIDE_ALARM, 0) == 1);
 
+        mHideBatt = (CheckBoxPreference) prefSet.findPreference(HIDE_BATTERY);
+        mHideBatt.setChecked(Settings.System.getInt(getContentResolver(),
+            Settings.System.HIDE_BATTERY, 0) == 1);
+        mBattBar = (CheckBoxPreference) prefSet.findPreference(BATTERY_BAR);
+        mBattBar.setChecked(Settings.System.getInt(getContentResolver(),
+            Settings.System.STATUSBAR_BATTERY_BAR, 0) == 1);
+
+        mBattBarColor = (ColorPickerPreference) prefSet.findPreference(BATTERY_BAR_COLOR);
+        mBattBarColor.setOnPreferenceChangeListener(this);
+
         mCarrier = (Preference) prefSet.findPreference(PREF_CARRIER_TEXT);
         updateCarrierText();
 
         mClockStyle = (ListPreference) prefSet.findPreference(PREF_CLOCK_STYLE);
         mAmPmStyle = (ListPreference) prefSet.findPreference(PREF_CLOCK_DISPLAY_STYLE);
-        mBatteryStyle = (ListPreference) prefSet.findPreference(PREF_BATTERY_STYLE);
+        mBatteryStyle = (ListPreference) prefSet.findPreference(BATTERY_STYLE);
 
         mShowMenuButton = (CheckBoxPreference) prefSet.findPreference(SHOW_MENU_BUTTON);
         mShowMenuButton.setChecked(Settings.System.getInt(getContentResolver(),
@@ -101,6 +119,16 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
             Settings.System.putInt(getContentResolver(),
                 Settings.System.SHOW_SEARCH_BUTTON, value ? 1 : 0);
             return true;
+        } else if (preference == mHideBatt) {
+            value = mHideBatt.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.HIDE_BATTERY, value ? 1 : 0);
+            return true;
+        } else if (preference == mBattBar) {
+            value = mBattBar.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.STATUSBAR_BATTERY_BAR, value ? 1 : 0);
+            return true;
         } else if (preference == mCarrier) {
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
             ad.setTitle("Custom Carrier Text");
@@ -139,6 +167,13 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
             int val = Integer.valueOf((String) newValue);
             Settings.System.putInt(getContentResolver(),
                 Settings.System.BATTERY_PERCENTAGES, val);
+            return true;
+        } else if (preference == mBattBarColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.STATUSBAR_BATTERY_BAR_COLOR, color);
             return true;
         }
         return false;

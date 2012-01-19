@@ -26,7 +26,10 @@
 
     <PreferenceScreen
             android:key="performance_settings"
-            android:title="@string/performance_settings"
-            android:fragment="com.android.settings.Performance" />
+            android:title="@string/performance_settings">
+            <intent android:action="android.intent.action.MAIN"
+                 android:targetPackage="com.liberty.settings"
+                 android:targetClass="com.liberty.settings.Performance" />
+    </PreferenceScreen>
 
 </PreferenceScreen>

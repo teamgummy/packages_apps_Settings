@@ -24,22 +24,25 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
     private static final String PREF_CLOCK_STYLE = "clock_style";
     private static final String SHOW_MENU_BUTTON = "show_menu_button";
     private static final String SHOW_SEARCH_BUTTON = "show_search_button";
-    private static final String HIDE_BATTERY = "hide_battery";
+    private static final String BATTERY_TEXT = "battery_text";
     private static final String BATTERY_STYLE = "battery_style";
     private static final String BATTERY_BAR = "battery_bar";
     private static final String BATTERY_BAR_COLOR = "battery_bar_color";
     private static final String PREF_CARRIER_TEXT = "carrier_text";
+    private static final String BATTERY_TEXT_COLOR ="battery_text_color";
 
     private CheckBoxPreference mHideAlarm;
     private CheckBoxPreference mShowMenuButton;
     private CheckBoxPreference mShowSearchButton;
-    private CheckBoxPreference mHideBatt;
+    private CheckBoxPreference mBattText;
     private CheckBoxPreference mBattBar;
     private ListPreference mAmPmStyle;
     private ListPreference mClockStyle;
     private ListPreference mBatteryStyle;
     private Preference mCarrier;
     private ColorPickerPreference mBattBarColor;
+
+    PreferenceScreen mBattColor;
 
     String mCarrierText = null;
 
@@ -53,12 +56,14 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
         mHideAlarm.setChecked(Settings.System.getInt(getContentResolver(),
             Settings.System.HIDE_ALARM, 0) == 1);
 
-        mHideBatt = (CheckBoxPreference) prefSet.findPreference(HIDE_BATTERY);
-        mHideBatt.setChecked(Settings.System.getInt(getContentResolver(),
+        mBattText = (CheckBoxPreference) prefSet.findPreference(BATTERY_TEXT);
+        mBattText.setChecked(Settings.System.getInt(getContentResolver(),
             Settings.System.HIDE_BATTERY, 0) == 1);
         mBattBar = (CheckBoxPreference) prefSet.findPreference(BATTERY_BAR);
         mBattBar.setChecked(Settings.System.getInt(getContentResolver(),
             Settings.System.STATUSBAR_BATTERY_BAR, 0) == 1);
+
+        mBattColor = (PreferenceScreen) findPreference(BATTERY_TEXT_COLOR);
 
         mBattBarColor = (ColorPickerPreference) prefSet.findPreference(BATTERY_BAR_COLOR);
         mBattBarColor.setOnPreferenceChangeListener(this);
@@ -119,10 +124,10 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
             Settings.System.putInt(getContentResolver(),
                 Settings.System.SHOW_SEARCH_BUTTON, value ? 1 : 0);
             return true;
-        } else if (preference == mHideBatt) {
-            value = mHideBatt.isChecked();
+        } else if (preference == mBattText) {
+            value = mBattText.isChecked();
             Settings.System.putInt(getContentResolver(),
-                Settings.System.HIDE_BATTERY, value ? 1 : 0);
+                Settings.System.BATTERY_TEXT, value ? 1 : 0);
             return true;
         } else if (preference == mBattBar) {
             value = mBattBar.isChecked();

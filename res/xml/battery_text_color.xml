@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/battery_text_color"
+    android:key="battery_text_color">
+
+    <CheckBoxPreference
+        android:key="allow_color_changes"
+        android:title="@string/allow_color_changes" >
+    </CheckBoxPreference>
+
+    <com.android.settings.util.colorpicker.ColorPickerPreference
+	android:key="battery_text_charge" 
+	android:title="@string/battery_text_charge" 
+	android:defaultValue="#00ff00" />
+
+    <com.android.settings.util.colorpicker.ColorPickerPreference
+	android:key="battery_text_normal" 
+	android:title="@string/battery_text_normal" 
+	android:defaultValue="#33b5e5" />
+
+    <com.android.settings.util.colorpicker.ColorPickerPreference
+	android:key="battery_text_low" 
+	android:title="@string/battery_text_low" 
+	android:defaultValue="#ff0000" />
+
+</PreferenceScreen>

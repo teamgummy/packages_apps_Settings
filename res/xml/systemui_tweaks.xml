@@ -2,7 +2,8 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/systemui_tweaks"
-    android:key="systemui_tweaks">
+    android:key="systemui_tweaks"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
             android:key="general_category"
@@ -38,16 +39,25 @@
             android:key="battery_category"
             android:title="Battery Settings">
 
-        <CheckBoxPreference
-            android:key="hide_battery"
-            android:title="@string/hide_battery" >
-        </CheckBoxPreference>
-
         <ListPreference
             android:key="battery_style"
             android:entries="@array/battery_entries"
             android:entryValues="@array/battery_values"
             android:title="@string/battery_types" />
+
+        <CheckBoxPreference
+            android:key="battery_text"
+            android:title="Use Battery Text" >
+        </CheckBoxPreference>
+
+        <PreferenceScreen
+            android:key="battery_text_color"
+            android:title="@string/battery_text_color">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.android.settings.BatteryTextColor"
+                android:targetPackage="com.android.settings" />
+    </PreferenceScreen>
 
         <CheckBoxPreference
             android:key="battery_bar"

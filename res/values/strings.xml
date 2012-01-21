@@ -3887,4 +3887,11 @@ found in the list of installed apps.</string>
     <string name="custom_app_1_summary">Choose a custom app to launch</string>
     <string name="custom_app_2_summary">Choose a custom app to launch</string>
 
+    <!-- String for Battery Color Menu -->
+    <string name="battery_text_color">Battery Text Colors</string>
+    <string name="allow_color_changes">Allow Custom Text Colors</string>
+    <string name="battery_text_charge">Battery Charging Color</string>
+    <string name="battery_text_normal">Battery Color (Above 15%)</string>
+    <string name="battery_text_low">Battery Color (Below 15%)</string>
+
 </resources>

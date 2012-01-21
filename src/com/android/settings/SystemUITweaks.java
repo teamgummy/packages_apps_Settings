@@ -64,9 +64,11 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
             Settings.System.STATUSBAR_BATTERY_BAR, 0) == 1);
 
         mBattColor = (PreferenceScreen) findPreference(BATTERY_TEXT_COLOR);
+        mBattColor.setEnabled(mBattText.isChecked());
 
         mBattBarColor = (ColorPickerPreference) prefSet.findPreference(BATTERY_BAR_COLOR);
         mBattBarColor.setOnPreferenceChangeListener(this);
+        mBattBarColor.setEnabled(mBattBar.isChecked());
 
         mCarrier = (Preference) prefSet.findPreference(PREF_CARRIER_TEXT);
         updateCarrierText();
@@ -107,6 +109,20 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
         }
     }
 
+    private void updateBatteryTextToggle(boolean bool){
+        if (bool)
+            mBattColor.setEnabled(true);
+        else
+            mBattColor.setEnabled(false);
+    }
+
+    private void updateBatteryBarToggle(boolean bool){
+        if (bool)
+            mBattBarColor.setEnabled(true);
+        else
+            mBattBarColor.setEnabled(false);
+    }
+
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         boolean value;
         if (preference == mHideAlarm) {
@@ -128,11 +144,13 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
             value = mBattText.isChecked();
             Settings.System.putInt(getContentResolver(),
                 Settings.System.BATTERY_TEXT, value ? 1 : 0);
+            updateBatteryTextToggle(value);
             return true;
         } else if (preference == mBattBar) {
             value = mBattBar.isChecked();
             Settings.System.putInt(getContentResolver(),
                 Settings.System.STATUSBAR_BATTERY_BAR, value ? 1 : 0);
+            updateBatteryBarToggle(value);
             return true;
         } else if (preference == mCarrier) {
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());

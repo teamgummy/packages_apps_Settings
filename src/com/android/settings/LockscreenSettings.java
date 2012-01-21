@@ -57,7 +57,9 @@ public class LockscreenSettings extends Activity {
             mLockBattery.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_BATTERY, 0) == 1);
 
             mCustomApp1 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_1);
+            mCustomApp1.setEnabled(mLockExtra.isChecked());
             mCustomApp2 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_2);
+            mCustomApp2.setEnabled(mLockExtra.isChecked());
             mPicker = new ShortcutPickerHelper(this.getActivity(), this);
             mCustomAppText1 = Settings.System.getString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_ONE);
             mCustomAppText2 = Settings.System.getString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_TWO);
@@ -75,6 +77,7 @@ public class LockscreenSettings extends Activity {
                 value = mLockExtra.isChecked();
                 Settings.System.putInt(getContentResolver(),
                 Settings.System.LOCKSCREEN_EXTRA_ICONS, value ? 1 : 0);
+                updateCustomAppPickers(value);
                 return true;
             } else if (preference == mCustomApp1) {
                 mCurrentCustomActivityPreference = preference;
@@ -88,7 +91,17 @@ public class LockscreenSettings extends Activity {
                 return true;
             }
             return false;
-        }  
+        }
+
+        private void updateCustomAppPickers(boolean bool) {
+            if (bool){
+                mCustomApp1.setEnabled(true);
+                mCustomApp2.setEnabled(true);
+            } else {
+                mCustomApp1.setEnabled(false);
+                mCustomApp2.setEnabled(false);
+            }
+        }
 
         @Override
         public void onResume() {

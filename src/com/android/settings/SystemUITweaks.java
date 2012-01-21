@@ -58,7 +58,7 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
 
         mBattText = (CheckBoxPreference) prefSet.findPreference(BATTERY_TEXT);
         mBattText.setChecked(Settings.System.getInt(getContentResolver(),
-            Settings.System.HIDE_BATTERY, 0) == 1);
+            Settings.System.BATTERY_TEXT, 0) == 1);
         mBattBar = (CheckBoxPreference) prefSet.findPreference(BATTERY_BAR);
         mBattBar.setChecked(Settings.System.getInt(getContentResolver(),
             Settings.System.STATUSBAR_BATTERY_BAR, 0) == 1);

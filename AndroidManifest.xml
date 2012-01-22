@@ -1360,7 +1360,8 @@
         <activity android:name="SystemUITweaks"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/systemui_tweaks">
+            android:label="@string/systemui_tweaks"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1378,7 +1379,8 @@
         <activity android:name="LEDSettings"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/led_settings">
+            android:label="@string/led_settings"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1410,7 +1412,8 @@
         </activity>
 
         <activity android:name="BatteryTextColor"
-            android:label="@string/battery_text_color">
+            android:label="@string/battery_text_color"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

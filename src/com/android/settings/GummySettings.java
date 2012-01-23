@@ -9,11 +9,13 @@ import java.util.List;
 
 public class GummySettings extends SettingsPreferenceFragment {
 
+    private static final String GENERAL_SETTINGS = "general_settings";
     private static final String SYSTEMUI_TWEAKS = "systemui_tweaks";
     private static final String LOCKSCREEN_SETTINGS = "lockscreen_settings";
     private static final String LED_SETTINGS = "led_settings";
     private static final String PERFORMANCE_SETTINGS = "performance_settings";
 
+    PreferenceScreen mGeneralSettings;
     PreferenceScreen mSystemUITweaks;
     PreferenceScreen mLockscreenSettings;
     PreferenceScreen mLEDSettings;
@@ -24,6 +26,7 @@ public class GummySettings extends SettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.gummy_settings);
 
+        mGeneralSettings = (PreferenceScreen) findPreference(GENERAL_SETTINGS);
         mSystemUITweaks = (PreferenceScreen) findPreference(SYSTEMUI_TWEAKS);
         mLockscreenSettings = (PreferenceScreen) findPreference(LOCKSCREEN_SETTINGS);
         mLEDSettings = (PreferenceScreen) findPreference(LED_SETTINGS);

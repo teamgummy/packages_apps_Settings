@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/general_settings"
+    android:key="lockscreen_settings">
+
+    <CheckBoxPreference
+        android:key="180_degree"
+        android:title="@string/180_degree" >
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="kill_app"
+        android:title="@string/kill_app" >
+    </CheckBoxPreference>
+</PreferenceScreen>

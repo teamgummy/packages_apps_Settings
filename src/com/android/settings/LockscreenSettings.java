@@ -32,11 +32,13 @@ public class LockscreenSettings extends Activity {
 
         private static final String LOCKSCREEN_EXTRA = "lockscreen_extra";
         private static final String LOCKSCREEN_BATTERY = "lockscreen_battery";
+        private static final String VOLUME_WAKE = "volume_wake";
         private static final String LOCKSCREEN_CUSTOM_1 = "lockscreen_custom_1";
         private static final String LOCKSCREEN_CUSTOM_2 = "lockscreen_custom_2";
 
         private CheckBoxPreference mLockExtra;
         private CheckBoxPreference mLockBattery;
+        private CheckBoxPreference mVolumeWake;
         private Preference mCustomApp1;
         private Preference mCustomApp2;
 
@@ -55,6 +57,9 @@ public class LockscreenSettings extends Activity {
             mLockExtra.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_EXTRA_ICONS, 0) == 1);
             mLockBattery = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_BATTERY);
             mLockBattery.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_BATTERY, 0) == 1);
+
+            mVolumeWake = (CheckBoxPreference) prefSet.findPreference(VOLUME_WAKE);
+            mVolumeWake.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.VOLUME_WAKE, 0) == 1);
 
             mCustomApp1 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_1);
             mCustomApp1.setEnabled(mLockExtra.isChecked());
@@ -78,6 +83,11 @@ public class LockscreenSettings extends Activity {
                 Settings.System.putInt(getContentResolver(),
                 Settings.System.LOCKSCREEN_EXTRA_ICONS, value ? 1 : 0);
                 updateCustomAppPickers(value);
+                return true;
+            } else if (preference == mVolumeWake) {
+                value = mVolumeWake.isChecked();
+                Settings.System.putInt(getContentResolver(),
+                Settings.System.VOLUME_WAKE, value ? 1 : 0);
                 return true;
             } else if (preference == mCustomApp1) {
                 mCurrentCustomActivityPreference = preference;

@@ -17,6 +17,11 @@
             android:key="lockscreen_battery"
             android:title="@string/lockscreen_battery" >
         </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="volume_wake"
+            android:title="@string/volume_wake" >
+        </CheckBoxPreference>
     </PreferenceCategory>
 
     <PreferenceCategory

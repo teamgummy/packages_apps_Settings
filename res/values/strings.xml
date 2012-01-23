@@ -3886,6 +3886,7 @@ found in the list of installed apps.</string>
     <string name="custom_app_2">Custom App 2</string>
     <string name="custom_app_1_summary">Choose a custom app to launch</string>
     <string name="custom_app_2_summary">Choose a custom app to launch</string>
+    <string name="volume_wake">Enable Volume Rocker Wake</string>
 
     <!-- String for Battery Color Menu -->
     <string name="battery_text_color">Battery Text Colors</string>

@@ -35,7 +35,7 @@ public class GeneralSettings extends SettingsPreferenceFragment {
             Settings.System.ACCELEROMETER_ROTATION_ANGLES, (1 | 2 | 8)) == (1 | 2 | 4 | 8));
 
         mKillApp = (CheckBoxPreference) prefSet.findPreference(KILL_APP);
-        mKillApp.setChecked(Settings.System.getInt(getContentResolver(),
+        mKillApp.setChecked(Settings.Secure.getInt(getContentResolver(),
             Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) == 1);
 
     }
@@ -49,7 +49,7 @@ public class GeneralSettings extends SettingsPreferenceFragment {
             return true;
         } else if (preference == mKillApp) {
             value = mKillApp.isChecked();
-            Settings.System.putInt(getContentResolver(),
+            Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.KILL_APP_LONGPRESS_BACK, value ? 1 : 0);
             return true;
         }

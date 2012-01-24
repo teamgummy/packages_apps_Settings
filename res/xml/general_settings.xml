@@ -5,8 +5,8 @@
     android:key="lockscreen_settings">
 
     <CheckBoxPreference
-        android:key="180_degree"
-        android:title="@string/180_degree" >
+        android:key="turn_degree"
+        android:title="@string/turn_degree" >
     </CheckBoxPreference>
 
     <CheckBoxPreference

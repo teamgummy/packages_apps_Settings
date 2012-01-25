@@ -52,6 +52,20 @@ public class BatteryTextColor extends Activity {
             mNormalColor.setOnPreferenceChangeListener(this);
             mLowColor = (ColorPickerPreference) prefSet.findPreference(BATTERY_TEXT_LOW);
             mLowColor.setOnPreferenceChangeListener(this);
+
+            updateColorPrefs(mAllowColors.isChecked());
+        }
+
+        private void updateColorPrefs(boolean bool){
+            if (bool) {
+                mChargeColor.setEnabled(true);
+                mNormalColor.setEnabled(true);
+                mLowColor.setEnabled(true);
+            } else {
+                mChargeColor.setEnabled(false);
+                mNormalColor.setEnabled(false);
+                mLowColor.setEnabled(false);
+            }
         }
 
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -60,6 +74,7 @@ public class BatteryTextColor extends Activity {
                 value = mAllowColors.isChecked();
                 Settings.System.putInt(getContentResolver(),
                     Settings.System.BATTERY_TEXT_COLOR_ALLOWED, value ? 1 : 0);
+                updateColorPrefs(value);
                 return true;
             }
             return false;

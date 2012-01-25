@@ -94,6 +94,6 @@
 	    <com.android.settings.util.colorpicker.ColorPickerPreference
 		android:key="softkey_color" 
 		android:title="@string/softkey_color" 
-		android:defaultValue="#ffffff" />
+		android:defaultValue="#B0B0B0" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -22,6 +22,7 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
     private static final String HIDE_ALARM = "hide_alarm";
     private static final String PREF_CLOCK_DISPLAY_STYLE = "clock_am_pm";
     private static final String PREF_CLOCK_STYLE = "clock_style";
+    private static final String CLOCK_COLOR = "clock_color";
     private static final String SHOW_MENU_BUTTON = "show_menu_button";
     private static final String SHOW_SEARCH_BUTTON = "show_search_button";
     private static final String BATTERY_TEXT = "battery_text";
@@ -45,6 +46,7 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
     private Preference mCarrier;
     private ColorPickerPreference mBattBarColor;
     private ColorPickerPreference mSoftKeyColor;
+    private ColorPickerPreference mClockColor;
 
     PreferenceScreen mBattColor;
 
@@ -73,6 +75,9 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
         mBattBarColor = (ColorPickerPreference) prefSet.findPreference(BATTERY_BAR_COLOR);
         mBattBarColor.setOnPreferenceChangeListener(this);
         mBattBarColor.setEnabled(mBattBar.isChecked());
+
+        mClockColor = (ColorPickerPreference) prefSet.findPreference(CLOCK_COLOR);
+        mClockColor.setOnPreferenceChangeListener(this);
 
         mLongPressHome = (CheckBoxPreference) prefSet.findPreference(LONG_PRESS_HOMEKEY);
         mLongPressHome.setChecked(Settings.System.getInt(getContentResolver(),
@@ -239,6 +244,13 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
                 Settings.System.SOFT_KEY_COLOR, color);
+            return true;
+        } else if (preference == mClockColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.CLOCK_COLOR, color);
             return true;
         }
         return false;

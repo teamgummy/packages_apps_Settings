@@ -33,6 +33,11 @@
             android:entries="@array/am_pm_entries"
             android:entryValues="@array/am_pm_values"
             android:title="@string/am_pm_style_title" />
+
+	<com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="clock_color" 
+		android:title="@string/clock_color" 
+		android:defaultValue="#33B5E5" />
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -8,16 +8,19 @@
     <PreferenceScreen
             android:key="general_settings"
             android:title="@string/general_settings"
+            android:icon="@drawable/gummy_gen_tweaks"
             android:fragment="com.android.settings.GeneralSettings" />
 
     <PreferenceScreen
             android:key="systemui_tweaks"
             android:title="@string/systemui_tweaks"
+            android:icon="@drawable/gummy_sysui_tweaks"
             android:fragment="com.android.settings.SystemUITweaksNS" />
 
     <PreferenceScreen
             android:key="lockscreen_settings"
-            android:title="@string/lockscreen_settings">
+            android:title="@string/lockscreen_settings"
+            android:icon="@drawable/gummy_lockscreen">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetClass="com.android.settings.LockscreenSettings"
@@ -27,11 +30,13 @@
     <PreferenceScreen
             android:key="led_settings"
             android:title="@string/led_settings"
+            android:icon="@drawable/gummy_led"
             android:fragment="com.android.settings.LEDSettings" />
 
     <PreferenceScreen
             android:key="performance_settings"
-            android:title="@string/performance_settings">
+            android:title="@string/performance_settings"
+            android:icon="@drawable/gummy_performance">
             <intent android:action="android.intent.action.MAIN"
                  android:targetPackage="com.liberty.settings"
                  android:targetClass="com.liberty.settings.Performance" />

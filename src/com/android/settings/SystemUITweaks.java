@@ -33,6 +33,7 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
     private static final String BATTERY_TEXT_COLOR ="battery_text_color";
     private static final String LONG_PRESS_HOMEKEY = "long_press_homekey";
     private static final String SOFTKEY_COLOR = "softkey_color";
+    private static final String TOGGLE_COLOR = "toggle_color";
 
     private CheckBoxPreference mHideAlarm;
     private CheckBoxPreference mShowMenuButton;
@@ -47,6 +48,7 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
     private ColorPickerPreference mBattBarColor;
     private ColorPickerPreference mSoftKeyColor;
     private ColorPickerPreference mClockColor;
+    private ColorPickerPreference mToggleColor;
 
     PreferenceScreen mBattColor;
 
@@ -78,6 +80,9 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
 
         mClockColor = (ColorPickerPreference) prefSet.findPreference(CLOCK_COLOR);
         mClockColor.setOnPreferenceChangeListener(this);
+
+        mToggleColor = (ColorPickerPreference) prefSet.findPreference(TOGGLE_COLOR);
+        mToggleColor.setOnPreferenceChangeListener(this);
 
         mLongPressHome = (CheckBoxPreference) prefSet.findPreference(LONG_PRESS_HOMEKEY);
         mLongPressHome.setChecked(Settings.System.getInt(getContentResolver(),
@@ -251,6 +256,13 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
                 Settings.System.CLOCK_COLOR, color);
+            return true;
+        } else if (preference == mToggleColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.NOTIFICATION_TOGGLE_COLOR_BAR, color);
             return true;
         }
         return false;

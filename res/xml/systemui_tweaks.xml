@@ -72,7 +72,7 @@
 	<com.android.settings.util.colorpicker.ColorPickerPreference
 		android:key="battery_bar_color" 
 		android:title="@string/battery_bar_color" 
-		android:defaultValue="#ffffff" />
+		android:defaultValue="#33B5E5" />
 
     </PreferenceCategory>
 
@@ -100,5 +100,15 @@
 		android:key="softkey_color" 
 		android:title="@string/softkey_color" 
 		android:defaultValue="#B0B0B0" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="notification_toggle"
+            android:title="Notification Toggle Settings">
+
+	    <com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="toggle_color" 
+		android:title="@string/toggle_color" 
+		android:defaultValue="#33B5E5" />
     </PreferenceCategory>
 </PreferenceScreen>

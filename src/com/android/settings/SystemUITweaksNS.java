@@ -22,12 +22,15 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements OnPr
     private static final String HIDE_ALARM = "hide_alarm";
     private static final String PREF_CLOCK_DISPLAY_STYLE = "clock_am_pm";
     private static final String PREF_CLOCK_STYLE = "clock_style";
+    private static final String CLOCK_COLOR = "clock_color";
     private static final String BATTERY_TEXT = "battery_text";
     private static final String BATTERY_STYLE = "battery_style";
     private static final String BATTERY_BAR = "battery_bar";
     private static final String BATTERY_BAR_COLOR = "battery_bar_color";
     private static final String PREF_CARRIER_TEXT = "carrier_text";
     private static final String BATTERY_TEXT_COLOR ="battery_text_color";
+    private static final String TOGGLE_COLOR = "toggle_color";
+
 
     private CheckBoxPreference mHideAlarm;
     private CheckBoxPreference mBattText;
@@ -37,6 +40,9 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements OnPr
     private ListPreference mBatteryStyle;
     private Preference mCarrier;
     private ColorPickerPreference mBattBarColor;
+    private ColorPickerPreference mClockColor;
+    private ColorPickerPreference mToggleColor;
+
 
     PreferenceScreen mBattColor;
 
@@ -65,6 +71,12 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements OnPr
         mBattBarColor = (ColorPickerPreference) prefSet.findPreference(BATTERY_BAR_COLOR);
         mBattBarColor.setOnPreferenceChangeListener(this);
         mBattBarColor.setEnabled(mBattBar.isChecked());
+
+        mClockColor = (ColorPickerPreference) prefSet.findPreference(CLOCK_COLOR);
+        mClockColor.setOnPreferenceChangeListener(this);
+
+        mToggleColor = (ColorPickerPreference) prefSet.findPreference(TOGGLE_COLOR);
+        mToggleColor.setOnPreferenceChangeListener(this);
 
         mCarrier = (Preference) prefSet.findPreference(PREF_CARRIER_TEXT);
         updateCarrierText();
@@ -176,6 +188,20 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements OnPr
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
                 Settings.System.STATUSBAR_BATTERY_BAR_COLOR, color);
+            return true;
+        } else if (preference == mClockColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.CLOCK_COLOR, color);
+            return true;
+        } else if (preference == mToggleColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.NOTIFICATION_TOGGLE_COLOR_BAR, color);
             return true;
         }
         return false;

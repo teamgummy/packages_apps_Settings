@@ -197,15 +197,14 @@ public class RingerVolumePreference extends VolumePreference {
             getContext().registerReceiver(mRingModeChangedReceiver, filter);
         }
 
-        // Disable either ringer+notifications or notifications
+        // Disable the Ringer volume for tablets
         int id;
         if (!Utils.isVoiceCapable(getContext())) {
             id = R.id.ringer_section;
-        } else {
-            id = R.id.notification_section;
+            View hideSection = view.findViewById(id);
+            hideSection.setVisibility(View.GONE);
         }
-        View hideSection = view.findViewById(id);
-        hideSection.setVisibility(View.GONE);
+
     }
 
     private Uri getMediaVolumeUri(Context context) {

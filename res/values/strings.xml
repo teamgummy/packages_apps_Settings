@@ -1546,9 +1546,9 @@
     <!-- Volume description for media volume -->
     <string name="volume_media_description">Music, video, games, &amp; other media</string>
     <!-- Volume description for ringtone and notification volume -->
-    <string name="volume_ring_description">Ringtone &amp; notifications</string>
+    <string name="volume_ring_description">Ringtone Volume</string>
     <!-- Volume description for notification volume -->
-    <string name="volume_notification_description">Notifications</string>
+    <string name="volume_notification_description">Notifications Volume</string>
     <!-- Volume description for alarm volume -->
     <string name="volume_alarm_description">Alarms</string>
 

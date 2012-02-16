@@ -20,6 +20,7 @@ import com.android.settings.util.colorpicker.ColorPickerPreference;
 public class SystemUITweaks extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String HIDE_ALARM = "hide_alarm";
+    private static final String ENABLE_VOLUME_OPTIONS = "enable_volume_options";
     private static final String PREF_CLOCK_DISPLAY_STYLE = "clock_am_pm";
     private static final String PREF_CLOCK_STYLE = "clock_style";
     private static final String CLOCK_COLOR = "clock_color";
@@ -36,6 +37,7 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
     private static final String TOGGLE_COLOR = "toggle_color";
 
     private CheckBoxPreference mHideAlarm;
+    private CheckBoxPreference mEnableVolumeOptions;
     private CheckBoxPreference mShowMenuButton;
     private CheckBoxPreference mShowSearchButton;
     private CheckBoxPreference mLongPressHome;
@@ -63,10 +65,15 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
         mHideAlarm = (CheckBoxPreference) prefSet.findPreference(HIDE_ALARM);
         mHideAlarm.setChecked(Settings.System.getInt(getContentResolver(),
             Settings.System.HIDE_ALARM, 0) == 1);
+        
+        mEnableVolumeOptions = (CheckBoxPreference) prefSet.findPreference(ENABLE_VOLUME_OPTIONS);
+        mEnableVolumeOptions.setChecked(Settings.System.getInt(getContentResolver(),
+            Settings.System.ENABLE_VOLUME_OPTIONS, 0) == 1);
 
         mBattText = (CheckBoxPreference) prefSet.findPreference(BATTERY_TEXT);
         mBattText.setChecked(Settings.System.getInt(getContentResolver(),
             Settings.System.BATTERY_TEXT, 0) == 1);
+        
         mBattBar = (CheckBoxPreference) prefSet.findPreference(BATTERY_BAR);
         mBattBar.setChecked(Settings.System.getInt(getContentResolver(),
             Settings.System.STATUSBAR_BATTERY_BAR, 0) == 1);
@@ -168,7 +175,12 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
             Settings.System.putInt(getContentResolver(),
                 Settings.System.HIDE_ALARM, value ? 1 : 0);
             return true;
-        } else if (preference == mShowMenuButton) {
+        } else if (preference == mEnableVolumeOptions) {
+            value = mEnableVolumeOptions.isChecked();
+            Settings.System.putInt(getContentResolver(),
+            Settings.System.ENABLE_VOLUME_OPTIONS, value ? 1 : 0);
+            return true;
+        }else if (preference == mShowMenuButton) {
             value = mShowMenuButton.isChecked();
             Settings.System.putInt(getContentResolver(),
                 Settings.System.SHOW_MENU_BUTTON, value ? 1 : 0);

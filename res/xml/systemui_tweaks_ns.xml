@@ -13,6 +13,11 @@
             android:key="hide_alarm"
             android:title="@string/hide_alarm" >
         </CheckBoxPreference>
+        
+        <CheckBoxPreference
+            android:key="enable_volume_options"
+            android:title="@string/enable_volume_options" >
+        </CheckBoxPreference>
 
         <Preference
             android:key="carrier_text"

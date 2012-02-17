@@ -80,8 +80,7 @@
             <CheckBoxPreference
                 android:key="long_press_homekey"
                 android:title="@string/long_press_home_title"
-                android:summary="@string/long_press_home_summary">
-            </CheckBoxPreference>
+                android:summary="@string/long_press_home_summary" />
 
             <CheckBoxPreference
                 android:key="show_menu_button"

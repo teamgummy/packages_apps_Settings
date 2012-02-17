@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/general_settings"
-    android:key="lockscreen_settings">
+	android:title="@string/general_settings" android:key="lockscreen_settings">
 
-    <CheckBoxPreference
-        android:key="turn_degree"
-        android:title="@string/turn_degree" >
-    </CheckBoxPreference>
+	<CheckBoxPreference android:key="turn_degree"
+		android:title="@string/turn_degree">
+	</CheckBoxPreference>
 
-    <CheckBoxPreference
-        android:key="kill_app"
-        android:title="@string/kill_app" >
-    </CheckBoxPreference>
+	<CheckBoxPreference android:key="kill_app"
+		android:title="@string/kill_app">
+	</CheckBoxPreference>
+
+	<CheckBoxPreference android:key="enable_volume_options"
+		android:title="@string/enable_volume_options">
+	</CheckBoxPreference>
+
+
 </PreferenceScreen>

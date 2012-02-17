@@ -1,3 +1,4 @@
+
 package com.android.settings;
 
 import android.app.Activity;
@@ -17,10 +18,10 @@ import android.widget.EditText;
 import com.android.settings.R;
 import com.android.settings.util.colorpicker.ColorPickerPreference;
 
-public class SystemUITweaks extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
+public class SystemUITweaks extends SettingsPreferenceFragment implements
+        OnPreferenceChangeListener {
 
     private static final String HIDE_ALARM = "hide_alarm";
-    private static final String ENABLE_VOLUME_OPTIONS = "enable_volume_options";
     private static final String PREF_CLOCK_DISPLAY_STYLE = "clock_am_pm";
     private static final String PREF_CLOCK_STYLE = "clock_style";
     private static final String CLOCK_COLOR = "clock_color";
@@ -31,13 +32,12 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
     private static final String BATTERY_BAR = "battery_bar";
     private static final String BATTERY_BAR_COLOR = "battery_bar_color";
     private static final String PREF_CARRIER_TEXT = "carrier_text";
-    private static final String BATTERY_TEXT_COLOR ="battery_text_color";
+    private static final String BATTERY_TEXT_COLOR = "battery_text_color";
     private static final String LONG_PRESS_HOMEKEY = "long_press_homekey";
     private static final String SOFTKEY_COLOR = "softkey_color";
     private static final String TOGGLE_COLOR = "toggle_color";
 
     private CheckBoxPreference mHideAlarm;
-    private CheckBoxPreference mEnableVolumeOptions;
     private CheckBoxPreference mShowMenuButton;
     private CheckBoxPreference mShowSearchButton;
     private CheckBoxPreference mLongPressHome;
@@ -64,19 +64,15 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
 
         mHideAlarm = (CheckBoxPreference) prefSet.findPreference(HIDE_ALARM);
         mHideAlarm.setChecked(Settings.System.getInt(getContentResolver(),
-            Settings.System.HIDE_ALARM, 0) == 1);
-        
-        mEnableVolumeOptions = (CheckBoxPreference) prefSet.findPreference(ENABLE_VOLUME_OPTIONS);
-        mEnableVolumeOptions.setChecked(Settings.System.getInt(getContentResolver(),
-            Settings.System.ENABLE_VOLUME_OPTIONS, 0) == 1);
+                Settings.System.HIDE_ALARM, 0) == 1);
 
         mBattText = (CheckBoxPreference) prefSet.findPreference(BATTERY_TEXT);
         mBattText.setChecked(Settings.System.getInt(getContentResolver(),
-            Settings.System.BATTERY_TEXT, 0) == 1);
-        
+                Settings.System.BATTERY_TEXT, 0) == 1);
+
         mBattBar = (CheckBoxPreference) prefSet.findPreference(BATTERY_BAR);
         mBattBar.setChecked(Settings.System.getInt(getContentResolver(),
-            Settings.System.STATUSBAR_BATTERY_BAR, 0) == 1);
+                Settings.System.STATUSBAR_BATTERY_BAR, 0) == 1);
 
         mBattColor = (PreferenceScreen) findPreference(BATTERY_TEXT_COLOR);
         mBattColor.setEnabled(mBattText.isChecked());
@@ -93,7 +89,7 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
 
         mLongPressHome = (CheckBoxPreference) prefSet.findPreference(LONG_PRESS_HOMEKEY);
         mLongPressHome.setChecked(Settings.System.getInt(getContentResolver(),
-            Settings.System.LONG_PRESS_HOME, 0) == 1);
+                Settings.System.LONG_PRESS_HOME, 0) == 1);
 
         mSoftKeyColor = (ColorPickerPreference) prefSet.findPreference(SOFTKEY_COLOR);
         mSoftKeyColor.setOnPreferenceChangeListener(this);
@@ -107,13 +103,13 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
 
         mShowMenuButton = (CheckBoxPreference) prefSet.findPreference(SHOW_MENU_BUTTON);
         mShowMenuButton.setChecked(Settings.System.getInt(getContentResolver(),
-            Settings.System.SHOW_MENU_BUTTON, 0) == 1);
+                Settings.System.SHOW_MENU_BUTTON, 0) == 1);
 
         mShowSearchButton = (CheckBoxPreference) prefSet.findPreference(SHOW_SEARCH_BUTTON);
         mShowSearchButton.setChecked(Settings.System.getInt(getContentResolver(),
-            Settings.System.SHOW_SEARCH_BUTTON, 0) == 1);
-       updateLongPressToggle(mShowSearchButton.isChecked());
-       updateSearchToggle(mLongPressHome.isChecked());
+                Settings.System.SHOW_SEARCH_BUTTON, 0) == 1);
+        updateLongPressToggle(mShowSearchButton.isChecked());
+        updateSearchToggle(mLongPressHome.isChecked());
 
         int styleValue = Settings.System.getInt(getContentResolver(),
                 Settings.System.STATUS_BAR_AM_PM, 2);
@@ -132,7 +128,8 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
     }
 
     private void updateCarrierText() {
-        mCarrierText = Settings.System.getString(getContentResolver(), Settings.System.CUSTOM_CARRIER_TEXT);
+        mCarrierText = Settings.System.getString(getContentResolver(),
+                Settings.System.CUSTOM_CARRIER_TEXT);
         if (mCarrierText == null) {
             mCarrier.setSummary("Upon changing you will need to data wipe to get back stock. Requires reboot.");
         } else {
@@ -173,40 +170,35 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
         if (preference == mHideAlarm) {
             value = mHideAlarm.isChecked();
             Settings.System.putInt(getContentResolver(),
-                Settings.System.HIDE_ALARM, value ? 1 : 0);
+                    Settings.System.HIDE_ALARM, value ? 1 : 0);
             return true;
-        } else if (preference == mEnableVolumeOptions) {
-            value = mEnableVolumeOptions.isChecked();
-            Settings.System.putInt(getContentResolver(),
-            Settings.System.ENABLE_VOLUME_OPTIONS, value ? 1 : 0);
-            return true;
-        }else if (preference == mShowMenuButton) {
+        } else if (preference == mShowMenuButton) {
             value = mShowMenuButton.isChecked();
             Settings.System.putInt(getContentResolver(),
-                Settings.System.SHOW_MENU_BUTTON, value ? 1 : 0);
+                    Settings.System.SHOW_MENU_BUTTON, value ? 1 : 0);
             return true;
         } else if (preference == mShowSearchButton) {
             value = mShowSearchButton.isChecked();
             Settings.System.putInt(getContentResolver(),
-                Settings.System.SHOW_SEARCH_BUTTON, value ? 1 : 0);
+                    Settings.System.SHOW_SEARCH_BUTTON, value ? 1 : 0);
             updateLongPressToggle(value);
             return true;
         } else if (preference == mBattText) {
             value = mBattText.isChecked();
             Settings.System.putInt(getContentResolver(),
-                Settings.System.BATTERY_TEXT, value ? 1 : 0);
+                    Settings.System.BATTERY_TEXT, value ? 1 : 0);
             updateBatteryTextToggle(value);
             return true;
         } else if (preference == mBattBar) {
             value = mBattBar.isChecked();
             Settings.System.putInt(getContentResolver(),
-                Settings.System.STATUSBAR_BATTERY_BAR, value ? 1 : 0);
+                    Settings.System.STATUSBAR_BATTERY_BAR, value ? 1 : 0);
             updateBatteryBarToggle(value);
             return true;
         } else if (preference == mLongPressHome) {
             value = mLongPressHome.isChecked();
             Settings.System.putInt(getContentResolver(),
-                Settings.System.LONG_PRESS_HOME, value ? 1 : 0);
+                    Settings.System.LONG_PRESS_HOME, value ? 1 : 0);
             updateSearchToggle(value);
             return true;
         } else if (preference == mCarrier) {
@@ -219,7 +211,8 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
             ad.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     String value = ((Spannable) text.getText()).toString();
-                    Settings.System.putString(getActivity().getContentResolver(), Settings.System.CUSTOM_CARRIER_TEXT, value);
+                    Settings.System.putString(getActivity().getContentResolver(),
+                            Settings.System.CUSTOM_CARRIER_TEXT, value);
                     updateCarrierText();
                 }
             });
@@ -233,48 +226,52 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements OnPref
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-         if (preference == mAmPmStyle) {
+        if (preference == mAmPmStyle) {
             int statusBarAmPm = Integer.valueOf((String) newValue);
             Settings.System.putInt(getContentResolver(),
-                Settings.System.STATUS_BAR_AM_PM, statusBarAmPm);
+                    Settings.System.STATUS_BAR_AM_PM, statusBarAmPm);
             return true;
         } else if (preference == mClockStyle) {
             int val = Integer.valueOf((String) newValue);
             Settings.System.putInt(getContentResolver(),
-                Settings.System.STATUS_BAR_CLOCK, val);
+                    Settings.System.STATUS_BAR_CLOCK, val);
             return true;
         } else if (preference == mBatteryStyle) {
             int val = Integer.valueOf((String) newValue);
             Settings.System.putInt(getContentResolver(),
-                Settings.System.BATTERY_PERCENTAGES, val);
+                    Settings.System.BATTERY_PERCENTAGES, val);
             return true;
         } else if (preference == mBattBarColor) {
-            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
             preference.setSummary(hexColor);
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
-                Settings.System.STATUSBAR_BATTERY_BAR_COLOR, color);
+                    Settings.System.STATUSBAR_BATTERY_BAR_COLOR, color);
             return true;
         } else if (preference == mSoftKeyColor) {
-            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
             preference.setSummary(hexColor);
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
-                Settings.System.SOFT_KEY_COLOR, color);
+                    Settings.System.SOFT_KEY_COLOR, color);
             return true;
         } else if (preference == mClockColor) {
-            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
             preference.setSummary(hexColor);
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
-                Settings.System.CLOCK_COLOR, color);
+                    Settings.System.CLOCK_COLOR, color);
             return true;
         } else if (preference == mToggleColor) {
-            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
             preference.setSummary(hexColor);
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
-                Settings.System.NOTIFICATION_TOGGLE_COLOR_BAR, color);
+                    Settings.System.NOTIFICATION_TOGGLE_COLOR_BAR, color);
             return true;
         }
         return false;

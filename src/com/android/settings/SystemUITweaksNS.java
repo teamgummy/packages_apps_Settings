@@ -22,7 +22,6 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
 
     private static final String HIDE_ALARM = "hide_alarm";
-    private static final String ENABLE_VOLUME_OPTIONS = "enable_volume_options";
     private static final String PREF_CLOCK_DISPLAY_STYLE = "clock_am_pm";
     private static final String PREF_CLOCK_STYLE = "clock_style";
     private static final String CLOCK_COLOR = "clock_color";
@@ -35,7 +34,6 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements
     private static final String TOGGLE_COLOR = "toggle_color";
 
     private CheckBoxPreference mHideAlarm;
-    private CheckBoxPreference mEnableVolumeOptions;
     private CheckBoxPreference mBattText;
     private CheckBoxPreference mBattBar;
     private ListPreference mAmPmStyle;
@@ -59,10 +57,6 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements
         mHideAlarm = (CheckBoxPreference) prefSet.findPreference(HIDE_ALARM);
         mHideAlarm.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.HIDE_ALARM, 0) == 1);
-
-        mEnableVolumeOptions = (CheckBoxPreference) prefSet.findPreference(ENABLE_VOLUME_OPTIONS);
-        mEnableVolumeOptions.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.ENABLE_VOLUME_OPTIONS, 0) == 1);
 
         mBattText = (CheckBoxPreference) prefSet.findPreference(BATTERY_TEXT);
         mBattText.setChecked(Settings.System.getInt(getContentResolver(),
@@ -137,11 +131,6 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements
             value = mHideAlarm.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.HIDE_ALARM, value ? 1 : 0);
-            return true;
-        } else if (preference == mEnableVolumeOptions) {
-            value = mEnableVolumeOptions.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.ENABLE_VOLUME_OPTIONS, value ? 1 : 0);
             return true;
         } else if (preference == mBattText) {
             value = mBattText.isChecked();

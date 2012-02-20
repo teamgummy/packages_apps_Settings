@@ -11,11 +11,13 @@
 
         <CheckBoxPreference
             android:key="hide_alarm"
-            android:title="@string/hide_alarm" />
+            android:title="@string/hide_alarm" >
+        </CheckBoxPreference>
         
         <CheckBoxPreference
             android:key="enable_volume_options"
-            android:title="@string/enable_volume_options" />
+            android:title="@string/enable_volume_options" >
+        </CheckBoxPreference>
 
         <Preference
             android:key="carrier_text"
@@ -55,7 +57,8 @@
 
         <CheckBoxPreference
             android:key="battery_text"
-            android:title="Use Battery Text" />
+            android:title="Use Battery Text" >
+        </CheckBoxPreference>
 
         <PreferenceScreen
             android:key="battery_text_color"
@@ -68,7 +71,8 @@
 
         <CheckBoxPreference
             android:key="battery_bar"
-            android:title="@string/battery_bar" />
+            android:title="@string/battery_bar" >
+        </CheckBoxPreference>
 
 	<com.android.settings.util.colorpicker.ColorPickerPreference
 		android:key="battery_bar_color" 

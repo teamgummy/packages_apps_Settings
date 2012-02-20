@@ -36,6 +36,8 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private static final String LONG_PRESS_HOMEKEY = "long_press_homekey";
     private static final String SOFTKEY_COLOR = "softkey_color";
     private static final String TOGGLE_COLOR = "toggle_color";
+    private static final String WIFI_SIGNAL_COLOR = "wifi_signal_color";
+    private static final String MOBILE_SIGNAL_COLOR = "mobile_signal_color";
 
     private CheckBoxPreference mHideAlarm;
     private CheckBoxPreference mShowMenuButton;
@@ -51,6 +53,8 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private ColorPickerPreference mSoftKeyColor;
     private ColorPickerPreference mClockColor;
     private ColorPickerPreference mToggleColor;
+    private ColorPickerPreference mWifiSignalColor;
+    private ColorPickerPreference mMobileSignalColor;
 
     PreferenceScreen mBattColor;
 
@@ -93,6 +97,12 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
 
         mSoftKeyColor = (ColorPickerPreference) prefSet.findPreference(SOFTKEY_COLOR);
         mSoftKeyColor.setOnPreferenceChangeListener(this);
+
+        mWifiSignalColor = (ColorPickerPreference) prefSet.findPreference(WIFI_SIGNAL_COLOR);
+        mWifiSignalColor.setOnPreferenceChangeListener(this);
+
+        mMobileSignalColor = (ColorPickerPreference) prefSet.findPreference(MOBILE_SIGNAL_COLOR);
+        mMobileSignalColor.setOnPreferenceChangeListener(this);
 
         mCarrier = (Preference) prefSet.findPreference(PREF_CARRIER_TEXT);
         updateCarrierText();
@@ -256,6 +266,22 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.SOFT_KEY_COLOR, color);
+            return true;
+        } else if (preference == mWifiSignalColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.WIFI_SIGNAL_COLOR, color);
+            return true;
+        } else if (preference == mMobileSignalColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.MOBILE_SIGNAL_COLOR, color);
             return true;
         } else if (preference == mClockColor) {
             String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String

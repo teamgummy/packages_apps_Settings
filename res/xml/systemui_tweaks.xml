@@ -49,6 +49,11 @@
             android:entryValues="@array/battery_values"
             android:title="@string/battery_types" />
 
+	<com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="battery_icon_color" 
+		android:title="@string/battery_icon_color" 
+		android:defaultValue="#33B5E5" />
+
         <CheckBoxPreference
             android:key="battery_text"
             android:title="Use Battery Text" />

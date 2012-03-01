@@ -23,6 +23,11 @@
             android:title="@string/lockscreen_before_unlock" >
         </CheckBoxPreference>
 
+		<CheckBoxPreference
+            android:key="lockscreen_rotation"
+            android:title="@string/lockscreen_rotation" >
+        </CheckBoxPreference>
+
         <CheckBoxPreference
             android:key="volume_wake"
             android:title="@string/volume_wake" >

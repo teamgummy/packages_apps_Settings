@@ -4,16 +4,12 @@
 	android:title="@string/general_settings" android:key="lockscreen_settings">
 
 	<CheckBoxPreference android:key="turn_degree"
-		android:title="@string/turn_degree">
-	</CheckBoxPreference>
+		android:title="@string/turn_degree" />
 
 	<CheckBoxPreference android:key="kill_app"
-		android:title="@string/kill_app">
-	</CheckBoxPreference>
+		android:title="@string/kill_app" />
 
 	<CheckBoxPreference android:key="enable_volume_options"
-		android:title="@string/enable_volume_options">
-	</CheckBoxPreference>
-
+		android:title="@string/enable_volume_options" />
 
 </PreferenceScreen>

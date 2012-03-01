@@ -6,8 +6,7 @@
 
     <CheckBoxPreference
         android:key="allow_color_changes"
-        android:title="@string/allow_color_changes" >
-    </CheckBoxPreference>
+        android:title="@string/allow_color_changes" />
 
     <com.android.settings.util.colorpicker.ColorPickerPreference
 	android:key="battery_text_charge" 

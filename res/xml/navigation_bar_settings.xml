@@ -6,11 +6,9 @@
 
         <CheckBoxPreference
             android:key="show_menu_button"
-            android:title="@string/show_menu_button_title" >
-        </CheckBoxPreference>
+            android:title="@string/show_menu_button_title" />
 
         <CheckBoxPreference
             android:key="show_search_button"
-            android:title="@string/show_search_button_title" >
-        </CheckBoxPreference>
+            android:title="@string/show_search_button_title" />
 </PreferenceScreen>

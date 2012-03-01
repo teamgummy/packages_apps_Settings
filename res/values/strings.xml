@@ -3883,6 +3883,9 @@ found in the list of installed apps.</string>
     <string name="softkey_color">Soft Key Icon Color</string>
     <string name="clock_color">Clock Color</string>
     <string name="toggle_color">Toggle Color Picker</string>
+    <string name="wifi_signal_color">Wifi Signal Color</string>
+    <string name="mobile_signal_color">Mobile Signal Color</string>
+    <string name="battery_icon_color">Battery Icon Color</string>
 
     <!-- Strings for Lockscreen Settings Menu -->
     <string name="lockscreen_battery">Lockscreen Battery %</string>

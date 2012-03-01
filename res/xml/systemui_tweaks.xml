@@ -11,8 +11,7 @@
 
         <CheckBoxPreference
             android:key="hide_alarm"
-            android:title="@string/hide_alarm" >
-        </CheckBoxPreference>
+            android:title="@string/hide_alarm" />
 
         <Preference
             android:key="carrier_text"
@@ -50,10 +49,14 @@
             android:entryValues="@array/battery_values"
             android:title="@string/battery_types" />
 
+	<com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="battery_icon_color" 
+		android:title="@string/battery_icon_color" 
+		android:defaultValue="#33B5E5" />
+
         <CheckBoxPreference
             android:key="battery_text"
-            android:title="Use Battery Text" >
-        </CheckBoxPreference>
+            android:title="Use Battery Text" />
 
         <PreferenceScreen
             android:key="battery_text_color"
@@ -66,8 +69,7 @@
 
         <CheckBoxPreference
             android:key="battery_bar"
-            android:title="@string/battery_bar" >
-        </CheckBoxPreference>
+            android:title="@string/battery_bar" />
 
 	<com.android.settings.util.colorpicker.ColorPickerPreference
 		android:key="battery_bar_color" 
@@ -83,19 +85,16 @@
             <CheckBoxPreference
                 android:key="long_press_homekey"
                 android:title="@string/long_press_home_title"
-                android:summary="@string/long_press_home_summary">
-            </CheckBoxPreference>
+                android:summary="@string/long_press_home_summary" />
 
             <CheckBoxPreference
                 android:key="show_menu_button"
-                android:title="@string/show_menu_button_title" >
-            </CheckBoxPreference>
-
+                android:title="@string/show_menu_button_title" />
+       
             <CheckBoxPreference
                 android:key="show_search_button"
-                android:title="@string/show_search_button_title" >
-            </CheckBoxPreference>
-
+                android:title="@string/show_search_button_title" />
+       
 	    <com.android.settings.util.colorpicker.ColorPickerPreference
 		android:key="softkey_color" 
 		android:title="@string/softkey_color" 
@@ -111,4 +110,19 @@
 		android:title="@string/toggle_color" 
 		android:defaultValue="#33B5E5" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="data_signal_color"
+            android:title="Wifi / Mobile Signal Colors">
+
+	    <com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="wifi_signal_color" 
+		android:title="@string/wifi_signal_color" 
+		android:defaultValue="#33B5E5" />
+	    <com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="mobile_signal_color" 
+		android:title="@string/mobile_signal_color" 
+		android:defaultValue="#33B5E5" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

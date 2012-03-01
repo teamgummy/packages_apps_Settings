@@ -105,6 +105,12 @@
     <PreferenceCategory
             android:key="notification_toggle"
             android:title="Notification Toggle Settings">
+		
+		<CheckBoxPreference
+         android:key="date_opens_calendar"
+         android:title="@string/date_opens_calendar"
+         </CheckBoxPreference>
+		
 
 	    <com.android.settings.util.colorpicker.ColorPickerPreference
 		android:key="toggle_color" 

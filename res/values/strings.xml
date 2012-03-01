@@ -3887,6 +3887,7 @@ found in the list of installed apps.</string>
     <!-- Strings for Lockscreen Settings Menu -->
     <string name="lockscreen_battery">Lockscreen Battery %</string>
     <string name="lockscreen_extra">Enable Custom App Icons</string>
+    <string name="lockscreen_before_unlock">Lockscreen before Unlock</string>
     <string name="group_applications">Applications</string>
     <string name="select_custom_app_title">Select custom application</string>
     <string name="custom_app_1">Custom App 1</string>

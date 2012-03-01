@@ -27,6 +27,11 @@
             android:key="lockscreen_rotation"
             android:title="@string/lockscreen_rotation" >
         </CheckBoxPreference>
+        
+        <com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="lockscreen_text_color" 
+		android:title="@string/lockscreen_text_color" 
+		android:defaultValue="#FFFFFF" />
 
         <CheckBoxPreference
             android:key="volume_wake"

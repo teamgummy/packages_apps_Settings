@@ -15,6 +15,7 @@ import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
 
 import com.android.settings.util.ShortcutPickerHelper;
+import com.android.settings.util.colorpicker.ColorPickerPreference;
 import com.android.settings.R;
 
 public class LockscreenSettings extends Activity {
@@ -29,12 +30,13 @@ public class LockscreenSettings extends Activity {
     }
 
     public class LockscreenPreferenceFragment extends SettingsPreferenceFragment implements
-            ShortcutPickerHelper.OnPickListener {
+            ShortcutPickerHelper.OnPickListener, OnPreferenceChangeListener {
 
         private static final String LOCKSCREEN_EXTRA = "lockscreen_extra";
         private static final String LOCKSCREEN_BATTERY = "lockscreen_battery";
         private static final String LOCKSCREEN_BEFORE_UNLOCK = "lockscreen_before_unlock";
         private static final String LOCKSCREEN_ROTATION = "lockscreen_rotation";
+        private static final String LOCKSCREEN_TEXT_COLOR = "lockscreen_text_color";
         private static final String VOLUME_WAKE = "volume_wake";
         private static final String LOCKSCREEN_CUSTOM_1 = "lockscreen_custom_1";
         private static final String LOCKSCREEN_CUSTOM_2 = "lockscreen_custom_2";
@@ -46,6 +48,7 @@ public class LockscreenSettings extends Activity {
         private CheckBoxPreference mVolumeWake;
         private Preference mCustomApp1;
         private Preference mCustomApp2;
+        private ColorPickerPreference mLockTextColor;
 
         private Preference mCurrentCustomActivityPreference;
         private String mCurrentCustomActivityString;
@@ -75,6 +78,9 @@ public class LockscreenSettings extends Activity {
                     .findPreference(LOCKSCREEN_ROTATION);
             mLockRotation.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_ROTATION, 0) == 1);
+
+            mLockTextColor = (ColorPickerPreference) prefSet.findPreference(LOCKSCREEN_TEXT_COLOR);
+            mLockTextColor.setOnPreferenceChangeListener(this);
 
             mVolumeWake = (CheckBoxPreference) prefSet.findPreference(VOLUME_WAKE);
             mVolumeWake.setChecked(Settings.System.getInt(getContentResolver(),
@@ -130,6 +136,19 @@ public class LockscreenSettings extends Activity {
                 mCurrentCustomActivityPreference = preference;
                 mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_TWO;
                 mPicker.pickShortcut();
+                return true;
+            }
+            return false;
+        }
+
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            if (preference == mLockTextColor) {
+                String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                        .valueOf(newValue)));
+                preference.setSummary(hexColor);
+                int color = ColorPickerPreference.convertToColorInt(hexColor);
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.LOCKSCREEN_TEXT_COLOR, color);
                 return true;
             }
             return false;

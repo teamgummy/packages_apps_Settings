@@ -77,32 +77,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-            android:key="softkeys_category"
-            android:title="Soft Key Settings">
-
-            <CheckBoxPreference
-                android:key="long_press_homekey"
-                android:title="@string/long_press_home_title"
-                android:summary="@string/long_press_home_summary">
-            </CheckBoxPreference>
-
-            <CheckBoxPreference
-                android:key="show_menu_button"
-                android:title="@string/show_menu_button_title" >
-            </CheckBoxPreference>
-
-            <CheckBoxPreference
-                android:key="show_search_button"
-                android:title="@string/show_search_button_title" >
-            </CheckBoxPreference>
-
-	    <com.android.settings.util.colorpicker.ColorPickerPreference
-		android:key="softkey_color" 
-		android:title="@string/softkey_color" 
-		android:defaultValue="#B0B0B0" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
             android:key="notification_toggle"
             android:title="Notification Toggle Settings">
 

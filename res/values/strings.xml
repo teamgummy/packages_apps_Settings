@@ -3867,6 +3867,7 @@ found in the list of installed apps.</string>
     <string name="systemui_tweaks">SystemUI Tweaks</string>
     <string name="lockscreen_settings">Lockscreen Settings</string>
     <string name="general_settings">General UI Settings</string>
+    <string name="softkey_settings">Soft Key Settings</string>
 
     <!-- Strings for SystemUI Tweaks Menu -->
     <string name="clock_style_title">Clock style</string>
@@ -3878,8 +3879,6 @@ found in the list of installed apps.</string>
     <string name="hide_battery">Hide Battery Icon</string>
     <string name="battery_bar">Battery Bar</string>
     <string name="battery_bar_color">Battery Bar Color</string>
-    <string name="long_press_home_title">Long Press Home Button</string>
-    <string name="long_press_home_summary">Enables home button to long press recent, swapping recent app icon with search</string>
     <string name="softkey_color">Soft Key Icon Color</string>
     <string name="clock_color">Clock Color</string>
     <string name="toggle_color">Toggle Color Picker</string>
@@ -3906,5 +3905,28 @@ found in the list of installed apps.</string>
     <!-- Strings for General UI Settings -->
     <string name="turn_degree">Enable 180 Degree Rotation</string>
     <string name="kill_app">Longpress Back Button App Kill</string>
+
+    <!-- Strings for Soft Key Settings -->
+        <string name="title_pref_menu_display">Menu location</string>
+    <string name="summary_pref_menu_display">Remember to remove your menu buttons if you\'re using the big menu button!</string>
+    <string name="navigation_bar">Navigation bar</string>
+    <string name="navigation_bar_tint_title">Navigation bar color</string>
+
+    <string name="title_pref_navigation_menu_display">Menu visibility</string>
+    <string name="summary_pref_navigation_menu_display">How and when do you want the menu buttons to appear?</string>
+
+    <string name="navbar_order_title">Navigation button order</string>
+    <string name="navbar_order_summary">Customize the order of your soft keys</string>
+
+    <string name="enabled_navbar_buttons_title">Enabled buttons</string>
+    <string name="enabled_navbar_buttons_summary">Choose which soft keys you would like to see</string>
+    
+    <string name="button_transparency_title">Nav button transparency</string>
+    
+    <string name="long_press_home_title">Long press home action</string>
+    <string name="long_press_home_summary">What to do when long pressing the home softkey. Reboot required to reflect changes.</string>
+    
+    <string name="glow_times_title">Button glow animation</string>
+    <string name="glow_times_summary">Adjust how fast your buttons animate after you touch them. Lowering the speed can improve performance.</string>
 
 </resources>

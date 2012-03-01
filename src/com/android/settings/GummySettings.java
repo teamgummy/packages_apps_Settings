@@ -28,11 +28,20 @@ public class GummySettings extends SettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.gummy_settings);
 
+        PreferenceScreen prefs = getPreferenceScreen();
+
         mGeneralSettings = (PreferenceScreen) findPreference(GENERAL_SETTINGS);
         mSystemUITweaks = (PreferenceScreen) findPreference(SYSTEMUI_TWEAKS);
         mSoftkeySettings = (PreferenceScreen) findPreference(SOFTKEY_SETTINGS);
         mLockscreenSettings = (PreferenceScreen) findPreference(LOCKSCREEN_SETTINGS);
         mLEDSettings = (PreferenceScreen) findPreference(LED_SETTINGS);
         mPerformanceSettings = (PreferenceScreen) findPreference(PERFORMANCE_SETTINGS);
+
+        boolean mHasSoftKeys = getActivity().getBaseContext().getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+
+        if (!mHasSoftKeys) {
+            prefs.removePreference(mSoftkeySettings);
+        }
+
     }
 }

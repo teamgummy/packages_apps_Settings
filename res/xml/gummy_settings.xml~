@@ -19,7 +19,7 @@
 
     <PreferenceScreen
             android:key="softkey_settings"
-            android:title="@string/softkey_settings"
+            android:title="@string/softkey_softkeys"
             android:icon="@drawable/gummy_sysui_tweaks"
             android:fragment="com.android.settings.Navbar" />
 

@@ -37,11 +37,5 @@ public class GummySettings extends SettingsPreferenceFragment {
         mLEDSettings = (PreferenceScreen) findPreference(LED_SETTINGS);
         mPerformanceSettings = (PreferenceScreen) findPreference(PERFORMANCE_SETTINGS);
 
-        boolean mHasSoftKeys = getActivity().getBaseContext().getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
-
-        if (!mHasSoftKeys) {
-            prefs.removePreference(mSoftkeySettings);
-        }
-
     }
 }

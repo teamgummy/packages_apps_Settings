@@ -56,6 +56,8 @@ public class Navbar extends SettingsPreferenceFragment implements
     Preference mLayout;
     SeekBarPreference mButtonAlpha;
 
+    CheckBoxPreference mEnableNavigationBar;
+
     private final String[] buttons = {
             "HOME", "BACK", "TASKS", "SEARCH", "MENU_BIG"
     };
@@ -103,6 +105,17 @@ public class Navbar extends SettingsPreferenceFragment implements
         mButtonAlpha = (SeekBarPreference) findPreference("button_transparency");
         mButtonAlpha.setInitValue((int) (defaultAlpha * 100));
         mButtonAlpha.setOnPreferenceChangeListener(this);
+
+        boolean hasNavBarByDefault = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_showNavigationBar);
+        mEnableNavigationBar = (CheckBoxPreference) findPreference("enable_nav_bar");
+        mEnableNavigationBar.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, hasNavBarByDefault ? 1 : 0) == 1);
+
+        // don't allow devices that must use a navigation bar to disable it
+        if (hasNavBarByDefault || !Utils.isVoiceCapable(getActivity())) {
+            prefs.removePreference(mEnableNavigationBar);
+        }
 
         mLayout = findPreference("buttons");
 
@@ -193,6 +206,29 @@ public class Navbar extends SettingsPreferenceFragment implements
             ft.addToBackStack("navbar_layout");
             ft.replace(this.getId(), fragment);
             ft.commit();
+        } else if (preference == mEnableNavigationBar) {
+
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_BUTTONS_SHOW,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Reboot required!")
+                    .setMessage("Please reboot to enable/disable the navigation bar properly!")
+                    .setNegativeButton("I'll reboot later", null)
+                    .setCancelable(false)
+                    .setPositiveButton("Reboot now!", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            PowerManager pm = (PowerManager) getActivity()
+                                    .getSystemService(Context.POWER_SERVICE);
+                            pm.reboot("New navbar");
+                        }
+                    })
+                    .create()
+                    .show();
+
+            return true;
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);

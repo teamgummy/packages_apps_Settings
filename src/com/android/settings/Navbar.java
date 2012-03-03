@@ -146,7 +146,7 @@ public class Navbar extends SettingsPreferenceFragment implements
                 Settings.System.putFloat(getActivity().getContentResolver(),
                         Settings.System.NAVIGATION_BAR_BUTTON_ALPHA,
                         0.6f);
-                mButtonAlpha.setValue(60);
+                mButtonAlpha.setValue(90);
                 return true;
             default:
                 return super.onContextItemSelected(item);

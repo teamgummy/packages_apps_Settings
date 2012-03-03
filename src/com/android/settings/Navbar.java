@@ -209,7 +209,7 @@ public class Navbar extends SettingsPreferenceFragment implements
         } else if (preference == mEnableNavigationBar) {
 
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.NAVBAR_TOGGLE_SHOW
+                    Settings.System.NAVBAR_TOGGLE_SHOW,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
 
             new AlertDialog.Builder(getActivity())

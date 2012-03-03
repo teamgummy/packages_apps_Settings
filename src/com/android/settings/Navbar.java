@@ -106,11 +106,11 @@ public class Navbar extends SettingsPreferenceFragment implements
         mButtonAlpha.setInitValue((int) (defaultAlpha * 100));
         mButtonAlpha.setOnPreferenceChangeListener(this);
 
-        boolean hasNavBarByDefault = mContext.getResources().getBoolean(
+        boolean hasNavBarByDefault = getActivity().getBaseContext().getResources().getBoolean(
                 com.android.internal.R.bool.config_showNavigationBar);
         mEnableNavigationBar = (CheckBoxPreference) findPreference("enable_nav_bar");
         mEnableNavigationBar.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, hasNavBarByDefault ? 1 : 0) == 1);
+                Settings.System.NAVBAR_TOGGLE_SHOW, hasNavBarByDefault ? 1 : 0) == 1);
 
         // don't allow devices that must use a navigation bar to disable it
         if (hasNavBarByDefault || !Utils.isVoiceCapable(getActivity())) {
@@ -209,7 +209,7 @@ public class Navbar extends SettingsPreferenceFragment implements
         } else if (preference == mEnableNavigationBar) {
 
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_BUTTONS_SHOW,
+                    Settings.System.NAVBAR_TOGGLE_SHOW
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
 
             new AlertDialog.Builder(getActivity())

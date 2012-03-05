@@ -15,5 +15,9 @@
 		android:title="@string/enable_volume_options">
 	</CheckBoxPreference>
 
+	<CheckBoxPreference android:key="brightness_slider"
+		android:title="@string/brightness_slider"
+                android:summary="@string/brightness_slider_sum">
+	</CheckBoxPreference>
 
 </PreferenceScreen>

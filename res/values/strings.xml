@@ -3905,6 +3905,8 @@ found in the list of installed apps.</string>
     <!-- Strings for General UI Settings -->
     <string name="turn_degree">Enable 180 Degree Rotation</string>
     <string name="kill_app">Longpress Back Button App Kill</string>
+    <string name="brightness_slider">Statusbar Brightness Slider</string>
+    <string name="brightness_slider_sum">The ability to slide your finger across the statusbar to adjust brightness</string>
 
     <!-- Strings for Soft Key Settings -->
         <string name="title_pref_menu_display">Menu location</string>

@@ -19,10 +19,12 @@ public class GeneralSettings extends SettingsPreferenceFragment {
     private static final String TURN_DEGREE = "turn_degree";
     private static final String KILL_APP = "kill_app";
     private static final String ENABLE_VOLUME_OPTIONS = "enable_volume_options";
+    private static final String BRIGHTNESS_SLIDER = "brightness_slider";
 
     private CheckBoxPreference m180Degree;
     private CheckBoxPreference mKillApp;
     private CheckBoxPreference mEnableVolumeOptions;
+    private CheckBoxPreference mBrightSlider;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,9 @@ public class GeneralSettings extends SettingsPreferenceFragment {
         mEnableVolumeOptions = (CheckBoxPreference) prefSet.findPreference(ENABLE_VOLUME_OPTIONS);
         mEnableVolumeOptions.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.ENABLE_VOLUME_OPTIONS, 0) == 1);
+
+        mBrightSlider = (CheckBoxPreference) prefSet.findPreference(ENABLE_VOLUME_OPTIONS);
+        mBrightSlider.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.STATUS_BAR_BRIGHTNESS_TOGGLE, 0) == 1);
 
     }
 
@@ -62,7 +67,11 @@ public class GeneralSettings extends SettingsPreferenceFragment {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ENABLE_VOLUME_OPTIONS, value ? 1 : 0);
             return true;
-        }
+        } else if (preference == mBrightSlider) {
+            value = mEnableVolumeOptions.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.STATUS_BAR_BRIGHTNESS_TOGGLE, value ? 1 : 0);
+            return true;
         return false;
     }
 

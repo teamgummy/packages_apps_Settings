@@ -72,7 +72,7 @@ public class LockscreenSettings extends Activity {
                     Settings.System.LOCKSCREEN_BEFORE_UNLOCK, 0) == 1);
 
             mQuickUnlock = (CheckBoxPreference) prefSet
-                    .findPreference(LOCKSCREEN_BEFORE_UNLOCK);
+                    .findPreference(QUICK_PASSWORD_UNLOCK);
             mQuickUnlock.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, 0) == 1);
 

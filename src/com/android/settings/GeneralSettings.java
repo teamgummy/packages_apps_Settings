@@ -44,7 +44,7 @@ public class GeneralSettings extends SettingsPreferenceFragment {
         mEnableVolumeOptions.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.ENABLE_VOLUME_OPTIONS, 0) == 1);
 
-        mBrightSlider = (CheckBoxPreference) prefSet.findPreference(ENABLE_VOLUME_OPTIONS);
+        mBrightSlider = (CheckBoxPreference) prefSet.findPreference(BRIGHTNESS_SLIDER);
         mBrightSlider.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.STATUS_BAR_BRIGHTNESS_TOGGLE, 0) == 1);
 
     }

@@ -72,6 +72,7 @@ public class GeneralSettings extends SettingsPreferenceFragment {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.STATUS_BAR_BRIGHTNESS_TOGGLE, value ? 1 : 0);
             return true;
+        }
         return false;
     }
 

@@ -112,7 +112,7 @@ public class LockscreenSettings extends Activity {
                         Settings.System.LOCKSCREEN_BEFORE_UNLOCK, value ? 1 : 0);
                 return true;
             } else if (preference == mQuickUnlock) {
-                value = mLockBeforeUnlock.isChecked();
+                value = mQuickUnlock.isChecked();
                 Settings.System.putInt(getContentResolver(),
                         Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, value ? 1 : 0);
                 return true;

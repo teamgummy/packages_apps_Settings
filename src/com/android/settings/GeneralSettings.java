@@ -68,7 +68,7 @@ public class GeneralSettings extends SettingsPreferenceFragment {
                     Settings.System.ENABLE_VOLUME_OPTIONS, value ? 1 : 0);
             return true;
         } else if (preference == mBrightSlider) {
-            value = mEnableVolumeOptions.isChecked();
+            value = mBrightSlider.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.STATUS_BAR_BRIGHTNESS_TOGGLE, value ? 1 : 0);
             return true;

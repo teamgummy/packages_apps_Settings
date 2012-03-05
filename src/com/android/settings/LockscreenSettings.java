@@ -34,6 +34,7 @@ public class LockscreenSettings extends Activity {
         private static final String LOCKSCREEN_EXTRA = "lockscreen_extra";
         private static final String LOCKSCREEN_BATTERY = "lockscreen_battery";
         private static final String LOCKSCREEN_BEFORE_UNLOCK = "lockscreen_before_unlock";
+        private static final String QUICK_PASSWORD_UNLOCK = "quick_password_unlock";
         private static final String VOLUME_WAKE = "volume_wake";
         private static final String LOCKSCREEN_CUSTOM_1 = "lockscreen_custom_1";
         private static final String LOCKSCREEN_CUSTOM_2 = "lockscreen_custom_2";
@@ -41,6 +42,7 @@ public class LockscreenSettings extends Activity {
         private CheckBoxPreference mLockExtra;
         private CheckBoxPreference mLockBattery;
         private CheckBoxPreference mLockBeforeUnlock;
+        private CheckBoxPreference mQuickUnlock;
         private CheckBoxPreference mVolumeWake;
         private Preference mCustomApp1;
         private Preference mCustomApp2;
@@ -68,6 +70,11 @@ public class LockscreenSettings extends Activity {
                     .findPreference(LOCKSCREEN_BEFORE_UNLOCK);
             mLockBeforeUnlock.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_BEFORE_UNLOCK, 0) == 1);
+
+            mQuickUnlock = (CheckBoxPreference) prefSet
+                    .findPreference(LOCKSCREEN_BEFORE_UNLOCK);
+            mQuickUnlock.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, 0) == 1);
 
             mVolumeWake = (CheckBoxPreference) prefSet.findPreference(VOLUME_WAKE);
             mVolumeWake.setChecked(Settings.System.getInt(getContentResolver(),
@@ -103,6 +110,11 @@ public class LockscreenSettings extends Activity {
                 value = mLockBeforeUnlock.isChecked();
                 Settings.System.putInt(getContentResolver(),
                         Settings.System.LOCKSCREEN_BEFORE_UNLOCK, value ? 1 : 0);
+                return true;
+            } else if (preference == mQuickUnlock) {
+                value = mLockBeforeUnlock.isChecked();
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, value ? 1 : 0);
                 return true;
             } else if (preference == mVolumeWake) {
                 value = mVolumeWake.isChecked();

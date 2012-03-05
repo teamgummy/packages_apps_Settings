@@ -18,9 +18,15 @@
             android:title="@string/lockscreen_battery" >
         </CheckBoxPreference>
 
-		<CheckBoxPreference
+	<CheckBoxPreference
             android:key="lockscreen_before_unlock"
             android:title="@string/lockscreen_before_unlock" >
+        </CheckBoxPreference>
+
+	<CheckBoxPreference
+            android:key="quick_password_unlock"
+            android:title="@string/quick_password_title"
+            android:summary="@string/quick_password_summary" >
         </CheckBoxPreference>
 
         <CheckBoxPreference

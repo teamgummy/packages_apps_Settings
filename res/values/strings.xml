@@ -3894,6 +3894,8 @@ found in the list of installed apps.</string>
     <string name="custom_app_1_summary">Choose a custom app to launch</string>
     <string name="custom_app_2_summary">Choose a custom app to launch</string>
     <string name="volume_wake">Enable Volume Rocker Wake</string>
+    <string name="quick_password_title">Quick Password Unlock</string>
+    <string name="quick_password_summary">Allows you to not hit the enter key on password lockscreens</string>
 
     <!-- Strings for Battery Color Menu -->
     <string name="battery_text_color">Battery Text Colors</string>

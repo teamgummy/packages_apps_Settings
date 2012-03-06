@@ -17,6 +17,11 @@
             android:key="lockscreen_battery"
             android:title="@string/lockscreen_battery" >
         </CheckBoxPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="unlock_category"
+            android:title="Unlocking Options">
 
 	<CheckBoxPreference
             android:key="lockscreen_before_unlock"
@@ -38,6 +43,13 @@
     <PreferenceCategory
             android:key="custom_app"
             android:title="Custom Apps">
+
+	<ListPreference
+	    android:key="sound_or_camera"
+	    android:entries="@array/sound_or_camera_entries"
+	    android:entryValues="@array/sound_or_camera_values"
+	    android:title="@string/sound_or_camera_title"
+	    android:summary="@string/sound_or_camera_summary" />
 
         <Preference
             android:key="lockscreen_custom_1"

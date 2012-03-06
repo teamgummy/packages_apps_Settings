@@ -3896,6 +3896,8 @@ found in the list of installed apps.</string>
     <string name="volume_wake">Enable Volume Rocker Wake</string>
     <string name="quick_password_title">Quick Password Unlock</string>
     <string name="quick_password_summary">Allows you to not hit the enter key on password lockscreens</string>
+    <string name="sound_or_camera_title">Camera Slot Picker</string>
+    <string name="sound_or_camera_summary">Pick what toggle you want on the Camera slot</string>
 
     <!-- Strings for Battery Color Menu -->
     <string name="battery_text_color">Battery Text Colors</string>

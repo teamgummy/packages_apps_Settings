@@ -29,7 +29,7 @@ public class LockscreenSettings extends Activity {
     }
 
     public class LockscreenPreferenceFragment extends SettingsPreferenceFragment implements
-            ShortcutPickerHelper.OnPickListener {
+            ShortcutPickerHelper.OnPickListener, OnPreferenceChangeListener {
 
         private static final String LOCKSCREEN_EXTRA = "lockscreen_extra";
         private static final String LOCKSCREEN_BATTERY = "lockscreen_battery";
@@ -38,12 +38,14 @@ public class LockscreenSettings extends Activity {
         private static final String VOLUME_WAKE = "volume_wake";
         private static final String LOCKSCREEN_CUSTOM_1 = "lockscreen_custom_1";
         private static final String LOCKSCREEN_CUSTOM_2 = "lockscreen_custom_2";
+        private static final String SOUND_OR_CAMERA = "sound_or_camera";
 
         private CheckBoxPreference mLockExtra;
         private CheckBoxPreference mLockBattery;
         private CheckBoxPreference mLockBeforeUnlock;
         private CheckBoxPreference mQuickUnlock;
         private CheckBoxPreference mVolumeWake;
+        private ListPreference mSoundCamera;
         private Preference mCustomApp1;
         private Preference mCustomApp2;
 
@@ -90,6 +92,10 @@ public class LockscreenSettings extends Activity {
             mCustomAppText2 = Settings.System.getString(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_CUSTOM_TWO);
 
+            mSoundCamera = (ListPreference) findPreference(SOUND_OR_CAMERA);
+            mSoundCamera.setOnPreferenceChangeListener(this);
+            mSoundCamera.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_FORCE_SOUND_ICON,
+                0) + "");
         }
 
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
@@ -130,6 +136,14 @@ public class LockscreenSettings extends Activity {
                 mCurrentCustomActivityPreference = preference;
                 mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_TWO;
                 mPicker.pickShortcut();
+                return true;
+            }
+            return false;
+        }
+
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            if (preference == mSoundCamera) {
+                Settings.System.putInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_FORCE_SOUND_ICON, Integer.parseInt((String) newValue));
                 return true;
             }
             return false;

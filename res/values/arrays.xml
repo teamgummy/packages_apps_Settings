@@ -883,4 +883,15 @@
                 <item>2048,3072,6144,15360,17920,20480</item>
                 <item>2560,3840,6400,12800,12800,25600</item>
         </string-array>
+
+        <!--arrays for choosing the sound or camera lockscreen icon -->
+	<string-array name="sound_or_camera_entries">
+		<item>Camera Icon</item>
+		<item>Sound Icon</item>
+	</string-array>
+
+	<string-array name="sound_or_camera_values">
+		<item>0</item>
+		<item>1</item>
+	</string-array>
 </resources>

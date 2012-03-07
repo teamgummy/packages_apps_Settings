@@ -197,14 +197,18 @@ public class RingerVolumePreference extends VolumePreference {
             getContext().registerReceiver(mRingModeChangedReceiver, filter);
         }
 
-        // Disable the Ringer volume for tablets
+        // Disable the Ringer volume for tablets or if linked volume
+        boolean unlinked = (System.getInt(getContext().getContentResolver(), Settings.System.UNLINK_VOLUMES_TOGETHER, 0) == 1);
         int id;
         if (!Utils.isVoiceCapable(getContext())) {
             id = R.id.ringer_section;
             View hideSection = view.findViewById(id);
             hideSection.setVisibility(View.GONE);
+        } else if (!unlinked) {
+            id = R.id.notification_section;
+            View hideSection = view.findViewById(id);
+            hideSection.setVisibility(View.GONE);
         }
-
     }
 
     private Uri getMediaVolumeUri(Context context) {

@@ -20,11 +20,13 @@ public class GeneralSettings extends SettingsPreferenceFragment {
     private static final String KILL_APP = "kill_app";
     private static final String ENABLE_VOLUME_OPTIONS = "enable_volume_options";
     private static final String BRIGHTNESS_SLIDER = "brightness_slider";
+    private static final String UNLINK_VOLUMES = "unlink_volumes";
 
     private CheckBoxPreference m180Degree;
     private CheckBoxPreference mKillApp;
     private CheckBoxPreference mEnableVolumeOptions;
     private CheckBoxPreference mBrightSlider;
+    private CheckBoxPreference mUnlinkVolumes;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,9 @@ public class GeneralSettings extends SettingsPreferenceFragment {
 
         mBrightSlider = (CheckBoxPreference) prefSet.findPreference(BRIGHTNESS_SLIDER);
         mBrightSlider.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.STATUS_BAR_BRIGHTNESS_TOGGLE, 0) == 1);
+
+        mUnlinkVolumes = (CheckBoxPreference) prefSet.findPreference(UNLINK_VOLUMES);
+        mUnlinkVolumes.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.UNLINK_VOLUMES_TOGETHER, 0) == 1);
 
     }
 
@@ -71,6 +76,11 @@ public class GeneralSettings extends SettingsPreferenceFragment {
             value = mBrightSlider.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.STATUS_BAR_BRIGHTNESS_TOGGLE, value ? 1 : 0);
+            return true;
+        } else if (preference == mUnlinkVolumes) {
+            value = mUnlinkVolumes.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.UNLINK_VOLUMES_TOGETHER, value ? 1 : 0);
             return true;
         }
         return false;

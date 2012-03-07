@@ -3873,7 +3873,6 @@ found in the list of installed apps.</string>
     <string name="clock_style_title">Clock style</string>
     <string name="am_pm_style_title">AM PM style</string>
     <string name="hide_alarm">Hide Alarm</string>
-    <string name="enable_volume_options">Enable Volume Options</string>
     <string name="battery_types">Battery Types</string>
     <string name="carrier_text">Custom Carrier Text</string>
     <string name="hide_battery">Hide Battery Icon</string>
@@ -3909,8 +3908,12 @@ found in the list of installed apps.</string>
     <!-- Strings for General UI Settings -->
     <string name="turn_degree">Enable 180 Degree Rotation</string>
     <string name="kill_app">Longpress Back Button App Kill</string>
+    <string name="enable_volume_options">Enable Volume Options</string>
     <string name="brightness_slider">Statusbar Brightness Slider</string>
     <string name="brightness_slider_sum">The ability to slide your finger across the statusbar to adjust brightness</string>
+    <string name="unlink_volumes_title">Unlink Notification Volume</string>
+    <string name="unlink_volumes_summary">Unlinks the notification volume with the ringer volume</string>
+
 
     <!-- Strings for Soft Key Settings -->
         <string name="title_pref_menu_display">Menu location</string>

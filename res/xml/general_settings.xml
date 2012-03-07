@@ -15,6 +15,11 @@
 		android:title="@string/enable_volume_options">
 	</CheckBoxPreference>
 
+	<CheckBoxPreference android:key="unlink_volumes"
+		android:title="@string/unlink_volumes_title"
+		android:summary="@string/unlink_volumes_summary">
+	</CheckBoxPreference>
+
 	<CheckBoxPreference android:key="brightness_slider"
 		android:title="@string/brightness_slider"
                 android:summary="@string/brightness_slider_sum">

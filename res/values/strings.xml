@@ -3897,6 +3897,9 @@ found in the list of installed apps.</string>
     <string name="quick_password_summary">Allows you to not hit the enter key on password lockscreens</string>
     <string name="sound_or_camera_title">Camera Slot Picker</string>
     <string name="sound_or_camera_summary">Pick what toggle you want on the Camera slot</string>
+    <string name="lockscreen_styles_title">Lockscreen Style</string>
+    <string name="lockscreen_styles_summary">Pick what Lockscreen Style you would like to use</string>
+    <string name="rotary_arrows_title">Hide Rotary Arrows</string>
 
     <!-- Strings for Battery Color Menu -->
     <string name="battery_text_color">Battery Text Colors</string>

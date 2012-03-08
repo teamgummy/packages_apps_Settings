@@ -21,6 +21,11 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
+            android:key="rotary_down"
+            android:title="@string/rotary_down_title" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
             android:key="lockscreen_extra"
             android:title="@string/lockscreen_extra" >
         </CheckBoxPreference>

@@ -41,6 +41,7 @@ public class LockscreenSettings extends Activity {
         private static final String SOUND_OR_CAMERA = "sound_or_camera";
         private static final String LOCKSCREEN_STYLES = "lockscreen_styles";
         private static final String ROTARY_ARROWS = "rotary_arrows";
+        private static final String ROTARY_DOWN = "rotary_down";
 
 
         private CheckBoxPreference mLockExtra;
@@ -49,6 +50,7 @@ public class LockscreenSettings extends Activity {
         private CheckBoxPreference mQuickUnlock;
         private CheckBoxPreference mVolumeWake;
         private CheckBoxPreference mRotaryArrows;
+        private CheckBoxPreference mRotaryDown;
         private ListPreference mSoundCamera;
         private ListPreference mLockStyle;
         private Preference mCustomApp1;
@@ -73,6 +75,10 @@ public class LockscreenSettings extends Activity {
             mRotaryArrows = (CheckBoxPreference) prefSet.findPreference(ROTARY_ARROWS);
             mRotaryArrows.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_HIDE_ARROWS, 0) == 1);
+
+            mRotaryDown = (CheckBoxPreference) prefSet.findPreference(ROTARY_DOWN);
+            mRotaryDown.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_ROTARY_UNLOCK_DOWN, 0) == 1);
 
             mLockExtra = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_EXTRA);
             mLockExtra.setChecked(Settings.System.getInt(getContentResolver(),
@@ -145,6 +151,11 @@ public class LockscreenSettings extends Activity {
                 value = mRotaryArrows.isChecked();
                 Settings.System.putInt(getContentResolver(),
                         Settings.System.LOCKSCREEN_HIDE_ARROWS, value ? 1 : 0);
+                return true;
+            } else if (preference == mRotaryDown) {
+                value = mRotaryDown.isChecked();
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.LOCKSCREEN_ROTARY_UNLOCK_DOWN, value ? 1 : 0);
                 return true;
             } else if (preference == mCustomApp1) {
                 mCurrentCustomActivityPreference = preference;

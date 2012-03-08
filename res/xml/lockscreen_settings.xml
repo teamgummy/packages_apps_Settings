@@ -8,6 +8,18 @@
             android:key="general_category"
             android:title="General Settings">
 
+	<ListPreference
+	    android:key="lockscreen_styles"
+	    android:entries="@array/lockscreen_styles_entries"
+	    android:entryValues="@array/lockscreen_styles_values"
+	    android:title="@string/lockscreen_styles_title"
+	    android:summary="@string/lockscreen_styles_summary" />
+
+        <CheckBoxPreference
+            android:key="rotary_arrows"
+            android:title="@string/rotary_arrows_title">
+        </CheckBoxPreference>
+
         <CheckBoxPreference
             android:key="lockscreen_extra"
             android:title="@string/lockscreen_extra" >

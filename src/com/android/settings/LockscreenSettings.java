@@ -39,13 +39,18 @@ public class LockscreenSettings extends Activity {
         private static final String LOCKSCREEN_CUSTOM_1 = "lockscreen_custom_1";
         private static final String LOCKSCREEN_CUSTOM_2 = "lockscreen_custom_2";
         private static final String SOUND_OR_CAMERA = "sound_or_camera";
+        private static final String LOCKSCREEN_STYLES = "lockscreen_styles";
+        private static final String ROTARY_ARROWS = "rotary_arrows";
+
 
         private CheckBoxPreference mLockExtra;
         private CheckBoxPreference mLockBattery;
         private CheckBoxPreference mLockBeforeUnlock;
         private CheckBoxPreference mQuickUnlock;
         private CheckBoxPreference mVolumeWake;
+        private CheckBoxPreference mRotaryArrows;
         private ListPreference mSoundCamera;
+        private ListPreference mLockStyle;
         private Preference mCustomApp1;
         private Preference mCustomApp2;
 
@@ -59,6 +64,15 @@ public class LockscreenSettings extends Activity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.lockscreen_settings);
             PreferenceScreen prefSet = getPreferenceScreen();
+
+            mLockStyle = (ListPreference) findPreference(LOCKSCREEN_STYLES);
+            mLockStyle.setOnPreferenceChangeListener(this);
+            mLockStyle.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE,
+                0) + "");
+
+            mRotaryArrows = (CheckBoxPreference) prefSet.findPreference(ROTARY_ARROWS);
+            mRotaryArrows.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_HIDE_ARROWS, 0) == 1);
 
             mLockExtra = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_EXTRA);
             mLockExtra.setChecked(Settings.System.getInt(getContentResolver(),
@@ -127,6 +141,11 @@ public class LockscreenSettings extends Activity {
                 Settings.System.putInt(getContentResolver(),
                         Settings.System.VOLUME_WAKE, value ? 1 : 0);
                 return true;
+            } else if (preference == mRotaryArrows) {
+                value = mRotaryArrows.isChecked();
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.LOCKSCREEN_HIDE_ARROWS, value ? 1 : 0);
+                return true;
             } else if (preference == mCustomApp1) {
                 mCurrentCustomActivityPreference = preference;
                 mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_ONE;
@@ -144,6 +163,9 @@ public class LockscreenSettings extends Activity {
         public boolean onPreferenceChange(Preference preference, Object newValue) {
             if (preference == mSoundCamera) {
                 Settings.System.putInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_FORCE_SOUND_ICON, Integer.parseInt((String) newValue));
+                return true;
+            } else if (preference == mLockStyle) {
+                Settings.System.putInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, Integer.parseInt((String) newValue));
                 return true;
             }
             return false;

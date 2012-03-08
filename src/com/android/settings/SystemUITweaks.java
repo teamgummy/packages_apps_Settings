@@ -32,10 +32,12 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private static final String PREF_CARRIER_TEXT = "carrier_text";
     private static final String BATTERY_TEXT_COLOR = "battery_text_color";
     private static final String TOGGLE_COLOR = "toggle_color";
+    private static final String DATE_OPENS_CALENDAR = "date_opens_calendar";
 
     private CheckBoxPreference mHideAlarm;
     private CheckBoxPreference mBattText;
     private CheckBoxPreference mBattBar;
+    private CheckBoxPreference mDateCalendar;
     private ListPreference mAmPmStyle;
     private ListPreference mClockStyle;
     private ListPreference mBatteryStyle;
@@ -65,6 +67,10 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
         mBattBar = (CheckBoxPreference) prefSet.findPreference(BATTERY_BAR);
         mBattBar.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.STATUSBAR_BATTERY_BAR, 0) == 1);
+
+        mDateCalendar = (CheckBoxPreference) prefSet.findPreference(DATE_OPENS_CALENDAR);
+        mDateCalendar.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.DATE_OPENS_CALENDAR, 0) == 1);
 
         mBattColor = (PreferenceScreen) findPreference(BATTERY_TEXT_COLOR);
         mBattColor.setEnabled(mBattText.isChecked());
@@ -144,6 +150,11 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.STATUSBAR_BATTERY_BAR, value ? 1 : 0);
             updateBatteryBarToggle(value);
+            return true;
+        } else if (preference == mDateCalendar) {
+            value = mDateCalendar.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.DATE_OPENS_CALENDAR, value ? 1 : 0);
             return true;
         } else if (preference == mCarrier) {
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());

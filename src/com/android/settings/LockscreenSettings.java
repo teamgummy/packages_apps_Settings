@@ -147,7 +147,7 @@ public class LockscreenSettings extends Activity {
                 Settings.System.putInt(getContentResolver(),
                         Settings.System.LOCKSCREEN_EXTRA_ICONS, value ? 1 : 0);
                 try {
-                    if(Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE) == 0)
+                    if(Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE) == 0 || Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE) == 1)
                         updateCustomAppPickers(value);
                 } catch (SettingNotFoundException e) {
                 }
@@ -228,7 +228,7 @@ public class LockscreenSettings extends Activity {
             prefSet.removeAll();
             prefSet.addPreference(mCategoryGeneral);
             prefSet.addPreference(mCategoryUnlock);
-            if (lock == 0 || lock == 3)
+            if (lock != 2)
                 prefSet.addPreference(mCategoryCustom);
 
             try {
@@ -263,6 +263,8 @@ public class LockscreenSettings extends Activity {
                 case 1:
                     lsGen.add(mLockStyle);
                     lsGenEnable.add(true);
+                    lsGen.add(mLockExtra);
+                    lsGenEnable.add(true);
                     lsGen.add(mLockBattery);
                     lsGenEnable.add(true);
                     lsUnlock.add(mLockBeforeUnlock);
@@ -271,6 +273,8 @@ public class LockscreenSettings extends Activity {
                     lsUnlockEnable.add(true);
                     lsUnlock.add(mVolumeWake);
                     lsUnlockEnable.add(true);
+                    lsApp.add(mCustomApp1);
+                    lsAppEnable.add(mLockExtra.isChecked());
                     break;
                 case 2:
                     lsGen.add(mLockStyle);

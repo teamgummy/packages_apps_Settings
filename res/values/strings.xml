@@ -3904,6 +3904,7 @@ found in the list of installed apps.</string>
     <string name="lockscreen_styles_title">Lockscreen Style</string>
     <string name="lockscreen_styles_summary">Pick what Lockscreen Style you would like to use</string>
     <string name="rotary_arrows_title">Hide Rotary Arrows</string>
+    <string name="rotary_down_title">Rotary Pulldown Unlock</string>
 
     <!-- Strings for Battery Color Menu -->
     <string name="battery_text_color">Battery Text Colors</string>

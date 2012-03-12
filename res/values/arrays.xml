@@ -902,6 +902,7 @@
                 <item>Rotary Lockscreen</item>
                 <item>Rotary Revamp Lockscreen</item>
                 <item>HoneyComb Lockscreen</item>
+                <item>Ring Lockscreen</item>
 	</string-array>
 
 	<string-array name="lockscreen_styles_values">
@@ -910,5 +911,6 @@
 		<item>2</item>
 		<item>3</item>
 		<item>4</item>
+		<item>5</item>
 	</string-array>
 </resources>

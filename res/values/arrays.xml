@@ -901,6 +901,7 @@
 		<item>Slider Lockscreen</item>
                 <item>Rotary Lockscreen</item>
                 <item>Rotary Revamp Lockscreen</item>
+                <item>HoneyComb Lockscreen</item>
 	</string-array>
 
 	<string-array name="lockscreen_styles_values">
@@ -908,5 +909,6 @@
 		<item>1</item>
 		<item>2</item>
 		<item>3</item>
+		<item>4</item>
 	</string-array>
 </resources>

@@ -228,8 +228,7 @@ public class LockscreenSettings extends Activity {
             prefSet.removeAll();
             prefSet.addPreference(mCategoryGeneral);
             prefSet.addPreference(mCategoryUnlock);
-            if (lock != 2)
-                prefSet.addPreference(mCategoryCustom);
+            prefSet.addPreference(mCategoryCustom);
 
             try {
             mCategoryGeneral.setTitle(mLockStyle.getEntries()[mLockStyle.
@@ -308,6 +307,18 @@ public class LockscreenSettings extends Activity {
                     lsApp.add(mCustomApp1);
                     lsAppEnable.add(true);
                     break;
+                case 4:
+                    lsGen.add(mLockStyle);
+                    lsGenEnable.add(true);
+                    lsGen.add(mLockBattery);
+                    lsGenEnable.add(true);
+                    lsUnlock.add(mLockBeforeUnlock);
+                    lsUnlockEnable.add(true);
+                    lsUnlock.add(mQuickUnlock);
+                    lsUnlockEnable.add(true);
+                    lsUnlock.add(mVolumeWake);
+                    lsUnlockEnable.add(true);
+                    break;
             }
 
             mCategoryGeneral.removeAll();
@@ -345,6 +356,9 @@ public class LockscreenSettings extends Activity {
                     ((CheckBoxPreference) pref).setChecked(false);
                 }
             }
+
+            if (lsApp.size() < 1)
+                prefSet.removePreference(mCategoryCustom);
         }
 
         @Override

@@ -359,6 +359,8 @@ public class LockscreenSettings extends Activity {
                     lsUnlockEnable.add(true);
                     lsApp.add(mCustomApp1);
                     lsAppEnable.add(mLockExtra.isChecked());
+                    lsApp.add(mSoundCamera);
+                    lsAppEnable.add(true);
                     break;
                 case 2:
                     lsGen.add(mLockStyle);
@@ -373,6 +375,8 @@ public class LockscreenSettings extends Activity {
                     lsUnlockEnable.add(true);
                     lsUnlock.add(mVolumeWake);
                     lsUnlockEnable.add(true);
+                    lsApp.add(mSoundCamera);
+                    lsAppEnable.add(true);
                     break;
                 case 3:
                     lsGen.add(mLockStyle);
@@ -390,6 +394,8 @@ public class LockscreenSettings extends Activity {
                     lsUnlock.add(mVolumeWake);
                     lsUnlockEnable.add(true);
                     lsApp.add(mCustomApp1);
+                    lsAppEnable.add(true);
+                    lsApp.add(mSoundCamera);
                     lsAppEnable.add(true);
                     break;
                 case 4:
@@ -419,6 +425,8 @@ public class LockscreenSettings extends Activity {
                     lsUnlockEnable.add(true);
                     lsApp.add(mCustomApp1);
                     lsAppEnable.add(mLockExtra.isChecked());
+                    lsApp.add(mSoundCamera);
+                    lsAppEnable.add(true);
                     break;
             }
 

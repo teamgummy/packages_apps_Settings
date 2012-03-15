@@ -913,4 +913,15 @@
 		<item>4</item>
 		<item>5</item>
 	</string-array>
+
+        <!--arrays for choosing music widget type -->
+	<string-array name="lockscreen_music_widget_entries">
+		<item>Ice Cream Sandwich</item>
+		<item>Gingerbread</item>
+	</string-array>
+
+	<string-array name="lockscreen_music_widget_values">
+		<item>0</item>
+		<item>1</item>
+	</string-array>
 </resources>

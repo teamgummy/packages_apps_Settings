@@ -51,6 +51,7 @@ public class LockscreenSettings extends Activity {
         private static final String LOCKSCREEN_STYLES = "lockscreen_styles";
         private static final String ROTARY_ARROWS = "rotary_arrows";
         private static final String ROTARY_DOWN = "rotary_down";
+        private static final String LOCKSCREEN_MUSIC_WIDGET = "lockscreen_music_widget";
 
         private PreferenceCategory mCategoryGeneral;
         private PreferenceCategory mCategoryUnlock;
@@ -65,6 +66,7 @@ public class LockscreenSettings extends Activity {
         private CheckBoxPreference mRotaryDown;
         private ListPreference mSoundCamera;
         private ListPreference mLockStyle;
+        private ListPreference mMusicStyle;
         private Preference mCustomApp1;
         private Preference mCustomApp2;
 
@@ -91,6 +93,11 @@ public class LockscreenSettings extends Activity {
             mLockStyle.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE,
                 0) + "");
 
+            mMusicStyle = (ListPreference) findPreference(LOCKSCREEN_MUSIC_WIDGET);
+            mMusicStyle.setOnPreferenceChangeListener(this);
+            mMusicStyle.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.MUSIC_WIDGET_TYPE,
+                0) + "");
+            
             mRotaryArrows = (CheckBoxPreference) prefSet.findPreference(ROTARY_ARROWS);
             mRotaryArrows.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_HIDE_ARROWS, 0) == 1);
@@ -287,6 +294,9 @@ public class LockscreenSettings extends Activity {
                 } catch (SettingNotFoundException e) {
                 }
                 return true;
+            } else if (preference == mMusicStyle) {
+            	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.MUSIC_WIDGET_TYPE, Integer.parseInt((String) newValue));
+                return true;
             }
             return false;
         }
@@ -322,7 +332,7 @@ public class LockscreenSettings extends Activity {
             }
             mCategoryUnlock.setTitle("Unlocking Options");
             mCategoryCustom.setTitle("Custom Apps");
-
+            
             switch (lock) {
                 case 0:
                     lsGen.add(mLockStyle);
@@ -330,6 +340,8 @@ public class LockscreenSettings extends Activity {
                     lsGen.add(mLockExtra);
                     lsGenEnable.add(true);
                     lsGen.add(mLockBattery);
+                    lsGenEnable.add(true);
+                    lsGen.add(mMusicStyle);
                     lsGenEnable.add(true);
                     lsUnlock.add(mLockBeforeUnlock);
                     lsUnlockEnable.add(true);
@@ -351,6 +363,8 @@ public class LockscreenSettings extends Activity {
                     lsGenEnable.add(true);
                     lsGen.add(mLockBattery);
                     lsGenEnable.add(true);
+                    lsGen.add(mMusicStyle);
+                    lsGenEnable.add(true);
                     lsUnlock.add(mLockBeforeUnlock);
                     lsUnlockEnable.add(true);
                     lsUnlock.add(mQuickUnlock);
@@ -368,6 +382,8 @@ public class LockscreenSettings extends Activity {
                     lsGen.add(mRotaryArrows);
                     lsGenEnable.add(true);
                     lsGen.add(mLockBattery);
+                    lsGenEnable.add(true);
+                    lsGen.add(mMusicStyle);
                     lsGenEnable.add(true);
                     lsUnlock.add(mLockBeforeUnlock);
                     lsUnlockEnable.add(true);
@@ -387,6 +403,8 @@ public class LockscreenSettings extends Activity {
                     lsGenEnable.add(true);
                     lsGen.add(mLockBattery);
                     lsGenEnable.add(true);
+                    lsGen.add(mMusicStyle);
+                    lsGenEnable.add(true);
                     lsUnlock.add(mLockBeforeUnlock);
                     lsUnlockEnable.add(true);
                     lsUnlock.add(mQuickUnlock);
@@ -403,6 +421,8 @@ public class LockscreenSettings extends Activity {
                     lsGenEnable.add(true);
                     lsGen.add(mLockBattery);
                     lsGenEnable.add(true);
+                    lsGen.add(mMusicStyle);
+                    lsGenEnable.add(true);
                     lsUnlock.add(mLockBeforeUnlock);
                     lsUnlockEnable.add(true);
                     lsUnlock.add(mQuickUnlock);
@@ -416,6 +436,8 @@ public class LockscreenSettings extends Activity {
                     lsGen.add(mLockExtra);
                     lsGenEnable.add(true);
                     lsGen.add(mLockBattery);
+                    lsGenEnable.add(true);
+                    lsGen.add(mMusicStyle);
                     lsGenEnable.add(true);
                     lsUnlock.add(mLockBeforeUnlock);
                     lsUnlockEnable.add(true);

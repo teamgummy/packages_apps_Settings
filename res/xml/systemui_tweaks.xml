@@ -76,6 +76,17 @@
 
     </PreferenceCategory>
 
+    <!-- I know this is lazy coding, but we are gonna move this anyway later -->
+    <PreferenceCategory
+            android:key="status_bar_stuffs"
+            android:title="Status Bar Stuff">
+
+	<com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="status_bar_color" 
+		android:title="Statusbar Color" 
+		android:defaultValue="#000000" />
+    </PreferenceCategory>
+
     <PreferenceCategory
             android:key="notification_toggle"
             android:title="Notification Toggle Settings">

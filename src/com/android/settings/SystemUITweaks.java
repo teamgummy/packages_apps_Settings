@@ -12,6 +12,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
+import android.util.Log;
 import android.text.Spannable;
 import android.widget.EditText;
 
@@ -33,6 +34,8 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private static final String BATTERY_TEXT_COLOR = "battery_text_color";
     private static final String TOGGLE_COLOR = "toggle_color";
     private static final String DATE_OPENS_CALENDAR = "date_opens_calendar";
+    private static final String STATUS_BAR_COLOR = "status_bar_color";
+    private static final String STATUS_BAR_TRANSPARENCY = "status_bar_transparency";
 
     private CheckBoxPreference mHideAlarm;
     private CheckBoxPreference mBattText;
@@ -45,6 +48,7 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private ColorPickerPreference mBattBarColor;
     private ColorPickerPreference mClockColor;
     private ColorPickerPreference mToggleColor;
+    private ColorPickerPreference mStatusColor;
 
     PreferenceScreen mBattColor;
 
@@ -84,6 +88,9 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
 
         mToggleColor = (ColorPickerPreference) prefSet.findPreference(TOGGLE_COLOR);
         mToggleColor.setOnPreferenceChangeListener(this);
+
+        mStatusColor = (ColorPickerPreference) prefSet.findPreference(STATUS_BAR_COLOR);
+        mStatusColor.setOnPreferenceChangeListener(this);
 
         mCarrier = (Preference) prefSet.findPreference(PREF_CARRIER_TEXT);
         updateCarrierText();
@@ -219,6 +226,14 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.NOTIFICATION_TOGGLE_COLOR_BAR, color);
+            return true;
+        } else if (preference == mStatusColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.STATUSBAR_BACKGROUND_COLOR, color);
             return true;
         }
         return false;

@@ -44,6 +44,11 @@
             android:key="battery_category"
             android:title="Battery Settings">
 
+	<com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="battery_icon_color" 
+		android:title="@string/battery_icon_color" 
+		android:defaultValue="#33B5E5" />
+
         <ListPreference
             android:key="battery_style"
             android:entries="@array/battery_entries"
@@ -91,4 +96,19 @@
 		android:title="@string/toggle_color" 
 		android:defaultValue="#33B5E5" />
     </PreferenceCategory>
+
+<PreferenceCategory
+            android:key="data_signal_color"
+            android:title="Wifi / Mobile Signal Colors">
+
+	    <com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="wifi_signal_color" 
+		android:title="@string/wifi_signal_color" 
+		android:defaultValue="#33B5E5" />
+	    <com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="mobile_signal_color" 
+		android:title="@string/mobile_signal_color" 
+		android:defaultValue="#33B5E5" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

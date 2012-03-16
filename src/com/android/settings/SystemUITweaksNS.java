@@ -33,6 +33,9 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements
     private static final String BATTERY_TEXT_COLOR = "battery_text_color";
     private static final String TOGGLE_COLOR = "toggle_color";
     private static final String DATE_OPENS_CALENDAR = "date_opens_calendar";
+    private static final String WIFI_SIGNAL_COLOR = "wifi_signal_color";
+    private static final String MOBILE_SIGNAL_COLOR = "mobile_signal_color";
+    private static final String BATTERY_ICON_COLOR = "battery_icon_color";
 
     private CheckBoxPreference mHideAlarm;
     private CheckBoxPreference mBattText;
@@ -45,6 +48,9 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements
     private ColorPickerPreference mBattBarColor;
     private ColorPickerPreference mClockColor;
     private ColorPickerPreference mToggleColor;
+    private ColorPickerPreference mWifiSignalColor;
+    private ColorPickerPreference mMobileSignalColor;
+    private ColorPickerPreference mBatteryIconColor;
 
     PreferenceScreen mBattColor;
 
@@ -75,6 +81,9 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements
         mBattColor = (PreferenceScreen) findPreference(BATTERY_TEXT_COLOR);
         mBattColor.setEnabled(mBattText.isChecked());
 
+	mBatteryIconColor = (ColorPickerPreference) prefSet.findPreference(BATTERY_ICON_COLOR);
+        mBatteryIconColor.setOnPreferenceChangeListener(this);
+
         mBattBarColor = (ColorPickerPreference) prefSet.findPreference(BATTERY_BAR_COLOR);
         mBattBarColor.setOnPreferenceChangeListener(this);
         mBattBarColor.setEnabled(mBattBar.isChecked());
@@ -84,6 +93,12 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements
 
         mToggleColor = (ColorPickerPreference) prefSet.findPreference(TOGGLE_COLOR);
         mToggleColor.setOnPreferenceChangeListener(this);
+
+        mWifiSignalColor = (ColorPickerPreference) prefSet.findPreference(WIFI_SIGNAL_COLOR);
+        mWifiSignalColor.setOnPreferenceChangeListener(this);
+
+        mMobileSignalColor = (ColorPickerPreference) prefSet.findPreference(MOBILE_SIGNAL_COLOR);
+        mMobileSignalColor.setOnPreferenceChangeListener(this);
 
         mCarrier = (Preference) prefSet.findPreference(PREF_CARRIER_TEXT);
         updateCarrierText();
@@ -204,6 +219,30 @@ public class SystemUITweaksNS extends SettingsPreferenceFragment implements
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.STATUSBAR_BATTERY_BAR_COLOR, color);
+            return true;
+	} else if (preference == mBatteryIconColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.BATTERY_ICON_COLOR, color);
+            return true;
+        } else if (preference == mWifiSignalColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.WIFI_SIGNAL_COLOR, color);
+            return true;
+        } else if (preference == mMobileSignalColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.MOBILE_SIGNAL_COLOR, color);
             return true;
         } else if (preference == mClockColor) {
             String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String

@@ -916,8 +916,8 @@
 
         <!--arrays for choosing music widget type -->
 	<string-array name="lockscreen_music_widget_entries">
-		<item>Ice Cream Sandwich</item>
-		<item>Gingerbread</item>
+		<item>Ice Cream Sandwich Stock</item>
+		<item>Revamped ICS</item>
 	</string-array>
 
 	<string-array name="lockscreen_music_widget_values">

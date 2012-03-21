@@ -27,7 +27,6 @@ public class DevCard extends Preference {
     private ImageView donateButton;
     private ImageView photoView;
     
-    private TextView twitterNames;
     private TextView devName;
     
     private Drawable devPic;
@@ -54,7 +53,6 @@ public class DevCard extends Preference {
 
         twitterButton = (ImageView) layout.findViewById (R.id.twitter_button);
         donateButton = (ImageView) layout.findViewById (R.id.donate_button);
-        twitterNames = (TextView) layout.findViewById (R.id.twitter_name);
         devName = (TextView) layout.findViewById (R.id.name);
         photoView = (ImageView) layout.findViewById(R.id.photo);
         
@@ -93,11 +91,8 @@ public class DevCard extends Preference {
             };
             
             twitterButton.setOnClickListener(openTwitter);
-            twitterNames.setOnClickListener(openTwitter);
-            twitterNames.setText("@" + twitterName);
         } else {
         	twitterButton.setVisibility(View.GONE);
-        	twitterNames.setVisibility(View.GONE);
         }
         
         if (devPic != null) {

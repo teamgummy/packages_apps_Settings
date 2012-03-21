@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:gummy="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/about_gummy"
+    android:key="about_settings">
+
+    <PreferenceCategory
+        android:key="gummy_links"
+        android:title="@string/gummy_links">
+
+        <Preference
+            android:key="gummy_site"
+            android:title="@string/gummy_site_title"
+            android:summary="@string/gummy_site_summary"
+        />
+
+        <Preference
+            android:key="gummy_source"
+            android:title="@string/gummy_source_title"
+            android:summary="@string/gummy_source_summary"
+        />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="gummy_primary"
+        android:title="@string/gummy_primary">
+
+        <com.android.settings.util.devcard.DevCard
+            android:title="Kejar31"
+            gummy:nameDev="Kejar31"
+            gummy:twitterName="kejar31"
+            gummy:donateLink="@string/kejar_donate"
+            gummy:devPic="@drawable/kejar31"
+        />
+
+        <com.android.settings.util.devcard.DevCard
+            android:title="syaoran12"
+            gummy:nameDev="syaoran12"
+            gummy:twitterName="adamthecashew"
+            gummy:donateLink="@string/syaoran_donate"
+            gummy:devPic="@drawable/syaoran12"
+        />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="gummy_team"
+        android:title="@string/gummy_team">
+
+        <com.android.settings.util.devcard.DevCard
+            android:title="tmoskowite"
+            gummy:nameDev="tmoskowite"
+            gummy:twitterName="tmoskowite"
+            gummy:devPic="@drawable/tmoskowite"
+        />
+
+        <com.android.settings.util.devcard.DevCard
+            android:title="daank"
+            gummy:nameDev="daank"
+            gummy:twitterName="designbydaank"
+            gummy:devPic="@drawable/daank"
+        />
+
+        <com.android.settings.util.devcard.DevCard
+            android:title="sixstringsg"
+            gummy:nameDev="sixstringsg"
+            gummy:twitterName="StewartJason"
+            gummy:devPic="@drawable/sixstringsg"
+        />
+
+        <com.android.settings.util.devcard.DevCard
+            android:title="x13thangelx"
+            gummy:nameDev="x13thangelx"
+            gummy:twitterName="x13thangelx"
+            gummy:devPic="@drawable/x13thangelx"
+        />
+
+        <com.android.settings.util.devcard.DevCard
+            android:title="aDroidman"
+            gummy:nameDev="aDroidman"
+            gummy:twitterName="aDroidman"
+            gummy:devPic="@drawable/adroidman"
+        />
+
+        <com.android.settings.util.devcard.DevCard
+            android:title="poitee"
+            gummy:nameDev="poitee"
+            gummy:twitterName="poitee"
+            gummy:devPic="@drawable/poitee"
+        />
+
+        <com.android.settings.util.devcard.DevCard
+            android:title="Mobile_Sensei"
+            gummy:nameDev="Mobile_Sensei"
+            gummy:twitterName="Mobile_Sensei"
+            gummy:devPic="@drawable/mobile_sensei"
+        />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

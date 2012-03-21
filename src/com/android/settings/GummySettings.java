@@ -15,6 +15,7 @@ public class GummySettings extends SettingsPreferenceFragment {
     private static final String LED_SETTINGS = "led_settings";
     private static final String SOFTKEY_SETTINGS = "softkey_settings";
     private static final String PERFORMANCE_SETTINGS = "performance_settings";
+    private static final String ABOUT_SETTINGS = "about_settings";
 
     PreferenceScreen mGeneralSettings;
     PreferenceScreen mSystemUITweaks;
@@ -22,6 +23,7 @@ public class GummySettings extends SettingsPreferenceFragment {
     PreferenceScreen mLEDSettings;
     PreferenceScreen mSoftkeySettings;
     PreferenceScreen mPerformanceSettings;
+    PreferenceScreen mAbout;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class GummySettings extends SettingsPreferenceFragment {
         mLockscreenSettings = (PreferenceScreen) findPreference(LOCKSCREEN_SETTINGS);
         mLEDSettings = (PreferenceScreen) findPreference(LED_SETTINGS);
         mPerformanceSettings = (PreferenceScreen) findPreference(PERFORMANCE_SETTINGS);
+        mAbout = (PreferenceScreen) findPreference(ABOUT_SETTINGS);
 
     }
 }

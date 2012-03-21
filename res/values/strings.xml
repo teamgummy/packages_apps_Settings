@@ -3868,6 +3868,7 @@ found in the list of installed apps.</string>
     <string name="lockscreen_settings">Lockscreen Settings</string>
     <string name="general_settings">General UI Settings</string>
     <string name="softkey_settings">Soft Key Settings</string>
+    <string name="about_gummy">About Team Gummy</string>
 
     <!-- Strings for SystemUI Tweaks Menu -->
     <string name="clock_style_title">Clock style</string>
@@ -3949,6 +3950,17 @@ found in the list of installed apps.</string>
     
     <string name="glow_times_title">Button glow animation</string>
     <string name="glow_times_summary">Adjust how fast your buttons animate after you touch them. Lowering the speed can improve performance.</string>
+
+    <!-- About Strings-->
+    <string name="gummy_links">Gummy Site Links</string>
+    <string name="gummy_site_title">Home Page</string>
+    <string name="gummy_site_summary">http://www.teamgummy.com</string>
+    <string name="gummy_source_title">Gummy Source</string>
+    <string name="gummy_source_summary">http://www.github.com/teamgummy</string>
+    <string name="gummy_team">Team Gummy Members</string>
+    <string name="gummy_primary">Team Gummy Primary Developers</string>
+    <string name="kejar_donate">https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=66PDMD645HJ7E</string>
+    <string name="syaoran_donate">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=WDP3A2WVHG9Y2</string>
 
     <!-- Backlight #CM -->
     <string name="backlight_title">Automatic backlight</string>

@@ -32,7 +32,7 @@
     <PreferenceScreen
             android:key="power_widgets"
             android:title="@string/power_widgets"
-            android:icon="@drawable/gummy_softkeys"
+            android:icon="@drawable/gummy_pw"
             android:fragment="com.android.settings.PowerWidget" />
 
     <PreferenceScreen

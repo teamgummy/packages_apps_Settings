@@ -14,6 +14,7 @@ public class GummySettingsNLED extends SettingsPreferenceFragment {
     private static final String LOCKSCREEN_SETTINGS = "lockscreen_settings";
     private static final String PERFORMANCE_SETTINGS = "performance_settings";
 	private static final String ABOUT_SETTINGS = "about_settings";
+	private static final String POWER_WIDGETS = "power_widgets";
 
     PreferenceScreen mGeneralSettings;
     PreferenceScreen mSystemUITweaks;
@@ -21,6 +22,7 @@ public class GummySettingsNLED extends SettingsPreferenceFragment {
     PreferenceScreen mLEDSettings;
     PreferenceScreen mPerformanceSettings;
 	PreferenceScreen mAbout;
+	PreferenceScreen mPowerWidgets;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,5 +34,6 @@ public class GummySettingsNLED extends SettingsPreferenceFragment {
         mLockscreenSettings = (PreferenceScreen) findPreference(LOCKSCREEN_SETTINGS);
         mPerformanceSettings = (PreferenceScreen) findPreference(PERFORMANCE_SETTINGS);
 		mAbout = (PreferenceScreen) findPreference(ABOUT_SETTINGS);
+		mPowerWidgets = (PreferenceScreen) findPreference(POWER_WIDGETS);
     }
 }

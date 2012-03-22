@@ -67,7 +67,13 @@
             android:title="@string/title_widget_order" 
             android:summary="@string/summary_widget_order"
             android:fragment="com.android.settings.PowerWidget$PowerWidgetOrder">
+
         </PreferenceScreen>
+
+	<com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="widget_color" 
+		android:title="@string/widget_color_title" 
+		android:defaultValue="#33B5E5" />
 
     </PreferenceCategory>
 

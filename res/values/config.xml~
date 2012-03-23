@@ -23,6 +23,6 @@
     <string name="additional_system_update_menu" translatable="false"></string>
 
     <!-- LED Flashlight -->
-    <bool name="has_led_flash">true</bool>
+    <bool name="has_led_flash">false</bool>
 
 </resources>

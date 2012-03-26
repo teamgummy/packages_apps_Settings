@@ -71,6 +71,13 @@
         />
 
         <com.android.settings.util.devcard.DevCard
+            android:title="Stevespear426"
+            gummy:nameDev="Stevespear426"
+            gummy:twitterName="Stevespeartweet"
+            gummy:devPic="@drawable/stevespear"
+        />
+
+        <com.android.settings.util.devcard.DevCard
             android:title="x13thangelx"
             gummy:nameDev="x13thangelx"
             gummy:twitterName="x13thangelx"

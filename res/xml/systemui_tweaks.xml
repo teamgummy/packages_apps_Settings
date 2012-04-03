@@ -17,6 +17,11 @@
         <Preference
             android:key="carrier_text"
             android:title="@string/carrier_text" />
+
+	<com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="status_bar_color" 
+		android:title="Statusbar Color" 
+		android:defaultValue="#000000" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -81,19 +86,23 @@
             android:key="status_bar_stuffs"
             android:title="Status Bar Stuff">
 
-	<com.android.settings.util.colorpicker.ColorPickerPreference
-		android:key="status_bar_color" 
-		android:title="Statusbar Color" 
-		android:defaultValue="#000000" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
-            android:key="notification_toggle"
-            android:title="Notification Toggle Settings">
-		
 	<CheckBoxPreference
             android:key="date_opens_calendar"
             android:title="@string/date_opens_calendar">
         </CheckBoxPreference>
+
+        <ListPreference
+            android:key="top_carrier"
+            android:entries="@array/top_carrier_entries"
+            android:entryValues="@array/top_carrier_values"
+            android:title="@string/top_carrier_title"
+            android:summary="@string/top_carrier_summary" />
+
+
+	<com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="top_carrier_color" 
+		android:title="@string/top_carrier_color" 
+		android:defaultValue="#33B5E5" />
+
     </PreferenceCategory>
 </PreferenceScreen>

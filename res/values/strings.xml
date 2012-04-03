@@ -3885,6 +3885,10 @@ found in the list of installed apps.</string>
     <string name="clock_color">Clock Color</string>
     <string name="toggle_color">Toggle Color Picker</string>
     <string name="date_opens_calendar">Date opens Calendar</string>
+    <string name="top_carrier_title">MIUI Style Carrier Text</string>
+    <string name="top_carrier_summary">Enable the carrier text in the statusbar in a style like MIUI **MUST REBOOT BETWEEN CARRIER AND CUSTOM**</string>
+    <string name="top_carrier_color">MIUI Carrier Text Color</string>
+
 
     <!-- Strings for Lockscreen Settings Menu -->
     <string name="lockscreen_battery">Lockscreen Battery %</string>

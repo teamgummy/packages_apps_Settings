@@ -34,6 +34,8 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private static final String BATTERY_TEXT_COLOR = "battery_text_color";
     private static final String DATE_OPENS_CALENDAR = "date_opens_calendar";
     private static final String STATUS_BAR_COLOR = "status_bar_color";
+    private static final String TOP_CARRIER = "top_carrier";
+    private static final String TOP_CARRIER_COLOR = "top_carrier_color";
 
     private CheckBoxPreference mHideAlarm;
     private CheckBoxPreference mBattText;
@@ -42,10 +44,12 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private ListPreference mAmPmStyle;
     private ListPreference mClockStyle;
     private ListPreference mBatteryStyle;
+    private ListPreference mTopCarrier;
     private Preference mCarrier;
     private ColorPickerPreference mBattBarColor;
     private ColorPickerPreference mClockColor;
     private ColorPickerPreference mStatusColor;
+    private ColorPickerPreference mTopCarrierColor;
 
     PreferenceScreen mBattColor;
 
@@ -85,6 +89,9 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
 
         mStatusColor = (ColorPickerPreference) prefSet.findPreference(STATUS_BAR_COLOR);
         mStatusColor.setOnPreferenceChangeListener(this);
+        
+        mTopCarrierColor = (ColorPickerPreference) prefSet.findPreference(TOP_CARRIER_COLOR);
+        mTopCarrierColor.setOnPreferenceChangeListener(this);
 
         mCarrier = (Preference) prefSet.findPreference(PREF_CARRIER_TEXT);
         updateCarrierText();
@@ -107,6 +114,11 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
                 Settings.System.BATTERY_PERCENTAGES, 1);
         mBatteryStyle.setValueIndex(battVal);
         mBatteryStyle.setOnPreferenceChangeListener(this);
+        
+        mTopCarrier = (ListPreference) findPreference(TOP_CARRIER);
+        mTopCarrier.setOnPreferenceChangeListener(this);
+        mTopCarrier.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.TOP_CARRIER_LABEL,
+            0) + "");
     }
 
     private void updateCarrierText() {
@@ -197,6 +209,9 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.BATTERY_PERCENTAGES, val);
             return true;
+        } else if (preference == mTopCarrier) {
+        	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.TOP_CARRIER_LABEL, Integer.parseInt((String) newValue));
+            return true;
         } else if (preference == mBattBarColor) {
             String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
                     .valueOf(newValue)));
@@ -212,6 +227,14 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.CLOCK_COLOR, color);
+            return true;
+        } else if (preference == mTopCarrierColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.TOP_CARRIER_LABEL_COLOR, color);
             return true;
         } else if (preference == mStatusColor) {
             String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String

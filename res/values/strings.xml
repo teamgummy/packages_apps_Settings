@@ -3888,6 +3888,10 @@ found in the list of installed apps.</string>
     <string name="top_carrier_title">MIUI Style Carrier Text</string>
     <string name="top_carrier_summary">Enable the carrier text in the statusbar in a style like MIUI **MUST REBOOT BETWEEN CARRIER AND CUSTOM**</string>
     <string name="top_carrier_color">MIUI Carrier Text Color</string>
+    <string name="status_bar_carrier">Carrier Text Modifications</string>
+    <string name="stock_carrier_title">Pull Down Carrier Text</string>
+    <string name="stock_carrier_summary">Enable/Disable text or choose between stock or custom text **MUST REBOOT BETWEEN CARRIER AND CUSTOM**</string>
+    <string name="stock_carrier_color">Pull Down Carrier Text Color</string>
 
 
     <!-- Strings for Lockscreen Settings Menu -->

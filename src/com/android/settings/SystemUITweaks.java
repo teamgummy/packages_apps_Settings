@@ -36,6 +36,8 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private static final String STATUS_BAR_COLOR = "status_bar_color";
     private static final String TOP_CARRIER = "top_carrier";
     private static final String TOP_CARRIER_COLOR = "top_carrier_color";
+    private static final String STOCK_CARRIER = "stock_carrier";
+    private static final String STOCK_CARRIER_COLOR = "stock_carrier_color";
 
     private CheckBoxPreference mHideAlarm;
     private CheckBoxPreference mBattText;
@@ -45,11 +47,13 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private ListPreference mClockStyle;
     private ListPreference mBatteryStyle;
     private ListPreference mTopCarrier;
+    private ListPreference mStockCarrier;
     private Preference mCarrier;
     private ColorPickerPreference mBattBarColor;
     private ColorPickerPreference mClockColor;
     private ColorPickerPreference mStatusColor;
     private ColorPickerPreference mTopCarrierColor;
+    private ColorPickerPreference mStockCarrierColor;
 
     PreferenceScreen mBattColor;
 
@@ -92,6 +96,9 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
         
         mTopCarrierColor = (ColorPickerPreference) prefSet.findPreference(TOP_CARRIER_COLOR);
         mTopCarrierColor.setOnPreferenceChangeListener(this);
+        
+        mStockCarrierColor = (ColorPickerPreference) prefSet.findPreference(STOCK_CARRIER_COLOR);
+        mStockCarrierColor.setOnPreferenceChangeListener(this);
 
         mCarrier = (Preference) prefSet.findPreference(PREF_CARRIER_TEXT);
         updateCarrierText();
@@ -119,13 +126,18 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
         mTopCarrier.setOnPreferenceChangeListener(this);
         mTopCarrier.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.TOP_CARRIER_LABEL,
             0) + "");
+        
+        mStockCarrier = (ListPreference) findPreference(STOCK_CARRIER);
+        mStockCarrier.setOnPreferenceChangeListener(this);
+        mStockCarrier.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.USE_CUSTOM_CARRIER,
+            0) + "");
     }
 
     private void updateCarrierText() {
         mCarrierText = Settings.System.getString(getContentResolver(),
                 Settings.System.CUSTOM_CARRIER_TEXT);
         if (mCarrierText == null) {
-            mCarrier.setSummary("Upon changing you will need to data wipe to get back stock. Requires reboot.");
+            mCarrier.setSummary("Sets the Text for both MIUI and pulldown custom text.");
         } else {
             mCarrier.setSummary(mCarrierText);
         }
@@ -212,6 +224,9 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
         } else if (preference == mTopCarrier) {
         	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.TOP_CARRIER_LABEL, Integer.parseInt((String) newValue));
             return true;
+        } else if (preference == mStockCarrier) {
+        	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.USE_CUSTOM_CARRIER, Integer.parseInt((String) newValue));
+            return true;
         } else if (preference == mBattBarColor) {
             String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
                     .valueOf(newValue)));
@@ -235,6 +250,14 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.TOP_CARRIER_LABEL_COLOR, color);
+            return true;
+        } else if (preference == mStockCarrierColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.USE_CUSTOM_CARRIER_COLOR, color);
             return true;
         } else if (preference == mStatusColor) {
             String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String

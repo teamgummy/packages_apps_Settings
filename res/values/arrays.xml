@@ -1141,4 +1141,16 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="stock_carrier_entries">
+        <item>Off</item>
+        <item>Default Carrier</item>
+        <item>Custom Carrier Text</item>
+    </string-array>
+
+    <string-array name="stock_carrier_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>

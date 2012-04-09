@@ -6,8 +6,8 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
-            android:key="general_category"
-            android:title="General Settings">
+        android:key="general_category"
+        android:title="General Settings">
 
         <CheckBoxPreference
             android:key="hide_alarm"
@@ -20,9 +20,24 @@
         </CheckBoxPreference>
 
 	<com.android.settings.util.colorpicker.ColorPickerPreference
-		android:key="status_bar_color" 
-		android:title="Statusbar Color" 
-		android:defaultValue="#000000" />
+	    android:key="status_bar_color" 
+	    android:title="Statusbar Color" 
+	    android:defaultValue="#000000" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="Notification Settings"
+        android:title="Notification Settings">
+
+        <com.android.settings.util.SeekBarPreference
+	        android:key="notification_alpha"
+		android:title="@string/notification_alpha_title" />
+
+	<com.android.settings.util.colorpicker.ColorPickerPreference
+		android:key="notification_color" 
+		android:title="@string/notification_color_title" 
+		android:defaultValue="#FFFFFF" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

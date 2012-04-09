@@ -3923,6 +3923,8 @@ found in the list of installed apps.</string>
     <string name="stock_carrier_title">Pull Down Carrier Text</string>
     <string name="stock_carrier_summary">Enable/Disable text or choose between stock or custom text **MUST REBOOT BETWEEN CARRIER AND CUSTOM**</string>
     <string name="stock_carrier_color">Pull Down Carrier Text Color</string>
+    <string name="notification_alpha_title">Notification Transparency</string>
+    <string name="notification_color_title">Notification Color</string>
 
 
     <!-- Strings for Lockscreen Settings Menu -->

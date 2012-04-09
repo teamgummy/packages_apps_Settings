@@ -17,6 +17,7 @@ import android.text.Spannable;
 import android.widget.EditText;
 
 import com.android.settings.R;
+import com.android.settings.util.SeekBarPreference;
 import com.android.settings.util.colorpicker.ColorPickerPreference;
 
 public class SystemUITweaks extends SettingsPreferenceFragment implements
@@ -38,6 +39,8 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private static final String TOP_CARRIER_COLOR = "top_carrier_color";
     private static final String STOCK_CARRIER = "stock_carrier";
     private static final String STOCK_CARRIER_COLOR = "stock_carrier_color";
+    private static final String NOTIFICATION_ALPHA = "notification_alpha";
+    private static final String NOTIFICATION_COLOR = "notification_color";
 
     private CheckBoxPreference mHideAlarm;
     private CheckBoxPreference mBattText;
@@ -54,7 +57,9 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private ColorPickerPreference mStatusColor;
     private ColorPickerPreference mTopCarrierColor;
     private ColorPickerPreference mStockCarrierColor;
-
+    private ColorPickerPreference mNotificationColor;
+    private SeekBarPreference mNotificationAlpha;
+    
     PreferenceScreen mBattColor;
 
     String mCarrierText = null;
@@ -99,6 +104,9 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
         
         mStockCarrierColor = (ColorPickerPreference) prefSet.findPreference(STOCK_CARRIER_COLOR);
         mStockCarrierColor.setOnPreferenceChangeListener(this);
+        
+        mNotificationColor = (ColorPickerPreference) prefSet.findPreference(NOTIFICATION_COLOR);
+        mNotificationColor.setOnPreferenceChangeListener(this);
 
         mCarrier = (Preference) prefSet.findPreference(PREF_CARRIER_TEXT);
         updateCarrierText();
@@ -131,6 +139,13 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
         mStockCarrier.setOnPreferenceChangeListener(this);
         mStockCarrier.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.USE_CUSTOM_CARRIER,
             0) + "");
+        
+        float defaultAlpha = Settings.System.getFloat(getActivity()
+                .getContentResolver(), Settings.System.STATUSBAR_NOTIFICATION_ALPHA,
+                0.55f);
+        mNotificationAlpha = (SeekBarPreference) findPreference(NOTIFICATION_ALPHA);
+        mNotificationAlpha.setInitValue((int) (defaultAlpha * 100));
+        mNotificationAlpha.setOnPreferenceChangeListener(this);
     }
 
     private void updateCarrierText() {
@@ -259,6 +274,14 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.USE_CUSTOM_CARRIER_COLOR, color);
             return true;
+        } else if (preference == mNotificationColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.STATUSBAR_NOTIFICATION_COLOR, color);
+            return true;
         } else if (preference == mStatusColor) {
             String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String
                     .valueOf(newValue)));
@@ -266,6 +289,12 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
             int color = ColorPickerPreference.convertToColorInt(hexColor);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.STATUSBAR_BACKGROUND_COLOR, color);
+            return true;
+        } else if (preference == mNotificationAlpha) {
+            float val = Float.parseFloat((String) newValue);
+            Settings.System.putFloat(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_NOTIFICATION_ALPHA,
+                    val / 100);
             return true;
         }
         return false;

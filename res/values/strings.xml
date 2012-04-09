@@ -486,7 +486,6 @@
     <!-- Band mode screen. Statusm essage when successful. -->
     <string name="band_mode_succeeded">Successful</string>
 
-<<<<<<< HEAD
     <!-- Instructions after the user changes the mass storage settings -->
     <string name="sdcard_changes_instructions">Changes take effect when USB cable is reconnected</string>
     <!-- Enable USB mass storage mode checkbox title -->

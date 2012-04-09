@@ -4097,8 +4097,12 @@ found in the list of installed apps.</string>
     <string name="pref_flash_mode_title">Flash mode</string>
     <string name="pref_flash_mode_summary">Choose High / Death Ray</string>
     <string name="widget_color_title">Power Widget Color Picker</string>
+
     <!-- Power Widget, Haptic feedback #CM -->
     <string name="expanded_haptic_feedback_title">Haptic feedback</string>
     <string name="expanded_haptic_feedback_summary">Enable/disable haptic feedback</string>
 
+    <!-- Temporary - stubed preference - to be removed once all preferences have been merged -->
+    <string name="stubbed">Preference Stub</string>
+    <string name="stubbed_summary">Temporary placeholder until functionality merged</string>
 </resources>

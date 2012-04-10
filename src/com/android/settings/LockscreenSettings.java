@@ -142,7 +142,7 @@ public class LockscreenSettings extends Activity {
                 0) + "");
 
             try {
-            	int lockScreenCurrent = Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE)
+            	int lockScreenCurrent = Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE);
             	    if (lockScreenCurrent != null) {
                         whatLock(lockScreenCurrent);
             	    } else {

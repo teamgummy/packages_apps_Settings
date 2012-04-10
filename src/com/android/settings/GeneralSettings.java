@@ -37,6 +37,7 @@ public class GeneralSettings extends SettingsPreferenceFragment {
     private CheckBoxPreference mBootAnim;
     
     private boolean isTurnedOn;
+    private boolean doesItEvenExist;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,10 +66,14 @@ public class GeneralSettings extends SettingsPreferenceFragment {
         mBootSound = (CheckBoxPreference) prefSet.findPreference(BOOT_SOUND);
         isTurnedOn = isItChecked(BOOT_SOUND);
         mBootSound.setChecked(isTurnedOn);
+        doesItEvenExist = doesItExist(BOOT_SOUND);
+        mBootSound.setEnabled(doesItEvenExist);
         
         mBootAnim = (CheckBoxPreference) prefSet.findPreference(BOOT_ANIM);
         isTurnedOn = isItChecked(BOOT_ANIM);
         mBootAnim.setChecked(isTurnedOn);
+        doesItEvenExist = doesItExist(BOOT_ANIM);
+        mBootAnim.setEnabled(doesItEvenExist);
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -139,5 +144,25 @@ public class GeneralSettings extends SettingsPreferenceFragment {
     	}
     	return false;
     }
-
+    
+    private boolean doesItExist (String youMadBro) {
+    	if (youMadBro == BOOT_SOUND) {
+    		if (new File("/system/media/boot_audio.mp3").exists() || new File("/system/media/boot_audio.old").exists()) {
+    			mBootSound.setSummary(getString(R.string.boot_sound_summary));
+    			return true;
+    		} else {
+    			mBootSound.setSummary("You do not have a boot_audio.mp3 in the system/media folder");
+    			return false;
+    		}
+    	} else if (youMadBro == BOOT_ANIM) {
+    		if (new File("/system/media/bootanimation.zip").exists() || new File("/system/media/bootanimation.old").exists()) {
+    			mBootAnim.setSummary(getString(R.string.boot_anim_summary));
+    			return true;
+    		} else {
+    			mBootAnim.setSummary("You do not have a bootanimation.zip in the system/media folder");
+    			return false;
+    		}
+    	}
+    	return false;
+    }
 }

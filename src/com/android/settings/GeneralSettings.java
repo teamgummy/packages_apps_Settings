@@ -13,6 +13,10 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 
 import com.android.settings.R;
+import com.android.settings.util.CMDProcessor;
+import com.android.settings.util.Helpers;
+
+import java.io.File;
 
 public class GeneralSettings extends SettingsPreferenceFragment {
 
@@ -21,12 +25,18 @@ public class GeneralSettings extends SettingsPreferenceFragment {
     private static final String ENABLE_VOLUME_OPTIONS = "enable_volume_options";
     private static final String BRIGHTNESS_SLIDER = "brightness_slider";
     private static final String UNLINK_VOLUMES = "unlink_volumes";
+    private static final String BOOT_SOUND = "boot_sound";
+    private static final String BOOT_ANIM = "boot_anim";
 
     private CheckBoxPreference m180Degree;
     private CheckBoxPreference mKillApp;
     private CheckBoxPreference mEnableVolumeOptions;
     private CheckBoxPreference mBrightSlider;
     private CheckBoxPreference mUnlinkVolumes;
+    private CheckBoxPreference mBootSound;
+    private CheckBoxPreference mBootAnim;
+    
+    private boolean isTurnedOn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +62,13 @@ public class GeneralSettings extends SettingsPreferenceFragment {
         mUnlinkVolumes = (CheckBoxPreference) prefSet.findPreference(UNLINK_VOLUMES);
         mUnlinkVolumes.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.UNLINK_VOLUMES_TOGETHER, 0) == 1);
 
+        mBootSound = (CheckBoxPreference) prefSet.findPreference(BOOT_SOUND);
+        isTurnedOn = isItChecked(BOOT_SOUND);
+        mBootSound.setChecked(isTurnedOn);
+        
+        mBootAnim = (CheckBoxPreference) prefSet.findPreference(BOOT_ANIM);
+        isTurnedOn = isItChecked(BOOT_ANIM);
+        mBootAnim.setChecked(isTurnedOn);
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -82,8 +99,45 @@ public class GeneralSettings extends SettingsPreferenceFragment {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.UNLINK_VOLUMES_TOGETHER, value ? 1 : 0);
             return true;
+        } else if (preference == mBootSound) {
+            value = mBootSound.isChecked();
+            Helpers.getMount("rw");
+            if (!value && new File("/system/media/boot_audio.mp3").exists()) {
+            	new CMDProcessor().su.runWaitFor("busybox mv /system/media/boot_audio.mp3 /system/media/boot_audio.old");
+            } else {
+            	new CMDProcessor().su.runWaitFor("busybox mv /system/media/boot_audio.old /system/media/boot_audio.mp3");
+            }
+            Helpers.getMount("ro");
+            return true;
+        } else if (preference == mBootAnim) {
+            value = mBootAnim.isChecked();
+            Helpers.getMount("rw");
+            if (!value && new File("/system/media/bootanimation.zip").exists()) {
+            	new CMDProcessor().su.runWaitFor("busybox mv /system/media/bootanimation.zip /system/media/bootanimation.old");
+            } else {
+            	new CMDProcessor().su.runWaitFor("busybox mv /system/media/bootanimation.old /system/media/bootanimation.zip");
+            }
+            Helpers.getMount("ro");
+            return true;
         }
         return false;
+    }
+    
+    private boolean isItChecked(String supDog) {
+    	if (supDog == BOOT_SOUND) {
+    		if (new File("/system/media/boot_audio.mp3").exists()) {
+    			return true;
+    		} else if (!new File("/system/media/boot_audio.mp3").exists()) {
+    			return false;
+    		}
+    	} else if (supDog == BOOT_ANIM) {
+    		if (new File("/system/media/bootanimation.zip").exists()) {
+    			return true;
+    		} else if (!new File("/system/media/bootanimation.zip").exists()) {
+    			return false;
+    		}
+    	}
+    	return false;
     }
 
 }

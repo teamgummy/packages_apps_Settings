@@ -3970,6 +3970,10 @@ found in the list of installed apps.</string>
     <string name="unlink_volumes_title">Unlink Notification Volume</string>
     <string name="unlink_volumes_summary">Unlinks the notification volume with the ringer volume</string>
     <string name="power_widgets">Power Widgets</string>
+    <string name="boot_anim_title">Turn On/Off Boot Animation</string>
+    <string name="boot_anim_summary">This will make a blank startup after the google screen if you turn it off</string>
+    <string name="boot_sound_title">Turn On/Off Animation Sound</string>
+    <string name="boot_sound_summary">This will enable or disable the boot animation sound</string>
 
 
     <!-- Strings for Soft Key Settings -->

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-	android:title="@string/general_settings" android:key="lockscreen_settings">
+    android:title="@string/general_settings"     
+    android:key="general_settings">
+
+    <PreferenceCategory
+        android:key="generals_settings"
+        android:title="@string/general_settings">
 
 	<CheckBoxPreference android:key="turn_degree"
 		android:title="@string/turn_degree">
@@ -25,4 +30,21 @@
                 android:summary="@string/brightness_slider_sum">
 	</CheckBoxPreference>
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="boot_animation_settings"
+        android:title="Boot Animation Settings">
+
+	<CheckBoxPreference android:key="boot_anim"
+		android:title="@string/boot_anim_title"
+		android:summary="@string/boot_anim_summary">
+	</CheckBoxPreference>
+
+	<CheckBoxPreference android:key="boot_sound"
+		android:title="@string/boot_sound_title"
+                android:summary="@string/boot_sound_summary">
+	</CheckBoxPreference>
+
+    </PreferenceCategory>
 </PreferenceScreen>

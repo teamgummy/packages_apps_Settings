@@ -143,10 +143,10 @@ public class LockscreenSettings extends Activity {
 
             try {
             	int lockScreenCurrent = Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE);
-            	    if (lockScreenCurrent != null) {
-                        whatLock(lockScreenCurrent);
-            	    } else {
+            	    if (lockScreenCurrent == Integer.MIN_VALUE) {
             	    	whatLock(0);
+            	    } else {
+            	    	whatLock(lockScreenCurrent);
             	    }
 
             } catch (SettingNotFoundException e) {

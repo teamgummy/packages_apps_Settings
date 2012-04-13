@@ -903,6 +903,7 @@
                 <item>Rotary Revamp Lockscreen</item>
                 <item>HoneyComb Lockscreen</item>
                 <item>Ring Lockscreen</item>
+                <item>Sense 3.0 Lockscreen</item>
 	</string-array>
 
 	<string-array name="lockscreen_styles_values">
@@ -912,6 +913,7 @@
 		<item>3</item>
 		<item>4</item>
 		<item>5</item>
+		<item>6</item>
 	</string-array>
 
         <!--arrays for choosing music widget type -->

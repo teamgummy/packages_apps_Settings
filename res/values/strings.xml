@@ -4009,6 +4009,9 @@ found in the list of installed apps.</string>
     <string name="gummy_primary">Team Gummy Primary Developers</string>
     <string name="kejar_donate">https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=66PDMD645HJ7E</string>
     <string name="syaoran_donate">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=WDP3A2WVHG9Y2</string>
+    <string name="x13thangelx_donate">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=GKT6FLH2TND94&amp;lc=US&amp;item_name=Dustin%20Einglett&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted</string>
+    <string name="steve_donate">https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6SY3WH7AZNR7Y</string>
+    <string name="sixstringsg_donate">https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&amp;SESSION=9wD3B9UOYPKHmhXU9nBrFSpIEXX2TUk0-8wOASEgtgaKorjthM5_vO8tx08&amp;dispatch=5885d80a13c0db1f8e263663d3faee8dcbcd55a50598f04d34b4bf5056870803</string>
 
     <!-- Backlight #CM -->
     <string name="backlight_title">Automatic backlight</string>

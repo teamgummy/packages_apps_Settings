@@ -74,6 +74,7 @@
             android:title="Stevespear426"
             gummy:nameDev="Stevespear426"
             gummy:twitterName="Stevespeartweet"
+            gummy:donateLink="@string/steve_donate"
             gummy:devPic="@drawable/stevespear"
         />
 
@@ -81,6 +82,7 @@
             android:title="x13thangelx"
             gummy:nameDev="x13thangelx"
             gummy:twitterName="x13thangelx"
+            gummy:donateLink="@string/x13thangelx_donate"
             gummy:devPic="@drawable/x13thangelx"
         />
 

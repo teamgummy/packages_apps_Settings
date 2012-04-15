@@ -67,6 +67,7 @@
             android:title="sixstringsg"
             gummy:nameDev="sixstringsg"
             gummy:twitterName="StewartJason"
+            gummy:donateLink="@string/sixstringsg_donate"
             gummy:devPic="@drawable/sixstringsg"
         />
 

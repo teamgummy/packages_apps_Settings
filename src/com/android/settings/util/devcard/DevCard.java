@@ -90,7 +90,10 @@ public class DevCard extends Preference {
                 }
             };
             
-            twitterButton.setOnClickListener(openTwitter);
+            //changed to clicking the preference to open twitter
+            //it was a hit or miss to click the twitter bird
+            //twitterButton.setOnClickListener(openTwitter);
+            this.setOnClickListener(openTwitter);
         } else {
         	twitterButton.setVisibility(View.GONE);
         }

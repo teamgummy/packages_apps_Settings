@@ -47,6 +47,7 @@ public class LockscreenSettings extends Activity {
         private static final String VOLUME_WAKE = "volume_wake";
         private static final String LOCKSCREEN_CUSTOM_1 = "lockscreen_custom_1";
         private static final String LOCKSCREEN_CUSTOM_2 = "lockscreen_custom_2";
+        private static final String LOCKSCREEN_CUSTOM_3 = "lockscreen_custom_3";
         private static final String SOUND_OR_CAMERA = "sound_or_camera";
         private static final String LOCKSCREEN_STYLES = "lockscreen_styles";
         private static final String ROTARY_ARROWS = "rotary_arrows";
@@ -69,11 +70,13 @@ public class LockscreenSettings extends Activity {
         private ListPreference mMusicStyle;
         private Preference mCustomApp1;
         private Preference mCustomApp2;
+        private Preference mCustomApp3;
 
         private Preference mCurrentCustomActivityPreference;
         private String mCurrentCustomActivityString;
         private String mCustomAppText1;
         private String mCustomAppText2;
+        private String mCustomAppText3;
 
         private int mWhichApp = -1;
         private int mMaxRingCustomApps = Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES.length;
@@ -130,11 +133,14 @@ public class LockscreenSettings extends Activity {
 
             mCustomApp1 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_1);
             mCustomApp2 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_2);
+            mCustomApp3 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_3);
             mPicker = new ShortcutPickerHelper(this.getActivity(), this);
             mCustomAppText1 = Settings.System.getString(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_CUSTOM_ONE);
             mCustomAppText2 = Settings.System.getString(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_CUSTOM_TWO);
+            mCustomAppText3 = Settings.System.getString(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_THREE);
 
             mSoundCamera = (ListPreference) findPreference(SOUND_OR_CAMERA);
             mSoundCamera.setOnPreferenceChangeListener(this);
@@ -278,6 +284,11 @@ public class LockscreenSettings extends Activity {
                 mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_TWO;
                 mPicker.pickShortcut();
                 return true;
+            } else if (preference == mCustomApp3) {
+                mCurrentCustomActivityPreference = preference;
+                mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_THREE;
+                mPicker.pickShortcut();
+                return true;
             }
             return false;
         }
@@ -304,9 +315,11 @@ public class LockscreenSettings extends Activity {
             if (bool) {
                 mCustomApp1.setEnabled(true);
                 mCustomApp2.setEnabled(true);
+                mCustomApp3.setEnabled(true);
             } else {
                 mCustomApp1.setEnabled(false);
                 mCustomApp2.setEnabled(false);
+                mCustomApp3.setEnabled(false);
             }
         }
 
@@ -351,6 +364,8 @@ public class LockscreenSettings extends Activity {
                     lsApp.add(mCustomApp1);
                     lsAppEnable.add(mLockExtra.isChecked());
                     lsApp.add(mCustomApp2);
+                    lsAppEnable.add(mLockExtra.isChecked());
+                    lsApp.add(mCustomApp3);
                     lsAppEnable.add(mLockExtra.isChecked());
                     lsApp.add(mSoundCamera);
                     lsAppEnable.add(true);
@@ -521,6 +536,7 @@ public class LockscreenSettings extends Activity {
                 else {
                     mCustomApp1.setSummary(mPicker.getFriendlyNameForUri(mCustomAppText1));
                     mCustomApp2.setSummary(mPicker.getFriendlyNameForUri(mCustomAppText2));
+                    mCustomApp3.setSummary(mPicker.getFriendlyNameForUri(mCustomAppText3));
                 }
             } catch (SettingNotFoundException e) {
             }

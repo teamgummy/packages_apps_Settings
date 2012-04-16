@@ -80,7 +80,7 @@ public class DevCard extends Preference {
     	}
         
         if (twitterName != null) {
-        	final OnClickListener openTwitter = new OnClickListener() {
+        	final OnPreferenceClickListener openTwitter = new OnPreferenceClickListener() {
                 @Override
                 public void onClick(View v) {
                 	Uri twitterURL = Uri.parse("http://twitter.com/#!/" + twitterName);
@@ -93,7 +93,7 @@ public class DevCard extends Preference {
             //changed to clicking the preference to open twitter
             //it was a hit or miss to click the twitter bird
             //twitterButton.setOnClickListener(openTwitter);
-            this.setOnClickListener(openTwitter);
+            this.setOnPreferenceClickListener(openTwitter);
         } else {
         	twitterButton.setVisibility(View.GONE);
         }

@@ -82,11 +82,12 @@ public class DevCard extends Preference {
         if (twitterName != null) {
         	final OnPreferenceClickListener openTwitter = new OnPreferenceClickListener() {
                 @Override
-                public void onClick(View v) {
+                public boolean onPreferenceClick(Preference preference) {
                 	Uri twitterURL = Uri.parse("http://twitter.com/#!/" + twitterName);
                     final Intent intent = new Intent(Intent.ACTION_VIEW, twitterURL);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     getContext().startActivity(intent);
+                    return true;
                 }
             };
             

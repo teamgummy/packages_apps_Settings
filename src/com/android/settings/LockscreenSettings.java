@@ -163,11 +163,9 @@ public class LockscreenSettings extends Activity {
                 value = mLockExtra.isChecked();
                 Settings.System.putInt(getContentResolver(),
                         Settings.System.LOCKSCREEN_EXTRA_ICONS, value ? 1 : 0);
-                try {
-                    if(Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE) == 0 || Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE) == 1 || Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE) == 5)
-                        updateCustomAppPickers(value);
-                } catch (SettingNotFoundException e) {
-                }
+                if(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 0 || Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 1 
+                		|| Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5)
+                    updateCustomAppPickers(value);
                 return true;
             } else if (preference == mLockBeforeUnlock) {
                 value = mLockBeforeUnlock.isChecked();
@@ -195,9 +193,8 @@ public class LockscreenSettings extends Activity {
                         Settings.System.LOCKSCREEN_ROTARY_UNLOCK_DOWN, value ? 1 : 0);
                 return true;
             } else if (preference == mCustomApp1) {
-                try {
-                    if ((Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE) == 5) || 
-                    		(Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE) == 6)) {
+                    if ((Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5) || 
+                    		(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6)) {
                         final String[] items = getCustomRingAppItems();
 
                         if (items.length == 0) {
@@ -276,8 +273,6 @@ public class LockscreenSettings extends Activity {
                         mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_ONE;
                         mPicker.pickShortcut();
                     }
-                } catch (SettingNotFoundException e) {
-                }
                 return true;
             } else if (preference == mCustomApp2) {
                 mCurrentCustomActivityPreference = preference;
@@ -337,11 +332,8 @@ public class LockscreenSettings extends Activity {
             prefSet.addPreference(mCategoryUnlock);
             prefSet.addPreference(mCategoryCustom);
 
-            try {
             mCategoryGeneral.setTitle(mLockStyle.getEntries()[mLockStyle.
-                findIndexOfValue("" + (Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE)))] + " " + "Settings");
-            } catch (SettingNotFoundException e) {
-            }
+                findIndexOfValue("" + (Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0)))] + " " + "Settings");
             mCategoryUnlock.setTitle("Unlocking Options");
             mCategoryCustom.setTitle("Custom Apps");
             
@@ -529,16 +521,13 @@ public class LockscreenSettings extends Activity {
         }
 
         public void refreshSettings() {
-            try {
-                if(Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE) == 5 || 
-                		Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE) == 6)
-                    mCustomApp1.setSummary(getCustomRingAppSummary());
-                else {
-                    mCustomApp1.setSummary(mPicker.getFriendlyNameForUri(mCustomAppText1));
-                    mCustomApp2.setSummary(mPicker.getFriendlyNameForUri(mCustomAppText2));
-                    mCustomApp3.setSummary(mPicker.getFriendlyNameForUri(mCustomAppText3));
-                }
-            } catch (SettingNotFoundException e) {
+            if(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5 || 
+                    Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6)
+                mCustomApp1.setSummary(getCustomRingAppSummary());
+            else {
+                mCustomApp1.setSummary(mPicker.getFriendlyNameForUri(mCustomAppText1));
+                mCustomApp2.setSummary(mPicker.getFriendlyNameForUri(mCustomAppText2));
+                mCustomApp3.setSummary(mPicker.getFriendlyNameForUri(mCustomAppText3));
             }
         }
 

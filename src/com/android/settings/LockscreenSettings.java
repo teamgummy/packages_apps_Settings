@@ -543,6 +543,7 @@ public class LockscreenSettings extends Activity {
                 mCustomApp1.setSummary(getCustomRingAppSummary());
                 mWhichApp = -1;
             }
+            refreshSettings();
         }
 
         private String getCustomRingAppSummary() {

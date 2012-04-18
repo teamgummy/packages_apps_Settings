@@ -20,6 +20,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.content.pm.ActivityInfo;
@@ -30,7 +31,7 @@ import com.android.settings.R;
 
 public class ShortcutPickerHelper {
 
-    private Activity mParent;
+    private Fragment mParent;
     private OnPickListener mListener;
 
     private static final int REQUEST_PICK_SHORTCUT = 100;
@@ -41,7 +42,7 @@ public class ShortcutPickerHelper {
         void shortcutPicked(String uri, String friendlyName, boolean isApplication);
     }
 
-    public ShortcutPickerHelper(Activity parent, OnPickListener listener) {
+    public ShortcutPickerHelper(Fragment parent, OnPickListener listener) {
         mParent = parent;
         mListener = listener;
     }
@@ -70,7 +71,7 @@ public class ShortcutPickerHelper {
         bundle.putStringArrayList(Intent.EXTRA_SHORTCUT_NAME, shortcutNames);
 
         ArrayList<ShortcutIconResource> shortcutIcons = new ArrayList<ShortcutIconResource>();
-        shortcutIcons.add(ShortcutIconResource.fromContext(mParent, R.drawable.ic_launcher_application));
+        shortcutIcons.add(ShortcutIconResource.fromContext(mParent.getActivity(), R.drawable.ic_launcher_application));
         bundle.putParcelableArrayList(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, shortcutIcons);
 
         Intent pickIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
@@ -112,7 +113,7 @@ public class ShortcutPickerHelper {
     }
 
     private String getFriendlyActivityName(Intent intent, boolean labelOnly) {
-        PackageManager pm = mParent.getPackageManager();
+        PackageManager pm = mParent.getActivity().getPackageManager();
         ActivityInfo ai = intent.resolveActivityInfo(pm, PackageManager.GET_ACTIVITIES);
         String friendlyName = null;
 

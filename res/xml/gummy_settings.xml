@@ -38,12 +38,8 @@
     <PreferenceScreen
             android:key="lockscreen_settings"
             android:title="@string/lockscreen_settings"
-            android:icon="@drawable/gummy_lockscreen">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetClass="com.android.settings.LockscreenSettings"
-                android:targetPackage="com.android.settings" />
-    </PreferenceScreen>
+            android:icon="@drawable/gummy_lockscreen"
+            android:fragment="com.android.settings.LockscreenSettings" />
 
     <PreferenceScreen
             android:key="led_settings"

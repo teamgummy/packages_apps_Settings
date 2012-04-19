@@ -36,10 +36,10 @@
             android:fragment="com.android.settings.PowerWidget" />
 
     <PreferenceScreen
-            android:key="led_settings"
-            android:title="@string/led_settings"
-            android:icon="@drawable/gummy_led"
-            android:fragment="com.android.settings.LEDSettings" />
+            android:key="lockscreen_settings"
+            android:title="@string/lockscreen_settings"
+            android:icon="@drawable/gummy_lockscreen"
+            android:fragment="com.android.settings.LockscreenSettings" />
 
     <!-- <PreferenceScreen
             android:key="led_settings"

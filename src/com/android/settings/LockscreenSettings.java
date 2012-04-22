@@ -42,6 +42,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
     private static final String ROTARY_ARROWS = "rotary_arrows";
     private static final String ROTARY_DOWN = "rotary_down";
     private static final String LOCKSCREEN_MUSIC_WIDGET = "lockscreen_music_widget";
+    private static final String LOCKSCREEN_TEXT = "lockscreen_text";
 
     private PreferenceCategory mCategoryGeneral;
     private PreferenceCategory mCategoryUnlock;
@@ -54,6 +55,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mVolumeWake;
     private CheckBoxPreference mRotaryArrows;
     private CheckBoxPreference mRotaryDown;
+    private CheckBoxPreference mLockSMS;
     private ListPreference mSoundCamera;
     private ListPreference mLockStyle;
     private ListPreference mMusicStyle;
@@ -118,6 +120,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         mVolumeWake = (CheckBoxPreference) prefSet.findPreference(VOLUME_WAKE);
         mVolumeWake.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.VOLUME_WAKE, 0) == 1);
+        
+        mLockSMS = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_TEXT);
+        mLockSMS.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.LOCKSCREEN_SHOW_TEXTS, 0) == 1);
 
         mCustomApp1 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_1);
         mCustomApp2 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_2);
@@ -169,6 +175,11 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             value = mRotaryArrows.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_HIDE_ARROWS, value ? 1 : 0);
+            return true;
+        } else if (preference == mLockSMS) {
+            value = mLockSMS.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_SHOW_TEXTS, value ? 1 : 0);
             return true;
         } else if (preference == mRotaryDown) {
             value = mRotaryDown.isChecked();
@@ -330,6 +341,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
+                lsGen.add(mLockSMS);
+                lsGenEnable.add(true)
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -354,6 +367,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
+                lsGen.add(mLockSMS);
+                lsGenEnable.add(true)
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -374,6 +389,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
+                lsGen.add(mLockSMS);
+                lsGenEnable.add(true)
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -394,6 +411,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
+                lsGen.add(mLockSMS);
+                lsGenEnable.add(true)
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -412,6 +431,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
+                lsGen.add(mLockSMS);
+                lsGenEnable.add(true)
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -427,6 +448,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGen.add(mLockBattery);
                 lsGenEnable.add(true);
                 lsGen.add(mMusicStyle);
+                lsGenEnable.add(true);
+                lsGen.add(mLockSMS);
                 lsGenEnable.add(true);
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
@@ -446,6 +469,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
+                lsGen.add(mLockSMS);
+                lsGenEnable.add(true)
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);

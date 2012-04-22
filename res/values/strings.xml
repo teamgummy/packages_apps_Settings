@@ -3955,6 +3955,8 @@ found in the list of installed apps.</string>
     <string name="pref_lockscreen_ring_custom_apps_dialog_cancel">Cancel</string>
     <string name="lockscreen_music_widget_title">Music Widget Type</string>
     <string name="lockscreen_music_widget_summary">Pick the lockscreen music widget you want to use</string>
+    <string name="lockscreen_text_title">Enable SMS Text</string>
+    <string name="lockscreen_text_summary">Show you most current SMS on the lockscreen</string>
 
     <!-- Strings for Battery Color Menu -->
     <string name="battery_text_color">Battery Text Colors</string>

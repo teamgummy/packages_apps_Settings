@@ -35,6 +35,12 @@
             android:title="@string/lockscreen_battery" >
         </CheckBoxPreference>
 
+        <CheckBoxPreference
+            android:key="lockscreen_text"
+            android:title="@string/lockscreen_text_title"
+            android:summary="@string/lockscreen_text_summary" >
+        </CheckBoxPreference>
+
 	<ListPreference
 	    android:key="lockscreen_music_widget"
 	    android:entries="@array/lockscreen_music_widget_entries"

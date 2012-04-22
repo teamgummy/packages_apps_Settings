@@ -342,7 +342,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
-                lsGenEnable.add(true)
+                lsGenEnable.add(true);
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -368,7 +368,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
-                lsGenEnable.add(true)
+                lsGenEnable.add(true);
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -390,7 +390,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
-                lsGenEnable.add(true)
+                lsGenEnable.add(true);
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -412,7 +412,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
-                lsGenEnable.add(true)
+                lsGenEnable.add(true);
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -432,7 +432,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
-                lsGenEnable.add(true)
+                lsGenEnable.add(true);
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -470,7 +470,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGen.add(mMusicStyle);
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
-                lsGenEnable.add(true)
+                lsGenEnable.add(true);
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);

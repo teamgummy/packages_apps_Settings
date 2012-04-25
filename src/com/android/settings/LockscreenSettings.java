@@ -18,6 +18,7 @@ import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
 
+import com.android.settings.util.colorpicker.ColorPickerPreference;
 import com.android.settings.util.ShortcutPickerHelper;
 import com.android.settings.R;
 
@@ -43,6 +44,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
     private static final String ROTARY_DOWN = "rotary_down";
     private static final String LOCKSCREEN_MUSIC_WIDGET = "lockscreen_music_widget";
     private static final String LOCKSCREEN_TEXT = "lockscreen_text";
+    private static final String LOCKSCREEN_TEXT_APP = "lockscreen_text_app";
+    private static final String LOCKSCREEN_TEXT_COLOR = "lockscreen_text_color";
 
     private PreferenceCategory mCategoryGeneral;
     private PreferenceCategory mCategoryUnlock;
@@ -62,6 +65,9 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
     private Preference mCustomApp1;
     private Preference mCustomApp2;
     private Preference mCustomApp3;
+    private Preference mSMSApp;
+    
+    private ColorPickerPreference mSMSColor;
 
     private Preference mCurrentCustomActivityPreference;
     private String mCurrentCustomActivityString;
@@ -128,6 +134,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         mCustomApp1 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_1);
         mCustomApp2 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_2);
         mCustomApp3 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_3);
+        mSMSApp = (Preference) prefSet.findPreference(LOCKSCREEN_TEXT_APP);
         
         mPicker = new ShortcutPickerHelper(this, this);
 
@@ -135,6 +142,9 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         mSoundCamera.setOnPreferenceChangeListener(this);
         mSoundCamera.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_FORCE_SOUND_ICON,
             0) + "");
+        
+        mSMSColor = (ColorPickerPreference) prefSet.findPreference(LOCKSCREEN_TEXT_COLOR);
+        mSMSColor.setOnPreferenceChangeListener(this);
 
         int lockScreenCurrent = Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0);
         whatLock(lockScreenCurrent);
@@ -180,6 +190,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             value = mLockSMS.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_SHOW_TEXTS, value ? 1 : 0);
+            updateSMSApp(value);
             return true;
         } else if (preference == mRotaryDown) {
             value = mRotaryDown.isChecked();
@@ -278,6 +289,11 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_THREE;
             mPicker.pickShortcut();
             return true;
+        } else if (preference == mSMSApp) {
+        	mCurrentCustomActivityPreference = preference;
+            mCurrentCustomActivityString = Settings.System.LOCKSCREEN_SMS_APP;
+            mPicker.pickShortcut();
+            return true;
         }
         return false;
     }    
@@ -296,6 +312,12 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         } else if (preference == mMusicStyle) {
         	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.MUSIC_WIDGET_TYPE, Integer.parseInt((String) newValue));
             return true;
+        } else if (preference == mSMSColor) {
+            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hexColor);
+            int color = ColorPickerPreference.convertToColorInt(hexColor);
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SMS_COLOR, color);
+            return true;
         }
         return false;
     }
@@ -310,6 +332,16 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             mCustomApp2.setEnabled(false);
             mCustomApp3.setEnabled(false);
         }
+    }
+    
+    private void updateSMSApp(boolean bool) {
+    	if (bool) {
+    		mSMSApp.setEnabled(true);
+    		mSMSColor.setEnabled(true);
+    	} else {
+    		mSMSApp.setEnabled(false);
+    		mSMSColor.setEnabled(false);
+    	}
     }
 
     private void whatLock(int lock) {
@@ -343,6 +375,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
                 lsGenEnable.add(true);
+                lsGen.add(mSMSApp);
+                lsGenEnable.add(mLockSMS.isChecked());
+                lsGen.add(mSMSColor);
+                lsGenEnable.add(mLockSMS.isChecked());
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -369,6 +405,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
                 lsGenEnable.add(true);
+                lsGen.add(mSMSApp);
+                lsGenEnable.add(mLockSMS.isChecked());
+                lsGen.add(mSMSColor);
+                lsGenEnable.add(mLockSMS.isChecked());
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -391,6 +431,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
                 lsGenEnable.add(true);
+                lsGen.add(mSMSApp);
+                lsGenEnable.add(mLockSMS.isChecked());
+                lsGen.add(mSMSColor);
+                lsGenEnable.add(mLockSMS.isChecked());
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -413,6 +457,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
                 lsGenEnable.add(true);
+                lsGen.add(mSMSApp);
+                lsGenEnable.add(mLockSMS.isChecked());
+                lsGen.add(mSMSColor);
+                lsGenEnable.add(mLockSMS.isChecked());
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -433,6 +481,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
                 lsGenEnable.add(true);
+                lsGen.add(mSMSApp);
+                lsGenEnable.add(mLockSMS.isChecked());
+                lsGen.add(mSMSColor);
+                lsGenEnable.add(mLockSMS.isChecked());
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -451,6 +503,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
                 lsGenEnable.add(true);
+                lsGen.add(mSMSApp);
+                lsGenEnable.add(mLockSMS.isChecked());
+                lsGen.add(mSMSColor);
+                lsGenEnable.add(mLockSMS.isChecked());
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -471,6 +527,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mLockSMS);
                 lsGenEnable.add(true);
+                lsGen.add(mSMSApp);
+                lsGenEnable.add(mLockSMS.isChecked());
+                lsGen.add(mSMSColor);
+                lsGenEnable.add(mLockSMS.isChecked());
                 lsUnlock.add(mLockBeforeUnlock);
                 lsUnlockEnable.add(true);
                 lsUnlock.add(mQuickUnlock);
@@ -540,7 +600,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             mCustomApp3.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_CUSTOM_THREE)));
         }
-
+        mSMSApp.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_SMS_APP)));
     }
 
     @Override

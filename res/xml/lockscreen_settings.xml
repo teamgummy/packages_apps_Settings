@@ -6,34 +6,45 @@
 
     <PreferenceCategory
             android:key="general_category"
-            android:title="General Settings">
-
-	<ListPreference
-	    android:key="lockscreen_styles"
-	    android:entries="@array/lockscreen_styles_entries"
-	    android:entryValues="@array/lockscreen_styles_values"
-	    android:title="@string/lockscreen_styles_title"
-	    android:summary="@string/lockscreen_styles_summary" />
-
-        <CheckBoxPreference
-            android:key="rotary_arrows"
-            android:title="@string/rotary_arrows_title">
-        </CheckBoxPreference>
-
-        <CheckBoxPreference
-            android:key="rotary_down"
-            android:title="@string/rotary_down_title" >
-        </CheckBoxPreference>
-
-        <CheckBoxPreference
-            android:key="lockscreen_extra"
-            android:title="@string/lockscreen_extra" >
-        </CheckBoxPreference>
+            android:title="Lockscreen Add-ons">
 
         <CheckBoxPreference
             android:key="lockscreen_battery"
             android:title="@string/lockscreen_battery" >
         </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="volume_wake"
+            android:title="@string/volume_wake" >
+        </CheckBoxPreference>
+
+	<ListPreference
+	    android:key="lockscreen_music_widget"
+	    android:entries="@array/lockscreen_music_widget_entries"
+	    android:entryValues="@array/lockscreen_music_widget_values"
+	    android:title="@string/lockscreen_music_widget_title"
+	    android:summary="@string/lockscreen_music_widget_summary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="unlock_category"
+            android:title="Unlocking Modifications">
+
+	<CheckBoxPreference
+            android:key="lockscreen_before_unlock"
+            android:title="@string/lockscreen_before_unlock" >
+        </CheckBoxPreference>
+
+	<CheckBoxPreference
+            android:key="quick_password_unlock"
+            android:title="@string/quick_password_title"
+            android:summary="@string/quick_password_summary" >
+        </CheckBoxPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="sms_popup"
+            android:title="SMS Popup Settings">
 
         <CheckBoxPreference
             android:key="lockscreen_text"
@@ -50,62 +61,5 @@
 	    android:key="lockscreen_text_color" 
 	    android:title="@string/lockscreen_text_color_title" 
 	    android:defaultValue="#FFFFFF" />
-
-	<ListPreference
-	    android:key="lockscreen_music_widget"
-	    android:entries="@array/lockscreen_music_widget_entries"
-	    android:entryValues="@array/lockscreen_music_widget_values"
-	    android:title="@string/lockscreen_music_widget_title"
-	    android:summary="@string/lockscreen_music_widget_summary" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-            android:key="unlock_category"
-            android:title="Unlocking Options">
-
-	<CheckBoxPreference
-            android:key="lockscreen_before_unlock"
-            android:title="@string/lockscreen_before_unlock" >
-        </CheckBoxPreference>
-
-	<CheckBoxPreference
-            android:key="quick_password_unlock"
-            android:title="@string/quick_password_title"
-            android:summary="@string/quick_password_summary" >
-        </CheckBoxPreference>
-
-        <CheckBoxPreference
-            android:key="volume_wake"
-            android:title="@string/volume_wake" >
-        </CheckBoxPreference>
-    </PreferenceCategory>
-
-    <PreferenceCategory
-            android:key="custom_app"
-            android:title="Custom Apps">
-
-	<ListPreference
-	    android:key="sound_or_camera"
-	    android:entries="@array/sound_or_camera_entries"
-	    android:entryValues="@array/sound_or_camera_values"
-	    android:title="@string/sound_or_camera_title"
-	    android:summary="@string/sound_or_camera_summary" />
-
-        <Preference
-            android:key="lockscreen_custom_1"
-            android:title="@string/custom_app_1"
-            android:summary="@string/custom_app_1_summary" />
-
-        <Preference
-            android:key="lockscreen_custom_2"
-            android:title="@string/custom_app_2"
-            android:summary="@string/custom_app_2_summary" />
-
-        <Preference
-            android:key="lockscreen_custom_3"
-            android:title="@string/custom_app_3"
-            android:summary="@string/custom_app_3_summary" />
-
     </PreferenceCategory>
 </PreferenceScreen>

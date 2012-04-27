@@ -3902,6 +3902,7 @@ found in the list of installed apps.</string>
     <string name="general_settings">General UI Settings</string>
     <string name="softkey_settings">Soft Key Settings</string>
     <string name="about_gummy">About Team Gummy</string>
+    <string name="lockscreen_styles">Lockscreen Styles</string>
 
     <!-- Strings for SystemUI Tweaks Menu -->
     <string name="clock_style_title">Clock style</string>

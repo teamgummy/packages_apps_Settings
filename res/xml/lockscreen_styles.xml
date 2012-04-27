@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/lockscreen_styles"
+    android:key="lockscreen_styles_settings">
+
+    <PreferenceCategory
+            android:key="general_category"
+            android:title="General Settings">
+
+	<ListPreference
+	    android:key="lockscreen_styles"
+	    android:entries="@array/lockscreen_styles_entries"
+	    android:entryValues="@array/lockscreen_styles_values"
+	    android:title="@string/lockscreen_styles_title"
+	    android:summary="@string/lockscreen_styles_summary" />
+
+        <CheckBoxPreference
+            android:key="lockscreen_extra"
+            android:title="@string/lockscreen_extra" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="rotary_arrows"
+            android:title="@string/rotary_arrows_title">
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="rotary_down"
+            android:title="@string/rotary_down_title" >
+        </CheckBoxPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="custom_app"
+            android:title="Custom Apps">
+
+	<ListPreference
+	    android:key="sound_or_camera"
+	    android:entries="@array/sound_or_camera_entries"
+	    android:entryValues="@array/sound_or_camera_values"
+	    android:title="@string/sound_or_camera_title"
+	    android:summary="@string/sound_or_camera_summary" />
+
+        <Preference
+            android:key="lockscreen_custom_1"
+            android:title="@string/custom_app_1"
+            android:summary="@string/custom_app_1_summary" />
+
+        <Preference
+            android:key="lockscreen_custom_2"
+            android:title="@string/custom_app_2"
+            android:summary="@string/custom_app_2_summary" />
+
+        <Preference
+            android:key="lockscreen_custom_3"
+            android:title="@string/custom_app_3"
+            android:summary="@string/custom_app_3_summary" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

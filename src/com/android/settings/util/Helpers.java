@@ -201,4 +201,8 @@ public class Helpers {
 		}		
 		return true;
 	}
+	
+    public static void killSystemUI() {
+        new CMDProcessor().su.run("pkill -TERM -f com.android.systemui");
+    }
 }

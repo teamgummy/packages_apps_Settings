@@ -57,5 +57,20 @@
             android:title="@string/custom_app_3"
             android:summary="@string/custom_app_3_summary" />
 
+        <Preference
+            android:key="lockscreen_custom_4"
+            android:title="@string/custom_app_4"
+            android:summary="@string/custom_app_4_summary" />
+
+        <Preference
+            android:key="lockscreen_custom_5"
+            android:title="@string/custom_app_5"
+            android:summary="@string/custom_app_5_summary" />
+
+        <Preference
+            android:key="lockscreen_custom_6"
+            android:title="@string/custom_app_6"
+            android:summary="@string/custom_app_6_summary" />
+
     </PreferenceCategory>
 </PreferenceScreen>

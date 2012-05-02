@@ -17,5 +17,8 @@
 <resources>
     <!-- Whether there is a silent mode checkbox  -->
     <bool name="has_silent_mode">false</bool>
+
+    <!-- Let's choose if this is a tablet or not! -->
+    <bool name="is_a_tablet">true</bool>
 </resources>
 

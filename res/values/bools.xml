@@ -25,4 +25,7 @@
 
     <!-- Display additional System Update menu if true -->
     <bool name="config_additional_system_update_setting_enable">false</bool>
+
+    <!-- Let's choose if this is a tablet or not! -->
+    <bool name="is_a_tablet">false</bool>
 </resources>

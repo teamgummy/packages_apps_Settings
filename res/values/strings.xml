@@ -3937,9 +3937,15 @@ found in the list of installed apps.</string>
     <string name="custom_app_1">Custom App</string>
     <string name="custom_app_2">Custom App 2</string>
     <string name="custom_app_3">Custom App 3</string>
+    <string name="custom_app_4">Custom App 4</string>
+    <string name="custom_app_5">Custom App 5</string>
+    <string name="custom_app_6">Custom App 6</string>
     <string name="custom_app_1_summary">Choose a custom app to launch</string>
     <string name="custom_app_2_summary">Choose a custom app to launch</string>
     <string name="custom_app_3_summary">Choose a custom app to launch</string>
+    <string name="custom_app_4_summary">Choose a custom app to launch</string>
+    <string name="custom_app_5_summary">Choose a custom app to launch</string>
+    <string name="custom_app_6_summary">Choose a custom app to launch</string>
     <string name="volume_wake">Enable Volume Rocker Wake</string>
     <string name="quick_password_title">Quick Password Unlock</string>
     <string name="quick_password_summary">Allows you to not hit the enter key on password lockscreens</string>

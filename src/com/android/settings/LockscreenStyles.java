@@ -27,6 +27,8 @@ import java.util.ArrayList;
 public class LockscreenStyles extends SettingsPreferenceFragment implements
     ShortcutPickerHelper.OnPickListener, OnPreferenceChangeListener {
 	
+	private boolean isTablet;
+	
     private static final String GENERAL_CATEGORY = "general_category";
     private static final String UNLOCK_CATEGORY = "unlock_category";
     private static final String CUSTOM_APP= "custom_app";
@@ -34,6 +36,9 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
     private static final String LOCKSCREEN_CUSTOM_1 = "lockscreen_custom_1";
     private static final String LOCKSCREEN_CUSTOM_2 = "lockscreen_custom_2";
     private static final String LOCKSCREEN_CUSTOM_3 = "lockscreen_custom_3";
+    private static final String LOCKSCREEN_CUSTOM_4 = "lockscreen_custom_4";
+    private static final String LOCKSCREEN_CUSTOM_5 = "lockscreen_custom_5";
+    private static final String LOCKSCREEN_CUSTOM_6 = "lockscreen_custom_6";
     private static final String SOUND_OR_CAMERA = "sound_or_camera";
     private static final String LOCKSCREEN_STYLES = "lockscreen_styles";
     private static final String ROTARY_ARROWS = "rotary_arrows";
@@ -50,6 +55,9 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
     private Preference mCustomApp1;
     private Preference mCustomApp2;
     private Preference mCustomApp3;
+    private Preference mCustomApp4;
+    private Preference mCustomApp5;
+    private Preference mCustomApp6;
 
     private Preference mCurrentCustomActivityPreference;
     private String mCurrentCustomActivityString;
@@ -64,6 +72,8 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.lockscreen_styles);
         PreferenceScreen prefSet = getPreferenceScreen();
+        
+        isTablet = getResources().getBoolean(R.bool.is_a_tablet);
 
         mCategoryGeneral = (PreferenceCategory) prefSet.findPreference(GENERAL_CATEGORY);
         mCategoryCustom = (PreferenceCategory) prefSet.findPreference(CUSTOM_APP);
@@ -88,6 +98,9 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
         mCustomApp1 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_1);
         mCustomApp2 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_2);
         mCustomApp3 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_3);
+        mCustomApp4 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_4);
+        mCustomApp5 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_5);
+        mCustomApp6 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_6);
         
         mPicker = new ShortcutPickerHelper(this, this);
 
@@ -213,6 +226,21 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
             mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_THREE;
             mPicker.pickShortcut();
             return true;
+        } else if (preference == mCustomApp4) {
+            mCurrentCustomActivityPreference = preference;
+            mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_FOUR;
+            mPicker.pickShortcut();
+            return true;
+        } else if (preference == mCustomApp5) {
+            mCurrentCustomActivityPreference = preference;
+            mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_FIVE;
+            mPicker.pickShortcut();
+            return true;
+        } else if (preference == mCustomApp6) {
+            mCurrentCustomActivityPreference = preference;
+            mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_SIX;
+            mPicker.pickShortcut();
+            return true;
         }
         return false;
     }    
@@ -237,10 +265,16 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
             mCustomApp1.setEnabled(true);
             mCustomApp2.setEnabled(true);
             mCustomApp3.setEnabled(true);
+            mCustomApp4.setEnabled(true);
+            mCustomApp5.setEnabled(true);
+            mCustomApp6.setEnabled(true);
         } else {
             mCustomApp1.setEnabled(false);
             mCustomApp2.setEnabled(false);
             mCustomApp3.setEnabled(false);
+            mCustomApp4.setEnabled(false);
+            mCustomApp5.setEnabled(false);
+            mCustomApp6.setEnabled(false);
         }
     }
 
@@ -265,14 +299,22 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsGen.add(mLockExtra);
                 lsGenEnable.add(true);
+                lsApp.add(mSoundCamera);
+                lsAppEnable.add(true);
                 lsApp.add(mCustomApp1);
                 lsAppEnable.add(mLockExtra.isChecked());
                 lsApp.add(mCustomApp2);
                 lsAppEnable.add(mLockExtra.isChecked());
                 lsApp.add(mCustomApp3);
                 lsAppEnable.add(mLockExtra.isChecked());
-                lsApp.add(mSoundCamera);
-                lsAppEnable.add(true);
+                if (isTablet) {
+                	lsApp.add(mCustomApp4);
+                    lsAppEnable.add(mLockExtra.isChecked());
+                    lsApp.add(mCustomApp5);
+                    lsAppEnable.add(mLockExtra.isChecked());
+                    lsApp.add(mCustomApp6);
+                    lsAppEnable.add(mLockExtra.isChecked());
+                }
                 break;
             case 1:
                 lsGen.add(mLockStyle);
@@ -371,6 +413,12 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
                     Settings.System.LOCKSCREEN_CUSTOM_TWO)));
             mCustomApp3.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_CUSTOM_THREE)));
+            mCustomApp4.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_FOUR)));
+            mCustomApp5.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_FIVE)));
+            mCustomApp6.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_SIX)));
         }
     }
 

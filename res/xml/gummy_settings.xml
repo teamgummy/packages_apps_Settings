@@ -38,7 +38,7 @@
     <PreferenceScreen
             android:key="lockscreen_styles"
             android:title="@string/lockscreen_styles"
-            android:icon="@drawable/gummy_lockscreen"
+            android:icon="@drawable/gummy_lock_styles"
             android:fragment="com.android.settings.LockscreenStyles" />
 
     <PreferenceScreen

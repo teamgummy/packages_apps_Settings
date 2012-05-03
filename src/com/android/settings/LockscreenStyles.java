@@ -111,6 +111,11 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
 
         int lockScreenCurrent = Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0);
         whatLock(lockScreenCurrent);
+        
+        if (isTablet) {
+        	mLockStyle.setEnabled(false);
+        	mLockStyle.setSummary("There is only the ICS style for tablets at this time");
+        }
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,

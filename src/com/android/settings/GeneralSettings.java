@@ -8,6 +8,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
@@ -19,6 +20,8 @@ import com.android.settings.util.Helpers;
 import java.io.File;
 
 public class GeneralSettings extends SettingsPreferenceFragment {
+	
+	private boolean isTablet;
 
     private static final String TURN_DEGREE = "turn_degree";
     private static final String KILL_APP = "kill_app";
@@ -44,6 +47,8 @@ public class GeneralSettings extends SettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.general_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
+        
+        isTablet = getResources().getBoolean(R.bool.is_a_tablet);
 
         m180Degree = (CheckBoxPreference) prefSet.findPreference(TURN_DEGREE);
         m180Degree.setChecked(Settings.System.getInt(getContentResolver(),
@@ -74,6 +79,13 @@ public class GeneralSettings extends SettingsPreferenceFragment {
         mBootAnim.setChecked(isTurnedOn);
         doesItEvenExist = doesItExist(BOOT_ANIM);
         mBootAnim.setEnabled(doesItEvenExist);
+        
+        if (isTablet) {
+        	prefSet.removePreference(m180Degree);
+        	prefSet.removePreference(mEnableVolumeOptions);
+        	prefSet.removePreference(mBrightSlider);
+        	prefSet.removePreference(mUnlinkVolumes);
+        }
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {

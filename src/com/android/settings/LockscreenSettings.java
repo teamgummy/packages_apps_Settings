@@ -23,21 +23,27 @@ import java.util.ArrayList;
 
 public class LockscreenSettings extends SettingsPreferenceFragment implements
     ShortcutPickerHelper.OnPickListener, OnPreferenceChangeListener {
+	
+	private boolean isTablet;
 
     private static final String LOCKSCREEN_BATTERY = "lockscreen_battery";
     private static final String LOCKSCREEN_BEFORE_UNLOCK = "lockscreen_before_unlock";
     private static final String QUICK_PASSWORD_UNLOCK = "quick_password_unlock";
     private static final String VOLUME_WAKE = "volume_wake";
+    private static final String VOLUME_SKIP = "volume_skip";
     private static final String LOCKSCREEN_MUSIC_WIDGET = "lockscreen_music_widget";
     private static final String LOCKSCREEN_TEXT = "lockscreen_text";
     private static final String LOCKSCREEN_TEXT_APP = "lockscreen_text_app";
     private static final String LOCKSCREEN_TEXT_COLOR = "lockscreen_text_color";
+    
+    private PreferenceCategory mCategoryLockSMS;
 
     private CheckBoxPreference mLockExtra;
     private CheckBoxPreference mLockBattery;
     private CheckBoxPreference mLockBeforeUnlock;
     private CheckBoxPreference mQuickUnlock;
     private CheckBoxPreference mVolumeWake;
+    private CheckBoxPreference mVolumeSkip;
     private CheckBoxPreference mLockSMS;
     private ListPreference mMusicStyle;
     private Preference mSMSApp;
@@ -54,6 +60,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.lockscreen_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
+        
+        isTablet = getResources().getBoolean(R.bool.is_a_tablet);
+        
+        mCategoryLockSMS = (PreferenceCategory) prefSet.findPreference("sms_popup");
 
         mMusicStyle = (ListPreference) findPreference(LOCKSCREEN_MUSIC_WIDGET);
         mMusicStyle.setOnPreferenceChangeListener(this);
@@ -78,6 +88,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         mVolumeWake.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.VOLUME_WAKE, 0) == 1);
         
+        mVolumeSkip = (CheckBoxPreference) prefSet.findPreference(VOLUME_SKIP);
+        mVolumeSkip.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.VOLBTN_MUSIC_CONTROLS, 0) == 1);
+        
         mLockSMS = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_TEXT);
         mLockSMS.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.LOCKSCREEN_SHOW_TEXTS, 0) == 1);
@@ -90,6 +104,14 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         mSMSColor.setOnPreferenceChangeListener(this);
         
         updateSMSApp(mLockSMS.isChecked());
+        
+        if (isTablet) {
+        	prefSet.removePreference(mCategoryLockSMS);
+        	prefSet.removePreference(mLockSMS);
+        	prefSet.removePreference(mSMSApp);
+        	prefSet.removePreference(mSMSColor);
+        	prefSet.removePreference(mMusicStyle);
+        }
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
@@ -114,6 +136,11 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             value = mVolumeWake.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.VOLUME_WAKE, value ? 1 : 0);
+            return true;
+        } else if (preference == mVolumeSkip) {
+            value = mVolumeSkip.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.VOLBTN_MUSIC_CONTROLS, value ? 1 : 0);
             return true;
         } else if (preference == mLockSMS) {
             value = mLockSMS.isChecked();

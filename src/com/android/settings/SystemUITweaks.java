@@ -9,6 +9,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
@@ -23,6 +24,8 @@ import com.android.settings.util.colorpicker.ColorPickerPreference;
 
 public class SystemUITweaks extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
+	
+	private boolean isTablet;
 
     private static final String HIDE_ALARM = "hide_alarm";
     private static final String PREF_CLOCK_DISPLAY_STYLE = "clock_am_pm";
@@ -61,6 +64,9 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
     private ColorPickerPreference mNotificationColor;
     private SeekBarPreference mNotificationAlpha;
     
+    private PreferenceCategory mCategoryCarrier;
+    private PreferenceCategory mCategoryClock;
+    
     PreferenceScreen mBattColor;
 
     String mCarrierText = null;
@@ -70,6 +76,11 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.systemui_tweaks);
         PreferenceScreen prefSet = getPreferenceScreen();
+        
+        isTablet = getResources().getBoolean(R.bool.is_a_tablet);
+        
+        mCategoryCarrier = (PreferenceCategory) prefSet.findPreference("sms_popup");
+        mCategoryClock = (PreferenceCategory) prefSet.findPreference("sb_carrier_text");
 
         mHideAlarm = (CheckBoxPreference) prefSet.findPreference(HIDE_ALARM);
         mHideAlarm.setChecked(Settings.System.getInt(getContentResolver(),
@@ -147,6 +158,21 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
         mNotificationAlpha = (SeekBarPreference) findPreference(NOTIFICATION_ALPHA);
         mNotificationAlpha.setInitValue((int) (defaultAlpha * 100));
         mNotificationAlpha.setOnPreferenceChangeListener(this);
+        
+        if (isTablet) {
+        	prefSet.removePreference(mCategoryCarrier);
+        	prefSet.removePreference(mCarrier);
+        	prefSet.removePreference(mTopCarrier);
+        	prefSet.removePreference(mStockCarrier);
+        	prefSet.removePreference(mTopCarrierColor);
+        	prefSet.removePreference(mStockCarrierColor);
+        	prefSet.removePreference(mCategoryClock);
+        	prefSet.removePreference(mAmPmStyle);
+        	prefSet.removePreference(mClockStyle);
+        	prefSet.removePreference(mClockColor);
+        	prefSet.removePreference(mDateCalendar);
+        	prefSet.removePreference(mStatusColor);
+        }
     }
 
     private void updateCarrierText() {

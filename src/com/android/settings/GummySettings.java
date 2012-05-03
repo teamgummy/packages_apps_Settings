@@ -3,11 +3,15 @@ package com.android.settings;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
 import java.util.List;
 
 public class GummySettings extends SettingsPreferenceFragment {
+	
+	private boolean isTablet;
+	private boolean hasColorLED;
 
     private static final String GENERAL_SETTINGS = "general_settings";
     private static final String SYSTEMUI_TWEAKS = "systemui_tweaks";
@@ -35,6 +39,9 @@ public class GummySettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.gummy_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
+        
+        isTablet = getResources().getBoolean(R.bool.is_a_tablet);
+        hasColorLED = getResources().getBoolean(R.bool.color_led);
 
         mGeneralSettings = (PreferenceScreen) findPreference(GENERAL_SETTINGS);
         mSystemUITweaks = (PreferenceScreen) findPreference(SYSTEMUI_TWEAKS);
@@ -45,6 +52,9 @@ public class GummySettings extends SettingsPreferenceFragment {
         mPerformanceSettings = (PreferenceScreen) findPreference(PERFORMANCE_SETTINGS);
         mAbout = (PreferenceScreen) findPreference(ABOUT_SETTINGS);
         mPowerWidgets = (PreferenceScreen) findPreference(POWER_WIDGETS);
-
+        
+        if (isTablet || !hasColorLED) {
+        	prefs.removePreference(mLEDSettings);
+        }
     }
 }

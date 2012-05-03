@@ -10,13 +10,16 @@
 
         <CheckBoxPreference
             android:key="lockscreen_battery"
-            android:title="@string/lockscreen_battery" >
-        </CheckBoxPreference>
+            android:title="@string/lockscreen_battery" />
 
         <CheckBoxPreference
             android:key="volume_wake"
-            android:title="@string/volume_wake" >
-        </CheckBoxPreference>
+            android:title="@string/volume_wake" />
+
+        <CheckBoxPreference
+            android:key="volume_skip"
+            android:title="@string/volume_skip_title"
+            android:summary="@string/volume_skip_summary" />
 
 	<ListPreference
 	    android:key="lockscreen_music_widget"

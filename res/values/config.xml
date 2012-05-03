@@ -25,4 +25,7 @@
     <!-- LED Flashlight -->
     <bool name="has_led_flash">true</bool>
 
+    <!-- Color LED Notification -->
+    <bool name="color_led">true</bool>
+
 </resources>

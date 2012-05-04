@@ -79,8 +79,8 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
         
         isTablet = getResources().getBoolean(R.bool.is_a_tablet);
         
-        mCategoryCarrier = (PreferenceCategory) prefSet.findPreference("sms_popup");
-        mCategoryClock = (PreferenceCategory) prefSet.findPreference("sb_carrier_text");
+        mCategoryCarrier = (PreferenceCategory) prefSet.findPreference("sb_carrier_text");
+        mCategoryClock = (PreferenceCategory) prefSet.findPreference("clock_category");
 
         mHideAlarm = (CheckBoxPreference) prefSet.findPreference(HIDE_ALARM);
         mHideAlarm.setChecked(Settings.System.getInt(getContentResolver(),

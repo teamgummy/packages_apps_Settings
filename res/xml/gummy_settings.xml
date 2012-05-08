@@ -17,15 +17,15 @@
             android:icon="@drawable/gummy_gen_tweaks"
             android:fragment="com.android.settings.GeneralSettings" />
 
-    <header
-        android:id="@+id/themes_settings"
+    <PreferenceScreen
+        android:key="themes_settings"
         android:icon="@drawable/ic_settings_themes"
         android:title="@string/themes_settings_title">
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="com.tmobile.themechooser"
             android:targetClass="com.tmobile.themechooser.ThemeChooser" />
-    </header>
+    </PreferenceScreen>
 
     <PreferenceScreen
             android:key="systemui_tweaks"

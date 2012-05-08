@@ -50,25 +50,19 @@
         android:title="@string/gummy_team">
 
         <com.android.settings.util.devcard.DevCard
-            android:title="tmoskowite"
-            gummy:nameDev="tmoskowite"
-            gummy:twitterName="tmoskowite"
-            gummy:devPic="@drawable/tmoskowite"
-        />
-
-        <com.android.settings.util.devcard.DevCard
-            android:title="daank"
-            gummy:nameDev="daank"
-            gummy:twitterName="designbydaank"
-            gummy:devPic="@drawable/daank"
-        />
-
-        <com.android.settings.util.devcard.DevCard
             android:title="sixstringsg"
             gummy:nameDev="sixstringsg"
             gummy:twitterName="StewartJason"
             gummy:donateLink="@string/sixstringsg_donate"
             gummy:devPic="@drawable/sixstringsg"
+        />
+
+        <com.android.settings.util.devcard.DevCard
+            android:title="x13thangelx"
+            gummy:nameDev="x13thangelx"
+            gummy:twitterName="x13thangelx"
+            gummy:donateLink="@string/x13thangelx_donate"
+            gummy:devPic="@drawable/x13thangelx"
         />
 
         <com.android.settings.util.devcard.DevCard
@@ -80,11 +74,17 @@
         />
 
         <com.android.settings.util.devcard.DevCard
-            android:title="x13thangelx"
-            gummy:nameDev="x13thangelx"
-            gummy:twitterName="x13thangelx"
-            gummy:donateLink="@string/x13thangelx_donate"
-            gummy:devPic="@drawable/x13thangelx"
+            android:title="tmoskowite"
+            gummy:nameDev="tmoskowite"
+            gummy:twitterName="tmoskowite"
+            gummy:devPic="@drawable/tmoskowite"
+        />
+
+        <com.android.settings.util.devcard.DevCard
+            android:title="daank"
+            gummy:nameDev="daank"
+            gummy:twitterName="designbydaank"
+            gummy:devPic="@drawable/daank"
         />
 
         <com.android.settings.util.devcard.DevCard

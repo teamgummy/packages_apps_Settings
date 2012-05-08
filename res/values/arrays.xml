@@ -1155,4 +1155,14 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="custom_app_entries">
+        <item>Blank</item>
+        <item>Custom App</item>
+    </string-array>
+
+    <string-array name="custom_app_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
 </resources>

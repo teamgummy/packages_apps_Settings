@@ -52,12 +52,12 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
     private CheckBoxPreference mRotaryDown;
     private ListPreference mSoundCamera;
     private ListPreference mLockStyle;
-    private Preference mCustomApp1;
-    private Preference mCustomApp2;
-    private Preference mCustomApp3;
-    private Preference mCustomApp4;
-    private Preference mCustomApp5;
-    private Preference mCustomApp6;
+    private ListPreference mCustomApp1;
+    private ListPreference mCustomApp2;
+    private ListPreference mCustomApp3;
+    private ListPreference mCustomApp4;
+    private ListPreference mCustomApp5;
+    private ListPreference mCustomApp6;
 
     private Preference mCurrentCustomActivityPreference;
     private String mCurrentCustomActivityString;
@@ -95,12 +95,35 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
         mLockExtra.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.LOCKSCREEN_EXTRA_ICONS, 0) == 1);
 
-        mCustomApp1 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_1);
-        mCustomApp2 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_2);
-        mCustomApp3 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_3);
-        mCustomApp4 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_4);
-        mCustomApp5 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_5);
-        mCustomApp6 = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_6);
+        mCustomApp1 = (ListPreference) findPreference(LOCKSCREEN_CUSTOM_1);
+        mCustomApp1.setOnPreferenceChangeListener(this);
+        mCustomApp1.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_ONE,
+            0) + "");
+        
+        mCustomApp2 = (ListPreference) findPreference(LOCKSCREEN_CUSTOM_2);
+        mCustomApp2.setOnPreferenceChangeListener(this);
+        mCustomApp2.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_TWO,
+            0) + "");
+        
+        mCustomApp3 = (ListPreference) findPreference(LOCKSCREEN_CUSTOM_3);
+        mCustomApp3.setOnPreferenceChangeListener(this);
+        mCustomApp3.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_THREE,
+            0) + "");
+        
+        mCustomApp4 = (ListPreference) findPreference(LOCKSCREEN_CUSTOM_4);
+        mCustomApp4.setOnPreferenceChangeListener(this);
+        mCustomApp4.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_FOUR,
+            0) + "");
+        
+        mCustomApp5 = (ListPreference) findPreference(LOCKSCREEN_CUSTOM_5);
+        mCustomApp5.setOnPreferenceChangeListener(this);
+        mCustomApp5.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_FIVE,
+            0) + "");
+        
+        mCustomApp6 = (ListPreference) findPreference(LOCKSCREEN_CUSTOM_6);
+        mCustomApp6.setOnPreferenceChangeListener(this);
+        mCustomApp6.setValue(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_SIX,
+            0) + "");
         
         mPicker = new ShortcutPickerHelper(this, this);
 
@@ -111,6 +134,8 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
 
         int lockScreenCurrent = Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0);
         whatLock(lockScreenCurrent);
+        
+        refreshSettings();
         
         if (isTablet) {
         	mLockStyle.setEnabled(false);
@@ -139,113 +164,6 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_ROTARY_UNLOCK_DOWN, value ? 1 : 0);
             return true;
-        } else if (preference == mCustomApp1) {
-                if ((Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5) || 
-                		(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6)) {
-                    final String[] items = getCustomRingAppItems();
-
-                    if (items.length == 0) {
-                        mWhichApp = 0;
-                        mPicker.pickShortcut();
-                    } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
-                        builder.setTitle(R.string.pref_lockscreen_ring_custom_apps_dialog_title_set);
-                        builder.setItems(items, new Dialog.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                mWhichApp = which;
-                                mPicker.pickShortcut();
-                            }
-                        });
-                        if (items.length < mMaxRingCustomApps) {
-                            builder.setPositiveButton(R.string.pref_lockscreen_ring_custom_apps_dialog_add,
-                                new Dialog.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    mWhichApp = items.length;
-                                    mPicker.pickShortcut();
-                                }
-                            });
-                        }
-                        builder.setNeutralButton(R.string.pref_lockscreen_ring_custom_apps_dialog_remove,
-                        new Dialog.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-
-                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                                builder.setTitle(R.string.pref_lockscreen_ring_custom_apps_dialog_title_unset);
-                                builder.setItems(items, new Dialog.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        Settings.System.putString(getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[which], null);
-                                    
-                                        for (int q = which + 1; q < mMaxRingCustomApps; q++) {
-                                            Settings.System.putString(getContentResolver(),
-                                            Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[q - 1],
-                                            Settings.System.getString(getContentResolver(),
-                                            Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[q]));
-                                             Settings.System.putString(getContentResolver(),
-                                            Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[q], null);
-                                         }
-                                         mCustomApp1.setSummary(getCustomRingAppSummary());
-                                     }
-                                });
-                                builder.setNegativeButton(R.string.pref_lockscreen_ring_custom_apps_dialog_cancel,
-                                new Dialog.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                                builder.setCancelable(true);
-                                builder.create().show();
-                            }
-                        });
-                        builder.setNegativeButton(R.string.pref_lockscreen_ring_custom_apps_dialog_cancel,
-                            new Dialog.OnClickListener() {
-                	        @Override
-                	        public void onClick(DialogInterface dialog, int which) {
-                		        dialog.dismiss();
-                	        }
-                        });
-                        builder.setCancelable(true);
-                        builder.create().show();
-                    }
-                } else {
-                    mCurrentCustomActivityPreference = preference;
-                    mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_ONE;
-                    mPicker.pickShortcut();
-                }
-            return true;
-        } else if (preference == mCustomApp2) {
-            mCurrentCustomActivityPreference = preference;
-            mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_TWO;
-            mPicker.pickShortcut();
-            return true;
-        } else if (preference == mCustomApp3) {
-            mCurrentCustomActivityPreference = preference;
-            mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_THREE;
-            mPicker.pickShortcut();
-            return true;
-        } else if (preference == mCustomApp4) {
-            mCurrentCustomActivityPreference = preference;
-            mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_FOUR;
-            mPicker.pickShortcut();
-            return true;
-        } else if (preference == mCustomApp5) {
-            mCurrentCustomActivityPreference = preference;
-            mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_FIVE;
-            mPicker.pickShortcut();
-            return true;
-        } else if (preference == mCustomApp6) {
-            mCurrentCustomActivityPreference = preference;
-            mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_SIX;
-            mPicker.pickShortcut();
-            return true;
         }
         return false;
     }    
@@ -260,8 +178,126 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
                 whatLock(Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_TYPE));
             } catch (SettingNotFoundException e) {
             }
+            refreshSettings();
+            return true;
+        } else if (preference == mCustomApp1) {
+        	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_ONE, Integer.parseInt((String) newValue));
+        	if (Integer.parseInt((String) newValue) > 0) {
+        		if ((Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5) || 
+                		(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6)) {
+                	    mCurrentCustomActivityPreference = preference;
+                        mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[0];
+                        mPicker.pickShortcut();
+                    } else {
+                        mCurrentCustomActivityPreference = preference;
+                        mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_ONE;
+                        mPicker.pickShortcut();
+                    }
+        	} else {
+        		if ((Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5) || 
+                		(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6)) {
+        			Settings.System.putString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[0], null);
+        		} else {
+        			Settings.System.putString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_ONE, null);
+        		}
+        		mCustomApp1.setSummary("Blank");
+        	}
+            return true;
+        } else if (preference == mCustomApp2) {
+        	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_TWO, Integer.parseInt((String) newValue));
+        	if (Integer.parseInt((String) newValue) > 0) {
+        		 if ((Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5) || 
+        	        		(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6)) {
+        	        	    mCurrentCustomActivityPreference = preference;
+        	                mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[1];
+        	                mPicker.pickShortcut();
+        	            } else {
+        	                mCurrentCustomActivityPreference = preference;
+        	                mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_TWO;
+        	                mPicker.pickShortcut();
+        	            }
+        	} else {
+        		if ((Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5) || 
+                		(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6)) {
+        			Settings.System.putString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[1], null);
+        		} else {
+        			Settings.System.putString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_TWO, null);
+        		}
+        		mCustomApp2.setSummary("Blank");
+        	}
+    	   
+            return true;
+        } else if (preference == mCustomApp3) {
+        	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_THREE, Integer.parseInt((String) newValue));
+        	if (Integer.parseInt((String) newValue) > 0) {
+        		if ((Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5) || 
+                		(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6)) {
+                	    mCurrentCustomActivityPreference = preference;
+                        mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[2];
+                        mPicker.pickShortcut();
+                    } else {
+                	    mCurrentCustomActivityPreference = preference;
+                        mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_THREE;
+                        mPicker.pickShortcut();
+                    }
+        	} else {
+        		if ((Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5) || 
+                		(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6)) {
+        			Settings.System.putString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[2], null);
+        		} else {
+        			Settings.System.putString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_THREE, null);
+        		}
+        		mCustomApp3.setSummary("Blank");
+        	}
+    	    
+            return true;
+        } else if (preference == mCustomApp4) {
+        	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_FOUR, Integer.parseInt((String) newValue));
+        	if (Integer.parseInt((String) newValue) > 0) {
+        		if ((Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5) || 
+                		(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6)) {
+                	    mCurrentCustomActivityPreference = preference;
+                        mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[3];
+                        mPicker.pickShortcut();
+                    } else {
+                	    mCurrentCustomActivityPreference = preference;
+                        mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_FOUR;
+                        mPicker.pickShortcut();
+                    }
+        	} else {
+        		if ((Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5) || 
+                		(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6)) {
+        			Settings.System.putString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[3], null);
+        		} else {
+        			Settings.System.putString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_FOUR, null);
+        		}
+        		mCustomApp4.setSummary("Blank");
+        	}
+            return true;
+        } else if (preference == mCustomApp5) {
+        	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_FIVE, Integer.parseInt((String) newValue));
+        	if (Integer.parseInt((String) newValue) > 0) {
+                mCurrentCustomActivityPreference = preference;
+                mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_FIVE;
+                mPicker.pickShortcut();
+        	} else {
+        		mCustomApp5.setSummary("Blank");
+        		Settings.System.putString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_FIVE, null);
+        	}
+            return true;
+        } else if (preference == mCustomApp6) {
+        	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_SIX, Integer.parseInt((String) newValue));
+        	if (Integer.parseInt((String) newValue) > 0) {
+        		mCurrentCustomActivityPreference = preference;
+                mCurrentCustomActivityString = Settings.System.LOCKSCREEN_CUSTOM_SIX;
+                mPicker.pickShortcut();
+        	} else {
+        		mCustomApp6.setSummary("Blank");
+        		Settings.System.putString(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_SIX, null);
+        	}          
             return true;
         }
+        
         return false;
     }
 
@@ -362,6 +398,12 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
                 lsGenEnable.add(true);
                 lsApp.add(mCustomApp1);
                 lsAppEnable.add(mLockExtra.isChecked());
+                lsApp.add(mCustomApp2);
+                lsAppEnable.add(mLockExtra.isChecked());
+                lsApp.add(mCustomApp3);
+                lsAppEnable.add(mLockExtra.isChecked());
+                lsApp.add(mCustomApp4);
+                lsAppEnable.add(mLockExtra.isChecked());
                 lsApp.add(mSoundCamera);
                 lsAppEnable.add(true);
                 break;
@@ -410,7 +452,14 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
     public void refreshSettings() {
         if (Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 5 || 
                 Settings.System.getInt(getActivity().getContentResolver(), Settings.System.LOCKSCREEN_TYPE, 0) == 6) {
-        	mCustomApp1.setSummary(getCustomRingAppSummary());
+        	mCustomApp1.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[0])));
+            mCustomApp2.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[1])));
+            mCustomApp3.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[2])));
+            mCustomApp4.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[3])));
         } else {
             mCustomApp1.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_CUSTOM_ONE)));
@@ -429,43 +478,10 @@ public class LockscreenStyles extends SettingsPreferenceFragment implements
 
     @Override
     public void shortcutPicked(String uri, String friendlyName, boolean isApplication) {
-        if (mWhichApp == -1) {
-            if (Settings.System.putString(getActivity().getContentResolver(), mCurrentCustomActivityString, uri)) {
-                mCurrentCustomActivityPreference.setSummary(friendlyName);
-                refreshSettings();
-            }
-        } else {
-            Settings.System.putString(getContentResolver(),
-                Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[mWhichApp], uri);
-            mCustomApp1.setSummary(getCustomRingAppSummary());
-            mWhichApp = -1;
+        if (Settings.System.putString(getActivity().getContentResolver(), mCurrentCustomActivityString, uri)) {
+            mCurrentCustomActivityPreference.setSummary(friendlyName);
+            refreshSettings();
         }
-    }
-
-    private String getCustomRingAppSummary() {
-        String summary = "";
-        String[] items = getCustomRingAppItems();
-
-        for (int q = 0; q < items.length; q++) {
-            if (q != 0) {
-                summary += ", ";
-            }
-            summary += items[q];
-        }
-
-        return summary;
-    }
-
-    private String[] getCustomRingAppItems() {
-        ArrayList<String> items = new ArrayList<String>();
-        for (int q = 0; q < mMaxRingCustomApps; q++) {
-            String uri = Settings.System.getString(getContentResolver(),
-                Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[q]);
-            if (uri != null) {
-                items.add(mPicker.getFriendlyNameForUri(uri));
-            }
-        }
-        return items.toArray(new String[0]);
     }
 
     @Override

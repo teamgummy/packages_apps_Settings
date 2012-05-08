@@ -78,8 +78,12 @@
 
         <PreferenceScreen
             android:key="battery_text_color"
-            android:title="@string/battery_text_color"
-            android:fragment="com.android.settings.BatteryTextColor" />
+            android:title="@string/battery_text_color">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.android.settings.BatteryTextColor"
+                android:targetPackage="com.android.settings" />
+        </PreferenceScreen>
 
         <CheckBoxPreference
             android:key="battery_bar"

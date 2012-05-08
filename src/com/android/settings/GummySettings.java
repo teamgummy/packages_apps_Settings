@@ -56,5 +56,9 @@ public class GummySettings extends SettingsPreferenceFragment {
         if (isTablet || !hasColorLED) {
         	prefs.removePreference(mLEDSettings);
         }
+        //remove for now till added
+        if (isTablet) {
+        	prefs.removePreference(mPowerWidgets);
+        }
     }
 }

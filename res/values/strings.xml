@@ -4130,4 +4130,8 @@ found in the list of installed apps.</string>
     <!-- Temporary - stubed preference - to be removed once all preferences have been merged -->
     <string name="stubbed">Preference Stub</string>
     <string name="stubbed_summary">Temporary placeholder until functionality merged</string>
+
+    <!-- Themes settings #CM -->
+    <string name="themes_settings_title">Themes</string>
+
 </resources>

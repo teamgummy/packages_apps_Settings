@@ -21,7 +21,7 @@ import java.io.File;
 
 public class GeneralSettings extends SettingsPreferenceFragment {
 	
-	private boolean isTablet;
+    private boolean isTablet;
 
     private static final String TURN_DEGREE = "turn_degree";
     private static final String KILL_APP = "kill_app";

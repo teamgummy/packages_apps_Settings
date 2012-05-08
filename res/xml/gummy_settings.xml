@@ -18,16 +18,6 @@
             android:fragment="com.android.settings.GeneralSettings" />
 
     <PreferenceScreen
-        android:key="themes_settings"
-        android:icon="@drawable/ic_settings_themes"
-        android:title="@string/themes_settings_title">
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.tmobile.themechooser"
-            android:targetClass="com.tmobile.themechooser.ThemeChooser" />
-    </PreferenceScreen>
-
-    <PreferenceScreen
             android:key="systemui_tweaks"
             android:title="@string/systemui_tweaks"
             android:icon="@drawable/gummy_sysui_tweaks"
@@ -62,6 +52,16 @@
             android:title="@string/led_settings"
             android:icon="@drawable/gummy_led"
             android:fragment="com.android.settings.LEDSettings" />
+
+    <PreferenceScreen
+        android:key="themes_settings"
+        android:icon="@drawable/ic_settings_themes"
+        android:title="@string/themes_settings_title">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.tmobile.themechooser"
+            android:targetClass="com.tmobile.themechooser.ThemeChooser" />
+    </PreferenceScreen>
 
     <PreferenceScreen
             android:key="performance_settings"

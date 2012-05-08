@@ -172,6 +172,8 @@ public class SystemUITweaks extends SettingsPreferenceFragment implements
         	prefSet.removePreference(mClockColor);
         	prefSet.removePreference(mDateCalendar);
         	prefSet.removePreference(mStatusColor);
+        	prefSet.removePreference(mBattBar);
+        	prefSet.removePreference(mBattBarColor);
         }
     }
 

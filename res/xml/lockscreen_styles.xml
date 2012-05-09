@@ -44,42 +44,42 @@
 
         <ListPreference
             android:key="lockscreen_custom_1"
-	    android:entries="@arraycustom_app_entries"
+	    android:entries="@array/custom_app_entries"
 	    android:entryValues="@array/custom_app_values"
             android:title="@string/custom_app_1"
             android:summary="@string/custom_app_1_summary" />
 
         <ListPreference
             android:key="lockscreen_custom_2"
-	    android:entries="@arraycustom_app_entries"
+	    android:entries="@array/custom_app_entries"
 	    android:entryValues="@array/custom_app_values"
             android:title="@string/custom_app_2"
             android:summary="@string/custom_app_2_summary" />
 
         <ListPreference
             android:key="lockscreen_custom_3"
-	    android:entries="@arraycustom_app_entries"
+	    android:entries="@array/custom_app_entries"
 	    android:entryValues="@array/custom_app_values"
             android:title="@string/custom_app_3"
             android:summary="@string/custom_app_3_summary" />
 
         <ListPreference
             android:key="lockscreen_custom_4"
-	    android:entries="@arraycustom_app_entries"
+	    android:entries="@array/custom_app_entries"
 	    android:entryValues="@array/custom_app_values"
             android:title="@string/custom_app_4"
             android:summary="@string/custom_app_4_summary" />
 
         <ListPreference
             android:key="lockscreen_custom_5"
-	    android:entries="@arraycustom_app_entries"
+	    android:entries="@array/custom_app_entries"
 	    android:entryValues="@array/custom_app_values"
             android:title="@string/custom_app_5"
             android:summary="@string/custom_app_5_summary" />
 
         <ListPreference
             android:key="lockscreen_custom_6"
-	    android:entries="@arraycustom_app_entries"
+	    android:entries="@array/custom_app_entries"
 	    android:entryValues="@array/custom_app_values"
             android:title="@string/custom_app_6"
             android:summary="@string/custom_app_6_summary" />

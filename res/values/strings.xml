@@ -4135,6 +4135,6 @@ found in the list of installed apps.</string>
     <string name="themes_settings_title">Themes</string>
 	
     <!-- Advanced, Device specific (DeviceParts) settings #CM -->
-    <string name="devic_settings_title">Device Settings</string>
+    <string name="device_settings_title">Device Specific</string>
 
 </resources>

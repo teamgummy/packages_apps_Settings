@@ -81,6 +81,14 @@
         />
 
         <com.android.settings.util.devcard.DevCard
+            android:title="pauljohnson75"
+            gummy:nameDev="pauljohnson75"
+            gummy:twitterName="pauljohnson75"
+            gummy:donateLink="@string/pauljohnson75_donate"
+            gummy:devPic="@drawable/pauljohnson75"
+        />
+
+        <com.android.settings.util.devcard.DevCard
             android:title="daank"
             gummy:nameDev="daank"
             gummy:twitterName="designbydaank"

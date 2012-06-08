@@ -17,6 +17,7 @@ public class GummySettings extends SettingsPreferenceFragment {
     private static final String SYSTEMUI_TWEAKS = "systemui_tweaks";
     private static final String LOCKSCREEN_SETTINGS = "lockscreen_settings";
     private static final String LOCKSCREEN_STYLES = "lockscreen_styles";
+    private static final String LOCKSCREEN_WEATHER = "lockscreen_weather";	
     private static final String LED_SETTINGS = "led_settings";
     private static final String SOFTKEY_SETTINGS = "softkey_settings";
     private static final String PERFORMANCE_SETTINGS = "performance_settings";
@@ -27,6 +28,7 @@ public class GummySettings extends SettingsPreferenceFragment {
     PreferenceScreen mSystemUITweaks;
     PreferenceScreen mLockscreenSettings;
     PreferenceScreen mLockscreenStyles;
+    PreferenceScreen mLockscreenWeather;
     PreferenceScreen mLEDSettings;
     PreferenceScreen mSoftkeySettings;
     PreferenceScreen mPerformanceSettings;
@@ -48,6 +50,7 @@ public class GummySettings extends SettingsPreferenceFragment {
         mSoftkeySettings = (PreferenceScreen) findPreference(SOFTKEY_SETTINGS);
         mLockscreenSettings = (PreferenceScreen) findPreference(LOCKSCREEN_SETTINGS);
         mLockscreenStyles = (PreferenceScreen) findPreference(LOCKSCREEN_STYLES);
+        mLockscreenWeather = (PreferenceScreen) findPreference(LOCKSCREEN_WEATHER);
         mLEDSettings = (PreferenceScreen) findPreference(LED_SETTINGS);
         mPerformanceSettings = (PreferenceScreen) findPreference(PERFORMANCE_SETTINGS);
         mAbout = (PreferenceScreen) findPreference(ABOUT_SETTINGS);

@@ -46,7 +46,8 @@
             android:title="@string/lockscreen_settings"
             android:icon="@drawable/gummy_lockscreen"
             android:fragment="com.android.settings.LockscreenSettings" />
-    <Preference
+			
+    <PreferenceScreen
            android:key="lockscreen_weather"
            android:title="@string/lockscreen_weather_title"
            android:icon="@drawable/ic_settings_performance"

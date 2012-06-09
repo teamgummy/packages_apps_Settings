@@ -50,7 +50,7 @@
     <PreferenceScreen
            android:key="lockscreen_weather"
            android:title="@string/lockscreen_weather_title"
-           android:icon="@drawable/ic_settings_performance"
+           android:icon="@drawable/gummy_weather"
            android:fragment="com.android.settings.cyanogenmod.Weather" />
 
     <PreferenceScreen

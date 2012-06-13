@@ -46,23 +46,14 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-            android:key="sms_popup"
-            android:title="SMS Popup Settings">
+            android:key="sms_call_widget"
+            android:title="SMS Call widget settings">
 
         <CheckBoxPreference
-            android:key="lockscreen_text"
-            android:title="@string/lockscreen_text_title"
-            android:summary="@string/lockscreen_text_summary" >
+            android:key="lockscreen_sms_call_widget"
+            android:title="@string/lockscreen_sms_call_widget_title"
+            android:summary="@string/lockscreen_sms_call_widget_summary" >
         </CheckBoxPreference>
 
-        <Preference
-            android:key="lockscreen_text_app"
-            android:title="@string/lockscreen_text_app_title"
-            android:summary="@string/lockscreen_text_app_summary" />
-
-	<com.android.settings.util.colorpicker.ColorPickerPreference
-	    android:key="lockscreen_text_color" 
-	    android:title="@string/lockscreen_text_color_title" 
-	    android:defaultValue="#FFFFFF" />
     </PreferenceCategory>
 </PreferenceScreen>

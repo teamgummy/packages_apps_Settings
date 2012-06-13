@@ -15,14 +15,12 @@ import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
 
-import com.android.settings.util.colorpicker.ColorPickerPreference;
-import com.android.settings.util.ShortcutPickerHelper;
 import com.android.settings.R;
 
 import java.util.ArrayList;
 
 public class LockscreenSettings extends SettingsPreferenceFragment implements
-    ShortcutPickerHelper.OnPickListener, OnPreferenceChangeListener {
+        OnPreferenceChangeListener {
 	
 	private boolean isTablet;
 
@@ -32,9 +30,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
     private static final String VOLUME_WAKE = "volume_wake";
     private static final String VOLUME_SKIP = "volume_skip";
     private static final String LOCKSCREEN_MUSIC_WIDGET = "lockscreen_music_widget";
-    private static final String LOCKSCREEN_TEXT = "lockscreen_text";
-    private static final String LOCKSCREEN_TEXT_APP = "lockscreen_text_app";
-    private static final String LOCKSCREEN_TEXT_COLOR = "lockscreen_text_color";
+    private static final String LOCKSCREEN_SMS_CALL_WIDGET = "lockscreen_sms_call_widget";
     
     private PreferenceCategory mCategoryLockSMS;
 
@@ -44,16 +40,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mQuickUnlock;
     private CheckBoxPreference mVolumeWake;
     private CheckBoxPreference mVolumeSkip;
-    private CheckBoxPreference mLockSMS;
+    private CheckBoxPreference mLockscreenSmsCallWidget;
     private ListPreference mMusicStyle;
-    private Preference mSMSApp;
-    
-    private ColorPickerPreference mSMSColor;
-
-    private Preference mCurrentCustomActivityPreference;
-    private String mCurrentCustomActivityString;
-    
-	private ShortcutPickerHelper mPicker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +51,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         
         isTablet = getResources().getBoolean(R.bool.is_a_tablet);
         
-        mCategoryLockSMS = (PreferenceCategory) prefSet.findPreference("sms_popup");
+        mCategoryLockSMS = (PreferenceCategory) prefSet.findPreference("sms_call_widget");
 
         mMusicStyle = (ListPreference) findPreference(LOCKSCREEN_MUSIC_WIDGET);
         mMusicStyle.setOnPreferenceChangeListener(this);
@@ -91,26 +79,14 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         mVolumeSkip = (CheckBoxPreference) prefSet.findPreference(VOLUME_SKIP);
         mVolumeSkip.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.VOLBTN_MUSIC_CONTROLS, 0) == 1);
-        
-        mLockSMS = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_TEXT);
-        mLockSMS.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.LOCKSCREEN_SHOW_TEXTS, 0) == 1);
-        
-        mSMSApp = (Preference) prefSet.findPreference(LOCKSCREEN_TEXT_APP);
-        
-        mPicker = new ShortcutPickerHelper(this, this);
-        
-        mSMSColor = (ColorPickerPreference) prefSet.findPreference(LOCKSCREEN_TEXT_COLOR);
-        mSMSColor.setOnPreferenceChangeListener(this);
-        
-        updateSMSApp(mLockSMS.isChecked());
+
+        mLockscreenSmsCallWidget = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_SMS_CALL_WIDGET);
+        mLockscreenSmsCallWidget.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_SMS_CALL_WIDGET, 0) == 1);
         
         if (isTablet) {
         	prefSet.removePreference(mCategoryLockSMS);
-        	prefSet.removePreference(mLockSMS);
-        	prefSet.removePreference(mSMSApp);
-        	prefSet.removePreference(mSMSColor);
         	prefSet.removePreference(mMusicStyle);
+            prefSet.removePreference(mLockscreenSmsCallWidget);
         }
     }
 
@@ -142,16 +118,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.VOLBTN_MUSIC_CONTROLS, value ? 1 : 0);
             return true;
-        } else if (preference == mLockSMS) {
-            value = mLockSMS.isChecked();
+        } else if (preference == mLockscreenSmsCallWidget) {
+            value = mLockscreenSmsCallWidget.isChecked();
             Settings.System.putInt(getContentResolver(),
-                    Settings.System.LOCKSCREEN_SHOW_TEXTS, value ? 1 : 0);
-            updateSMSApp(value);
-            return true;
-        } else if (preference == mSMSApp) {
-        	mCurrentCustomActivityPreference = preference;
-            mCurrentCustomActivityString = Settings.System.LOCKSCREEN_SMS_APP;
-            mPicker.pickShortcut();
+                    Settings.System.LOCKSCREEN_SMS_CALL_WIDGET, value ? 1 : 0);
             return true;
         }
         return false;
@@ -161,47 +131,12 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         if (preference == mMusicStyle) {
         	Settings.System.putInt(getActivity().getContentResolver(), Settings.System.MUSIC_WIDGET_TYPE, Integer.parseInt((String) newValue));
             return true;
-        } else if (preference == mSMSColor) {
-            String hexColor = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
-            preference.setSummary(hexColor);
-            int color = ColorPickerPreference.convertToColorInt(hexColor);
-            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SMS_COLOR, color);
-            return true;
         }
         return false;
-    }
-    
-    private void updateSMSApp(boolean bool) {
-    	if (bool) {
-    		mSMSApp.setEnabled(true);
-    		mSMSColor.setEnabled(true);
-    	} else {
-    		mSMSApp.setEnabled(false);
-    		mSMSColor.setEnabled(false);
-    	}
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        refreshSettings();
-    }
-
-    public void refreshSettings() {
-        mSMSApp.setSummary(mPicker.getFriendlyNameForUri(Settings.System.getString(getActivity().getContentResolver(),
-                Settings.System.LOCKSCREEN_SMS_APP)));
-    }
-
-    @Override
-    public void shortcutPicked(String uri, String friendlyName, boolean isApplication) {
-        if (Settings.System.putString(getActivity().getContentResolver(), mCurrentCustomActivityString, uri)) {
-            mCurrentCustomActivityPreference.setSummary(friendlyName);
-            refreshSettings();
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mPicker.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -6,11 +6,11 @@
 		android:key="scroll"
 		android:title="@string/scroll">
 
-                <com.aokp.romcontrol.widgets.SeekBarPreference
+                <com.android.settings.util.SeekBarPreference
 			android:key="scroll_friction"
 			android:title="@string/scroll_friction_title" />
 
-                <com.aokp.romcontrol.widgets.SeekBarPreference
+                <com.android.settings.util.SeekBarPreference
 			android:key="custom_fling_velocity"
 			android:title="@string/custom_fling_velocity_title" />
 

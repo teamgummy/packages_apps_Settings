@@ -43,6 +43,15 @@
             gummy:devPic="@drawable/syaoran12"
         />
 
+        <!-- Hide your ladies, xoomdev is here -->
+        <com.android.settings.util.devcard.DevCard
+            android:title="xoomdev"
+            gummy:nameDev="xoomdev"
+            gummy:twitterName="xoomdev"
+            gummy:donateLink="@string/xoomdev_donate"
+            gummy:devPic="@drawable/xoomdev"
+        />
+
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -30,6 +30,12 @@
                 android:summary="@string/brightness_slider_sum">
 	</CheckBoxPreference>
 
+        <PreferenceScreen
+                android:key="scroll_setup"
+                android:title="@string/scroll_title"
+                android:summary="@string/scroll_summary"
+                android:fragment="com.android.settings.Scroller" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

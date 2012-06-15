@@ -1513,6 +1513,9 @@
 	<!-- Light Levels activity -->	
 	<activity android:name=".cyanogenmod.LightLevelsActivity" />
     <activity android:name=".cyanogenmod.Weather" />
+
+	<!-- Scroller -->	
+    <activity android:name=".Scroller" />
 	
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"

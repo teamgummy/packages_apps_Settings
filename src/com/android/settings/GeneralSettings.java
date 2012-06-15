@@ -30,6 +30,7 @@ public class GeneralSettings extends SettingsPreferenceFragment {
     private static final String UNLINK_VOLUMES = "unlink_volumes";
     private static final String BOOT_SOUND = "boot_sound";
     private static final String BOOT_ANIM = "boot_anim";
+    private static final String SCROLLER = "scroller";
 
     private CheckBoxPreference m180Degree;
     private CheckBoxPreference mKillApp;
@@ -38,6 +39,7 @@ public class GeneralSettings extends SettingsPreferenceFragment {
     private CheckBoxPreference mUnlinkVolumes;
     private CheckBoxPreference mBootSound;
     private CheckBoxPreference mBootAnim;
+    PreferenceScreen mScroller;
     
     private boolean isTurnedOn;
     private boolean doesItEvenExist;
@@ -79,7 +81,9 @@ public class GeneralSettings extends SettingsPreferenceFragment {
         mBootAnim.setChecked(isTurnedOn);
         doesItEvenExist = doesItExist(BOOT_ANIM);
         mBootAnim.setEnabled(doesItEvenExist);
-        
+
+        mScroller = (PreferenceScreen) findPreference(SCROLLER);
+
         if (isTablet) {
         	prefSet.removePreference(m180Degree);
         	prefSet.removePreference(mEnableVolumeOptions);

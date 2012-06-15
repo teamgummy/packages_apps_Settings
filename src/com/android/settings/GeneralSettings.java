@@ -16,10 +16,11 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.util.CMDProcessor;
 import com.android.settings.util.Helpers;
+import com.android.settings.util.SeekBarPreference;
 
 import java.io.File;
 
-public class GeneralSettings extends SettingsPreferenceFragment {
+public class GeneralSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 	
     private boolean isTablet;
 
@@ -30,7 +31,8 @@ public class GeneralSettings extends SettingsPreferenceFragment {
     private static final String UNLINK_VOLUMES = "unlink_volumes";
     private static final String BOOT_SOUND = "boot_sound";
     private static final String BOOT_ANIM = "boot_anim";
-    private static final String SCROLLER = "scroller";
+    private static final String PREF_SCROLL_FRICTION = "scroll_friction";
+    private static final String PREF_CUSTOM_FLING_VELOCITY = "custom_fling_velocity";
 
     private CheckBoxPreference m180Degree;
     private CheckBoxPreference mKillApp;
@@ -39,7 +41,8 @@ public class GeneralSettings extends SettingsPreferenceFragment {
     private CheckBoxPreference mUnlinkVolumes;
     private CheckBoxPreference mBootSound;
     private CheckBoxPreference mBootAnim;
-    PreferenceScreen mScroller;
+    SeekBarPreference mScrollFriction;
+    SeekBarPreference mCustomFlingVelocity;
     
     private boolean isTurnedOn;
     private boolean doesItEvenExist;
@@ -81,8 +84,22 @@ public class GeneralSettings extends SettingsPreferenceFragment {
         mBootAnim.setChecked(isTurnedOn);
         doesItEvenExist = doesItExist(BOOT_ANIM);
         mBootAnim.setEnabled(doesItEvenExist);
+        
+        float defaultFriction = Settings.System.getFloat(getActivity()
+                .getContentResolver(), Settings.System.SCROLL_FRICTION,
+                0.015f);
+        
+        mScrollFriction = (SeekBarPreference) findPreference(PREF_SCROLL_FRICTION);
+        mScrollFriction.setInitValue((int) (defaultFriction * 5000));
+        mScrollFriction.setOnPreferenceChangeListener(this);
 
-        mScroller = (PreferenceScreen) findPreference(SCROLLER);
+        int defaultVelocity = Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.CUSTOM_FLING_VELOCITY,
+                8000);
+
+        mCustomFlingVelocity = (SeekBarPreference) findPreference(PREF_CUSTOM_FLING_VELOCITY);
+        mCustomFlingVelocity.setInitValue((int) (defaultVelocity / 100));
+        mCustomFlingVelocity.setOnPreferenceChangeListener(this);
 
         if (isTablet) {
         	prefSet.removePreference(m180Degree);
@@ -139,6 +156,22 @@ public class GeneralSettings extends SettingsPreferenceFragment {
             	new CMDProcessor().su.runWaitFor("busybox mv /system/media/bootanimation.old /system/media/bootanimation.zip");
             }
             Helpers.getMount("ro");
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mScrollFriction) {
+            float val = Float.parseFloat((String) newValue);
+            Settings.System.putFloat(getActivity().getContentResolver(),
+                    Settings.System.SCROLL_FRICTION, val / 5000);
+            return true;
+        } else if (preference == mCustomFlingVelocity) {
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.CUSTOM_FLING_VELOCITY, val * 100);
             return true;
         }
         return false;

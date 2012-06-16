@@ -4176,5 +4176,13 @@ found in the list of installed apps.</string>
     <string name="scroll_friction_title">Scroll friction</string>
     <string name="custom_fling_velocity_title">Scroll fling velocity</string>
 
+    <!-- Lock screen background -->
+    <string name="lockscreen_custom_background_title">Background</string>
+    <string name="lockscreen_custom_background_dialog_title">Choose color</string>
+    <string name="lockscreen_background_result_successful">Background changed</string>
+    <string name="lockscreen_background_result_not_successful">Background not changed</string>
+    <string name="lockscreen_background_color_fill">Color fill</string>
+    <string name="lockscreen_background_custom_image">Custom image</string>
+    <string name="lockscreen_background_default_wallpaper">Default wallpaper</string>
 
 </resources>

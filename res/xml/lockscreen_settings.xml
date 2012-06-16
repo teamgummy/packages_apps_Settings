@@ -27,6 +27,15 @@
 	    android:entryValues="@array/lockscreen_music_widget_values"
 	    android:title="@string/lockscreen_music_widget_title"
 	    android:summary="@string/lockscreen_music_widget_summary" />
+
+    <ListPreference
+        android:key="lockscreen_background"
+        android:persistent="false"
+        android:dialogTitle="@string/lockscreen_custom_background_title"
+        android:title="@string/lockscreen_custom_background_title"
+        android:entries="@array/lockscreen_background_entries"
+        android:entryValues="@array/lockscreen_background_values"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -42,7 +51,7 @@
             android:key="quick_password_unlock"
             android:title="@string/quick_password_title"
             android:summary="@string/quick_password_summary" >
-        </CheckBoxPreference>
+    </CheckBoxPreference>
     </PreferenceCategory>
 
     <PreferenceCategory

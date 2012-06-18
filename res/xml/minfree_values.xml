@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/pt_minfree_values" >
+        <EditTextPreference
+            android:defaultValue="2048"
+            android:dialogTitle="@string/pt_foreground_app_mem"
+            android:key="foreground_app_mem"
+            android:title="@string/pt_foreground_app_mem" />
+        <EditTextPreference
+            android:defaultValue="3072"
+            android:dialogTitle="@string/pt_visible_app_mem"
+            android:key="visible_app_mem"
+            android:title="@string/pt_visible_app_mem" />
+        <EditTextPreference
+            android:defaultValue="4096"
+            android:dialogTitle="@string/pt_perceptible_app_mem"
+            android:key="perceptible_app_mem"
+            android:title="@string/pt_perceptible_app_mem" />
+        <EditTextPreference
+            android:defaultValue="4096"
+            android:dialogTitle="@string/pt_heavy_weight_app_mem"
+            android:key="heavy_weight_app_mem"
+            android:title="@string/pt_heavy_weight_app_mem" />
+        <EditTextPreference
+            android:defaultValue="6144"
+            android:dialogTitle="@string/pt_secondary_server_mem"
+            android:key="secondary_server_mem"
+            android:title="@string/pt_secondary_server_mem" />
+        <EditTextPreference
+            android:defaultValue="6144"
+            android:dialogTitle="@string/pt_backup_app_mem"
+            android:key="backup_app_mem"
+            android:title="@string/pt_backup_app_mem" />
+        <EditTextPreference
+            android:defaultValue="6144"
+            android:dialogTitle="@string/pt_home_app_mem"
+            android:key="home_app_mem"
+            android:title="@string/pt_home_app_mem" />
+        <EditTextPreference
+            android:defaultValue="7168"
+            android:dialogTitle="@string/pt_hidden_app_mem"
+            android:key="hidden_app_mem"
+            android:title="@string/pt_hidden_app_mem" />
+        <EditTextPreference
+            android:defaultValue="8192"
+            android:dialogTitle="@string/pt_empty_app_mem"
+            android:key="empty_app_mem"
+            android:title="@string/pt_empty_app_mem" />
+        
+    </PreferenceCategory>
+
+</PreferenceScreen>

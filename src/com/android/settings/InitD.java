@@ -5,211 +5,262 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.net.Uri;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settings.util.CMDProcessor;
 import com.android.settings.util.Helpers;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
-public class InitD extends SettingsPreferenceFragment implements OnSharedPreferenceChangeListener {
+public class InitD extends SettingsPreferenceFragment {
 
 	private static final String TAG = "InitD";
-	
-	private static final String KEY_ENABLE_INITD = "enable_init_d";
-	private static final String KEY_ZIPALIGN = "zipalign";
-	private static final String KEY_ENABLE_SDBOOST = "enable_sd_boost";
-	private static final String KEY_SDBOOST = "sd_boost";
-	private static final String KEY_FIX_PERMS = "fix_permissions";
-	private static final String KEY_CLEAR_CACHE = "clear_cache";
+
+	private static final int MSG_LOAD_PREFS = 0;
+	private static final int DIALOG_INIT_D_ERROR = 0;
+
+	private static final String INIT_D = "/system/etc/init.d";
+	private static final String INIT_D_CFG = "/system/etc/init.d.cfg";
+
+	private static final String KEY_ZIPALIGN_APKS = "zipalign_apks";
+	private static final String KEY_FIX_PERMISSIONS = "fix_permissions";
 	private static final String KEY_ENABLE_SYSCTL = "enable_sysctl";
+	private static final String KEY_FREE_MEM = "free_mem";
+	private static final String KEY_CLEAR_DATA_CACHE = "clear_data_cache";
 	private static final String KEY_ENABLE_CRON = "enable_cron";
+	private static final String KEY_SD_BOOST = "sd_boost";
+	private static final String KEY_FILE_SYSTEM_SPEEDUPS = "file_system_speedups";
+	private static final String KEY_FOREGROUND_APP_MEM = "foreground_app_mem";
+	private static final String KEY_VISIBLE_APP_MEM = "visible_app_mem";
+	private static final String KEY_PERCEPTIBLE_APP_MEM = "perceptible_app_mem";
+	private static final String KEY_HEAVY_WEIGHT_APP_MEM = "heavy_weight_app_mem";
+	private static final String KEY_SECONDARY_SERVER_MEM = "secondary_server_mem";
+	private static final String KEY_BACKUP_APP_MEM = "backup_app_mem";
+	private static final String KEY_HOME_APP_MEM = "home_app_mem";
+	private static final String KEY_HIDDEN_APP_MEM = "hidden_app_mem";
+	private static final String KEY_EMPTY_APP_MEM = "empty_app_mem";
+	private static final String KEY_READ_AHEAD_KB = "read_ahead_kb";
+	private static final String KEY_INIT_D_CREDITS = "init_d_credits";
 
-	private static final String VAR_ZIPALIGN = "ZIPALIGN_AT_BOOT";
-	private static final String VAR_ENABLE_SDBOOST = "SD_BOOST_AT_BOOT";
-	private static final String VAR_SDBOOST = "READ_AHEAD_KB";
-	private static final String VAR_FIX_PERMS = "FIX_PERMISSIONS_AT_BOOT";
-	private static final String VAR_CLEAR_CACHE = "REMOVE_CACHE";
-	private static final String VAR_ENABLE_SYSCTL = "ENABLE_SYSCTL";
-	private static final String VAR_ENABLE_CRON = "ENABLE_CRON";
+	private static final String[] KEYS = {
+		KEY_ZIPALIGN_APKS, KEY_FIX_PERMISSIONS, KEY_ENABLE_SYSCTL,
+		KEY_FREE_MEM, KEY_CLEAR_DATA_CACHE, KEY_ENABLE_CRON,
+		KEY_SD_BOOST, KEY_FILE_SYSTEM_SPEEDUPS, KEY_FOREGROUND_APP_MEM,
+		KEY_VISIBLE_APP_MEM, KEY_PERCEPTIBLE_APP_MEM, KEY_HEAVY_WEIGHT_APP_MEM,
+		KEY_SECONDARY_SERVER_MEM, KEY_BACKUP_APP_MEM, KEY_HOME_APP_MEM,
+		KEY_HIDDEN_APP_MEM, KEY_EMPTY_APP_MEM, KEY_READ_AHEAD_KB
+	};
+
+	private HashMap<String, String> mShellVariables;
+	protected SharedPreferences mPrefs;
+	private ProgressDialog mPbarDialog;
+
+	private static InitD sActivity;
 	
-	static File cfg;
+	public static InitD whatActivity() {
+		return sActivity;
+	}
 
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
-		
-		PreferenceManager.getDefaultSharedPreferences(getActivity()).registerOnSharedPreferenceChangeListener(this);
-		addPreferencesFromResource(R.xml.init_d);
+		sActivity = this;
+		mPrefs    = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
+		loadValues();
+	}
 
-		cfg = new File("/system/etc/liberty.cfg");
-		
-		CheckBoxPreference cb = (CheckBoxPreference) findPreference(KEY_ENABLE_INITD);
-		boolean checked = isTweakEnabled(KEY_ENABLE_INITD, null);
-		cb.setChecked(checked);
-		
-		cb = (CheckBoxPreference) findPreference(KEY_ZIPALIGN);
-		checked = isTweakEnabled(KEY_ZIPALIGN, VAR_ZIPALIGN);
-		cb.setChecked(checked);
+	private void loadValues() {
+		mPbarDialog = new ProgressDialog(InitD.this.getActivity());
+		mPbarDialog.setMessage("Loading values ...");
+		mPbarDialog.show();
+		new Thread() {
+			@Override
+			public void run() {
+				Looper.prepare();
+				mShellVariables = getShellVariables();
+				mHandler.sendEmptyMessageDelayed(MSG_LOAD_PREFS, 1000);
+			}
+		}.start();
+	}
 
-		cb = (CheckBoxPreference) findPreference(KEY_ENABLE_SDBOOST);
-		checked = isTweakEnabled(KEY_ENABLE_SDBOOST, VAR_ENABLE_SDBOOST);
-		cb.setChecked(checked);
+	private Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case MSG_LOAD_PREFS:
+				mPbarDialog.dismiss();
+				if (!isInitdSetup()) {
+					showDialog(DIALOG_INIT_D_ERROR);
+					return;
+				}
 
-		cb = (CheckBoxPreference) findPreference(KEY_FIX_PERMS);
-		checked = isTweakEnabled(KEY_FIX_PERMS, VAR_FIX_PERMS);
-		cb.setChecked(checked);
+				saveAllPrefs();
+				addPreferencesFromResource(R.xml.init_d);
+				mPrefs.registerOnSharedPreferenceChangeListener(
+						mOnSharedPreferenceChangeListener);
+				PreferenceScreen credits = (PreferenceScreen) getPreferenceScreen()
+						.findPreference(KEY_INIT_D_CREDITS);
 
-		cb = (CheckBoxPreference) findPreference(KEY_ENABLE_SDBOOST);
-		checked = isTweakEnabled(KEY_ENABLE_SDBOOST, VAR_ENABLE_SDBOOST);
-		cb.setChecked(checked);
+				credits.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					@Override
+					public boolean onPreferenceClick(Preference preference) {
+						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=jrummy16")));
+						return true;
+					}
+				});
+				break;
+			}
+		}
+	};
 
-		cb = (CheckBoxPreference) findPreference(KEY_CLEAR_CACHE);
-		checked = isTweakEnabled(KEY_CLEAR_CACHE, VAR_CLEAR_CACHE);
-		cb.setChecked(checked);
+	protected OnSharedPreferenceChangeListener mOnSharedPreferenceChangeListener = 
+			new OnSharedPreferenceChangeListener() {
 
-		cb = (CheckBoxPreference) findPreference(KEY_ENABLE_SYSCTL);
-		checked = isTweakEnabled(KEY_ENABLE_SYSCTL, VAR_ENABLE_SYSCTL);
-		cb.setChecked(checked);
+		@Override
+		public void onSharedPreferenceChanged(
+				SharedPreferences sharedPreferences, String key) {
+			Map<String, ?> prefs = mPrefs.getAll();
+			String value = null;
+			Object obj = prefs.get(key);
+			if (obj instanceof Boolean) {
+				value = (Boolean) obj ? "true" : "false";
+			} else if (obj instanceof String) {
+				value = (String) obj;
+			} else if (obj instanceof Integer) {
+				value = Integer.toString((Integer) obj); 
+			}
+			if (value != null) {
+				updateShellVariable(key, value);
+			}
+		}
 
-		cb = (CheckBoxPreference) findPreference(KEY_ENABLE_CRON);
-		checked = isTweakEnabled(KEY_ENABLE_CRON, VAR_ENABLE_CRON);
-		cb.setChecked(checked);		
+	};
+
+	private boolean isInitdSetup() {
+		if (!new File(INIT_D_CFG).exists()) {
+			Log.i(TAG, INIT_D_CFG + " does not exist!");
+			return false;
+		} else if (mShellVariables == null) {
+			Log.i(TAG, "Failed getting shell variables!");
+			return false;
+		} else if (!new File(INIT_D).isDirectory()) {
+			Log.i(TAG, INIT_D + " does not exist!");
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-			String key) {
-		if (key.equals(KEY_ENABLE_INITD))
-		{
-			final boolean initDEnabled = sharedPreferences.getBoolean(KEY_ENABLE_INITD, true);
-			Helpers.getMount("rw");
-			if (initDEnabled && !new File("/system/etc/init_trigger.enabled").exists())
-			{
-				new CMDProcessor().su.runWaitFor("busybox mv /system/etc/init_trigger.disabled /system/etc/init_trigger.enabled");
+	public Dialog onCreateDialog(final int id) {
+		if (id == DIALOG_INIT_D_ERROR) {
+			return new AlertDialog.Builder(InitD.this.getActivity())
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle(getString(R.string.dt_init_d_error))
+			.setCancelable(false)
+			.setMessage(getString(R.string.dm_init_d_error))
+			.setPositiveButton(getString(R.string.db_exit), 
+					new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					finish();
+				}
+			})
+			.create();
+		} else {
+			return null;
+		}
+	};
+
+	private boolean saveAllPrefs() {
+		SharedPreferences.Editor editor = mPrefs.edit();
+		for (int i = 0; i < KEYS.length; i++) {
+			String key = KEYS[i];
+			String value = mShellVariables.get(key);
+			boolean isBool = value.equals("true") || value.equals("false");
+			if (isBool) {
+				editor.putBoolean(key, value.equals("true"));
+			} else {
+				editor.putString(key, value);
 			}
-			else if (!initDEnabled && !new File("/system/etc/init_trigger.disabled").exists())
-			{
-				new CMDProcessor().su.runWaitFor("busybox mv /system/etc/init_trigger.enabled /system/etc/init_trigger.disabled");
-			}
-			Helpers.getMount("ro");
 		}
-		else if (key.equals(KEY_ZIPALIGN))
-		{
-			final boolean zipalign = sharedPreferences.getBoolean(KEY_ZIPALIGN, true);
-			final String value = zipalign ? "1" : "0";
-			Helpers.getMount("rw");
-			new CMDProcessor().su.runWaitFor("busybox sed -i 's|"+VAR_ZIPALIGN+"=.*|"+VAR_ZIPALIGN+"="+value+"|' " + cfg);
-			Helpers.getMount("ro");
-		}
-		else if (key.equals(KEY_ENABLE_SDBOOST))
-		{
-			final boolean enable_boost = sharedPreferences.getBoolean(KEY_ENABLE_SDBOOST, true);
-			final String value = enable_boost ? "1" : "0";
-			Helpers.getMount("rw");
-			new CMDProcessor().su.runWaitFor("busybox sed -i 's|"+VAR_ENABLE_SDBOOST+"=.*|"+VAR_ENABLE_SDBOOST+"="+value+"|' " + cfg);
-			Helpers.getMount("ro");
-		}
-		else if (key.equals(KEY_SDBOOST))
-		{
-			final String value = sharedPreferences.getString(KEY_SDBOOST, "2048");
-			Helpers.getMount("rw");
-			new CMDProcessor().su.runWaitFor("busybox sed -i 's|"+VAR_SDBOOST+"=.*|"+VAR_SDBOOST+"="+value+"|' " + cfg);
-			Helpers.getMount("ro");
-		}
-		else if (key.equals(KEY_FIX_PERMS))
-		{
-			final boolean fix_perms = sharedPreferences.getBoolean(KEY_FIX_PERMS, true);
-			final String value = fix_perms ? "1" : "0";
-			Helpers.getMount("rw");
-			new CMDProcessor().su.runWaitFor("busybox sed -i 's|"+VAR_FIX_PERMS+"=.*|"+VAR_FIX_PERMS+"="+value+"|' " + cfg);
-			Helpers.getMount("ro");
-		}
-		else if (key.equals(KEY_CLEAR_CACHE))
-		{
-			final boolean clear_cache = sharedPreferences.getBoolean(KEY_CLEAR_CACHE, true);
-			final String value = clear_cache ? "1" : "0";
-			Helpers.getMount("rw");
-			new CMDProcessor().su.runWaitFor("busybox sed -i 's|"+VAR_CLEAR_CACHE+"=.*|"+VAR_CLEAR_CACHE+"="+value+"|' " + cfg);
-			Helpers.getMount("ro");
-		}
-		else if (key.equals(KEY_ENABLE_SYSCTL))
-		{
-			final boolean enable_sysctl = sharedPreferences.getBoolean(KEY_ENABLE_SYSCTL, true);
-			final String value = enable_sysctl ? "1" : "0";
-			Helpers.getMount("rw");
-			new CMDProcessor().su.runWaitFor("busybox sed -i 's|"+VAR_ENABLE_SYSCTL+"=.*|"+VAR_ENABLE_SYSCTL+"="+value+"|' " + cfg);
-			Helpers.getMount("ro");
-		}
-		else if (key.equals(KEY_ENABLE_CRON))
-		{
-			final boolean enable_cron = sharedPreferences.getBoolean(KEY_ENABLE_CRON, true);
-			final String value = enable_cron ? "1" : "0";
-			Helpers.getMount("rw");
-			new CMDProcessor().su.runWaitFor("busybox sed -i 's|"+VAR_ENABLE_CRON+"=.*|"+VAR_ENABLE_CRON+"="+value+"|' " + cfg);
-			Helpers.getMount("ro");
-		}
+		return editor.commit();
 	}
 
-	private static String getVariableValue(final String variable)
-	{
-		String value = null;
-		
-		try
-		{
-			BufferedReader br = new BufferedReader(new FileReader(cfg), 256);
-			String line = null;
-			while ((line = br.readLine()) != null)
-			{
-				if (line.startsWith(variable))
-				{
-					value = line.substring(line.lastIndexOf("=")+1);
-					break;
+	private void updateShellVariable(String key, String value) {
+		CMDProcessor.SH shell = new CMDProcessor().su;
+		shell.runWaitFor("busybox mount -o remount,rw /system");
+		shell.runWaitFor("busybox sed -i 's|" + key + "=.*|" + key + "=" + value + "|' " + INIT_D_CFG);
+		shell.runWaitFor("busybox mount -o remount,ro /system");
+		mShellVariables.put(key, value);
+	}
+
+	private HashMap<String, String> getShellVariables() {
+		HashMap<String, String> variables = null;
+		CMDProcessor.SH sh = new CMDProcessor().sh;
+		CMDProcessor.CommandResult result;
+		int numOfKeys = KEYS.length;
+		String[] cmds = new String[numOfKeys + 1];
+		String[] values;
+		int numOfValues;
+
+		cmds[0] = ". " + INIT_D_CFG;
+		for (int i = 0; i < numOfKeys; i++) {
+			cmds[i + 1] = "echo $" + KEYS[i];
+		}
+
+		result = sh.runWaitFor(cmds);
+		values = result.stdout.split("[\r\n]+");
+		numOfValues = values.length;
+		if (numOfValues == numOfKeys) {
+			variables = new HashMap<String, String>();
+			for (int i = 0; i < numOfKeys; i++) {
+				variables.put(KEYS[i], values[i]);
+			}
+		}
+
+		if (variables == null) {
+			variables = new HashMap<String, String>();
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(INIT_D_CFG), 256);
+				String line = null;
+				while ((line = br.readLine()) != null) {
+					if (line.contains("=")) {
+						String value = line.substring(line.lastIndexOf("=") + 1);
+						for (String name : KEYS) {
+							if (line.startsWith(name + "=")) {
+								variables.put(name, value);
+								break;
+							}
+						}
+					}
 				}
-			}
-			br.close();
-		} 
-		catch (FileNotFoundException e) {
-			Log.d(TAG, cfg + " does not exist");
-			return null;
-		} 
-		catch (IOException e) {
-			Log.d(TAG, "Error reading " + cfg);
-		}
-		
-		if (value == null)
-		{
-			final String s = new CMDProcessor().su.runWaitFor("busybox grep " + variable + " " + cfg).stdout;
-			if (s != null)
-			{
-				value = s.substring(s.lastIndexOf("=")+1);
+				br.close();
+			} catch (FileNotFoundException e) {
+				Log.d(TAG, INIT_D_CFG + " does not exist");
+				variables = null;
+			} catch (IOException e) {
+				Log.d(TAG, "Error reading " + INIT_D_CFG);
+				variables = null;
 			}
 		}
-		return value;
+		return variables;
 	}
-	
-	private static boolean isTweakEnabled(final String key, final String variable)
-	{
-		if (key.equals(KEY_ENABLE_INITD))
-		{
-			return new File("/system/etc/init_trigger.enabled").exists();
-		}
-		else
-		{
-			String value = getVariableValue(variable);
-			if (value == null)
-			{
-				return false;
-			}
-			return (value.equals("1"));
-		}
-	}
+
 }

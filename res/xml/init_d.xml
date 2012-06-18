@@ -26,8 +26,8 @@
         <PreferenceScreen android:title="@string/pt_minfree_values" >
             <intent
                 android:action="android.intent.action.MAIN"
-                android:targetClass="com.jrummy.init.d.conf.MinfreeValues"
-                android:targetPackage="com.jrummy.init.d.conf" />
+                android:targetClass="com.android.settings.MinfreeValues"
+                android:targetPackage="com.android.settings" />
         </PreferenceScreen>
 
         <CheckBoxPreference

@@ -23,19 +23,16 @@ public class Performance extends SettingsPreferenceFragment implements
 	public static final String KEY_MIN_CPU = "min_cpu";
 	public static final String KEY_GOV = "gov";
 	public static final String KEY_CPU_BOOT = "cpu_boot";
-	public static final String KEY_MINFREE = "free_memory";
 	private static final String STEPS = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies";
 	private static final String MAX_FREQ = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq";
 	private static final String MIN_FREQ = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
 	private static final String GETALL_GOV = "sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors";
 	private static final String CUR_GOV = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor";
-	public static final String MINFREE = "/sys/module/lowmemorykiller/parameters/minfree";
 	private static String[] ALL_GOV;
 	private static int[] SPEED_STEPS;
 	private static ListPreference mMinCpu;
 	private static ListPreference mMaxCpu;
 	private ListPreference mSetGov;
-	private ListPreference mFreeMem;
 	private static SharedPreferences preferences;
 	private static boolean doneLoading = false;
 
@@ -75,25 +72,6 @@ public class Performance extends SettingsPreferenceFragment implements
 		mSetGov.setEntryValues(govs);
 		mSetGov.setValue(currentGov);
 		mSetGov.setSummary(getString(R.string.ps_set_gov, currentGov));
-		
-		final int minFree = getMinFreeValue();
-		final String values[] = getResources().getStringArray(R.array.minfree_values);
-		String closestValue = preferences.getString(KEY_MINFREE, values[0]);
-		
-		if (minFree < 37)
-			closestValue = values[0];
-		else if (minFree < 62)
-			closestValue = values[1];
-		else if (minFree < 77)
-			closestValue = values[2];
-		else if (minFree < 90)
-			closestValue = values[3];
-		else
-			closestValue = values[4];
-		
-		mFreeMem = (ListPreference) findPreference(KEY_MINFREE);
-		mFreeMem.setValue(closestValue);
-		mFreeMem.setSummary(getString(R.string.ps_free_memory, minFree+"mb"));
 
 		PreferenceScreen ps = (PreferenceScreen)findPreference("volt_control");
 		if (!new File(VoltageControlActivity.MV_TABLE0).exists()) {        	 
@@ -129,11 +107,6 @@ public class Performance extends SettingsPreferenceFragment implements
 				if ((new CMDProcessor().su
 						.runWaitFor("busybox echo " + value + " > " + CUR_GOV)).success())
 					mSetGov.setSummary(getString(R.string.ps_set_gov, value));
-			} else if (key.equals(KEY_MINFREE)) {
-				String values = preferences.getString(key, null);
-				if (!values.equals(null))
-					new CMDProcessor().su.runWaitFor("busybox echo " + values + " > " + MINFREE);
-				mFreeMem.setSummary(getString(R.string.ps_free_memory, getMinFreeValue()+"mb"));
 			}
 		}
 		
@@ -235,22 +208,6 @@ public class Performance extends SettingsPreferenceFragment implements
 			ALL_GOV =  new String[] { "ondemand", "userspace", "performance" };
 		}
 		return ALL_GOV;
-	}
-	
-	private static int getMinFreeValue(){
-		int emptyApp = 0;
-		String MINFREE_LINE = Helpers.getFile(MINFREE);
-		String EMPTY_APP = MINFREE_LINE.substring(MINFREE_LINE.lastIndexOf(",")+1);
-
-		if (!EMPTY_APP.equals(null) || !EMPTY_APP.equals("")) {
-			try {
-				int mb = Integer.parseInt(EMPTY_APP.trim()) * 4 / 1024;	
-				emptyApp = (int) Math.ceil(mb);
-			} catch (NumberFormatException nfe) {
-				Log.i(TAG, "error processing " + EMPTY_APP);
-			}
-		}
-		return emptyApp;
 	}
 
 }

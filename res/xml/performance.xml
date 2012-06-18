@@ -29,14 +29,4 @@
 			android:summary="@string/ps_init_d"
                         android:fragment="com.android.settings.InitD" />
 	</PreferenceCategory>
-	<PreferenceCategory android:title="@string/prefcat_free_memory"
-		android:key="performance">
-		<ListPreference android:key="free_memory"
-			android:title="@string/pt_free_memory" android:summary="@string/ps_free_memory"
-			android:dialogTitle="@string/dt_free_memory" android:persistent="true"
-			android:entries="@array/minfree" android:entryValues="@array/minfree_values" />
-		<CheckBoxPreference android:key="free_memory_boot"
-			android:defaultValue="false" android:title="@string/pt_free_memory_boot"
-			android:summary="@string/ps_free_memory_boot" />
-	</PreferenceCategory>
 </PreferenceScreen>
